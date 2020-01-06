@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { distinctUntilChanged, filter, pluck } from 'rxjs/operators';
 import { selectRouteData } from 'src/app/store/router/router.selectors';
+import { SET_SEARCH_PHRASE } from 'src/app/store/filters/filters.actions';
 
 @Component({
     selector: 'cpk-root',
@@ -37,5 +38,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
     ngOnDestroy() {
         this.subscription.unsubscribe();
+    }
+
+    public onNavbarSearch(phrase: string | Event): void {
+        if (typeof phrase === 'string') {
+            this.store.dispatch(SET_SEARCH_PHRASE({ phrase }));
+        } else {
+            this.resetNavSearch();
+        }
+    }
+
+    public resetNavSearch(): void {
+        this.onNavbarSearch('');
     }
 }

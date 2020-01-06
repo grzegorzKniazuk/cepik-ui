@@ -15,12 +15,21 @@ export const selectDictionary = createSelector(
     ((entities: Dictionary<{ id: string, items: DictionaryItem[] }>, { id }: { id: string }) => entities[id] ? entities[id].items : undefined),
 );
 
-export const selectDictionaryWithPagination = createSelector(
+export const selectDictionaryWithPaginationAndFilters = createSelector(
     selectDictionariesEntities,
-    ((entities: Dictionary<{ id: string, items: DictionaryItem[] }>, { id, pagination }: { id: string, pagination: Pagination }) => {
+    ((entities: Dictionary<{ id: string, items: DictionaryItem[] }>, { id, pagination, phrase }: { id: string, pagination: Pagination, phrase: string }) => {
 
         if (entities[id] && Array.isArray(entities[id].items)) {
-            return entities[id].items.filter((_, index: number) => index < pagination.page * pagination.limit && index >= pagination.page * pagination.limit - pagination.limit);
+            return entities[id].items.filter((entity: DictionaryItem) => {
+                if (phrase) {
+                    return entity['klucz-slownika'].toString().toLowerCase().includes(phrase.toLowerCase())
+                        || entity['wartosc-slownika'].toString().toLowerCase().includes(phrase.toLowerCase())
+                        || entity['liczba-wystapien'].toString().toLowerCase().includes(phrase.toLowerCase());
+                }
+                return entity;
+            }).filter((_, index: number) => {
+                return index < pagination.page * pagination.limit && index >= pagination.page * pagination.limit - pagination.limit;
+            });
         }
 
         return undefined;

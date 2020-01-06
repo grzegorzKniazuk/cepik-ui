@@ -13,7 +13,8 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from 'src/app/store';
 import { RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/constants';
 import { DictionaryIdsResolver, DictionaryItemsResolver } from 'src/app/resolvers';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { HttpErrorInterceptor, HttpLoaderInterceptor } from 'src/app/shared/interceptors';
 
 const components: any[] = [
     AppComponent,
@@ -33,6 +34,11 @@ const resolvers: any[] = [
     DictionaryItemsResolver,
 ];
 
+const interceptors: any[] = [
+    { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpLoaderInterceptor, multi: true },
+];
+
 @NgModule({
     declarations: [
         ...components,
@@ -47,6 +53,7 @@ const resolvers: any[] = [
     providers: [
         { provide: API_URL, useValue: environment.apiUrl },
         ...resolvers,
+        ...interceptors,
     ],
     bootstrap: [
         AppComponent,

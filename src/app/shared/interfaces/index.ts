@@ -6,3 +6,4 @@ export * from './attributes';
 export * from './dictionary-item-list';
 export * from './dictionary-item';
 export * from './pagination';
+export * from './filter';

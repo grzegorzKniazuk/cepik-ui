@@ -14,8 +14,8 @@
                 <th scope="col">Liczba wystąpień</th>
             </tr>
         </thead>
-        <tbody *ngIf="dictionaryItems$ | async as items">
-            <ng-container *ngTemplateOutlet="items.length ? itemTemplate : noItemsTemplate; context: { $implicit: items }"></ng-container>
+        <tbody>
+            <ng-container *ngTemplateOutlet="(dictionaryItems$ | async) ? itemTemplate : noItemsTemplate; context: { $implicit: dictionaryItems$ | async }"></ng-container>
         </tbody>
     </table>
     <cpk-paginator *ngIf="paginator$ | async as paginator"

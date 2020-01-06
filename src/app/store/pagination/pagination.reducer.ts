@@ -8,7 +8,7 @@ export interface PaginationState {
     total: number;
 }
 
-const initialState = {
+const initialState: PaginationState = {
     page: 1,
     pages: 1,
     limit: 10,

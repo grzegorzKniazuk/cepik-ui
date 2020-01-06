@@ -24,13 +24,10 @@
             <li class="nav-item clickable" routerLink="dictionaries" routerLinkActive="active">
                 <a class="nav-link">Słowniki</a>
             </li>
-            <li class="nav-item clickable">
-                <a class="nav-link" href="#">Wersje</a>
-            </li>
         </ul>
         <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Wyszukaj">
-            <button class="btn btn-primary my-2 my-sm-0" type="submit">Wyszukaj</button>
+            <input class="form-control mr-sm-2" type="search" name="phrase" placeholder="Wyszukaj" title="Wyszukaj" [(ngModel)]="phrase">
+            <button class="btn btn-primary my-2 my-sm-0" type="submit" (click)="onSearch()">Wyszukaj</button>
         </form>
     </div>
 </nav>
