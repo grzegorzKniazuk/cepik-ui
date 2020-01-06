@@ -1,15 +1,17 @@
+<div class="btn-group float-left mt-4" role="group">
+    <button type="button" class="btn" *ngFor="let params of limitButtonsParams" [ngClass]="params === limit ? 'btn-primary' : 'btn-secondary'" (click)="onLimitChange(params)">{{ params }}</button>
+</div>
 <nav>
-    <ul class="pagination float-right">
-        <li class="page-item disabled">
-            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Poprzednia strona</a>
+    <ul class="pagination float-right mt-4">
+        <li class="page-item clickable" [class.disabled]="page === 1" (click)="onPageChange(page - 1)">
+            <a class="page-link">Poprzednia strona</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">1</a></li>
-        <li class="page-item active" aria-current="page">
-            <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+        <li class="page-item clickable" [class.active]="pn === page" *ngFor="let pn of pageNumbers" (click)="onPageChange(pn)">
+            <a class="page-link">{{ pn }}</a>
         </li>
-        <li class="page-item"><a class="page-link" href="#">3</a></li>
-        <li class="page-item">
-            <a class="page-link" href="#">Następna strona</a>
+        <li class="page-item clickable" [class.disabled]="page + 1 > pages" (click)="onPageChange(page + 1)">
+            <a class="page-link">Następna strona</a>
         </li>
     </ul>
 </nav>
+

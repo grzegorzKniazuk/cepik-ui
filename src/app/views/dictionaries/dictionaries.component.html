@@ -2,7 +2,6 @@
     <div class="form-group">
         <label for="dictionary-select">Wybierz słownik</label>
         <select class="form-control" id="dictionary-select" [value]="selectedCategory$ | async" (change)="onCategorySelect($event.target.value)">
-            <option value="" disabled selected>--- brak ---</option>
             <option *ngFor="let def of dictionariesDef$ | async" [value]="def.id">{{ def.id }}</option>
         </select>
     </div>
@@ -15,15 +14,21 @@
                 <th scope="col">Liczba wystąpień</th>
             </tr>
         </thead>
-        <tbody>
-            <ng-container *ngTemplateOutlet="(dictionaryItems$ | async).length ? itemTemplate : noItemsTemplate"></ng-container>
+        <tbody *ngIf="dictionaryItems$ | async as items">
+            <ng-container *ngTemplateOutlet="items.length ? itemTemplate : noItemsTemplate; context: { $implicit: items }"></ng-container>
         </tbody>
     </table>
-    <cpk-paginator></cpk-paginator>
+    <cpk-paginator *ngIf="paginator$ | async as paginator"
+                   [total]="paginator.total"
+                   [limit]="paginator.limit"
+                   [page]="paginator.page"
+                   [pages]="paginator.pages"
+                   (pageChange)="onPageChange($event)"
+                   (limitChange)="onLimitChange($event)"></cpk-paginator>
 </div>
 
-<ng-template #itemTemplate>
-    <tr *ngFor="let item of dictionaryItems$ | async; let i = index;">
+<ng-template #itemTemplate let-items>
+    <tr *ngFor="let item of items; let i = index;">
         <th scope="row">{{ i + 1 }}</th>
         <td>{{ item["klucz-slownika"] }}</td>
         <td>{{ item["wartosc-slownika"] }}</td>

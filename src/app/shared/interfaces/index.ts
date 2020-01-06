@@ -5,3 +5,4 @@ export * from './meta';
 export * from './attributes';
 export * from './dictionary-item-list';
 export * from './dictionary-item';
+export * from './pagination';

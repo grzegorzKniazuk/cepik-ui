@@ -8,6 +8,7 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { SET_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
 import { selectDictionary } from 'src/app/store/dictionaries/dictionaries.selectors';
+import { UPDATE_PAGINATION } from 'src/app/store/pagination/pagination.actions';
 
 @Injectable()
 export class DictionaryItemsResolver implements Resolve<DictionaryItem[]> {
@@ -34,9 +35,19 @@ export class DictionaryItemsResolver implements Resolve<DictionaryItem[]> {
                         first(),
                     );
                 }),
+                tap((dictionaryItems: DictionaryItem[]) => {
+                    this.store.dispatch(UPDATE_PAGINATION({
+                        pagination: {
+                            page: 1,
+                            total: dictionaryItems.length,
+                            limit: 10,
+                        },
+                    }));
+                }),
                 first(),
             );
         }
+
         return of([]);
     }
 }
