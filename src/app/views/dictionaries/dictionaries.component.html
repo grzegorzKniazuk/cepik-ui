@@ -1,0 +1,38 @@
+<div class="container-xl mt-4">
+    <div class="form-group">
+        <label for="dictionary-select">Wybierz słownik</label>
+        <select class="form-control" id="dictionary-select" [value]="selectedCategory$ | async" (change)="onCategorySelect($event.target.value)">
+            <option value="" disabled selected>--- brak ---</option>
+            <option *ngFor="let def of dictionariesDef$ | async" [value]="def.id">{{ def.id }}</option>
+        </select>
+    </div>
+    <table class="table mt-4">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Klucz</th>
+                <th scope="col">Wartość słownikowa</th>
+                <th scope="col">Liczba wystąpień</th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngTemplateOutlet="(dictionaryItems$ | async).length ? itemTemplate : noItemsTemplate"></ng-container>
+        </tbody>
+    </table>
+    <cpk-paginator></cpk-paginator>
+</div>
+
+<ng-template #itemTemplate>
+    <tr *ngFor="let item of dictionaryItems$ | async; let i = index;">
+        <th scope="row">{{ i + 1 }}</th>
+        <td>{{ item["klucz-slownika"] }}</td>
+        <td>{{ item["wartosc-slownika"] }}</td>
+        <td>{{ item["liczba-wystapien"] }}</td>
+    </tr>
+</ng-template>
+
+<ng-template #noItemsTemplate>
+    <tr>
+        <td [colSpan]="4" class="text-center">Nie wybrano słownika</td>
+    </tr>
+</ng-template>

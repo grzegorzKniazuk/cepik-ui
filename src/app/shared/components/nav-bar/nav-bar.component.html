@@ -6,25 +6,25 @@
 
     <div class="collapse navbar-collapse" id="navbarToggle">
         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-            <li class="nav-item active">
-                <a class="nav-link" href="#">Home</a>
+            <li class="nav-item clickable">
+                <a class="nav-link" routerLink="./" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Home</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item clickable">
                 <a class="nav-link" href="#">Pojazdy</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item clickable">
                 <a class="nav-link" href="#">Prawa jazdy</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item clickable">
                 <a class="nav-link" href="#">Uprawnienia</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item clickable">
                 <a class="nav-link" href="#">Statystyki</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Słowniki</a>
+            <li class="nav-item clickable" routerLink="dictionaries" routerLinkActive="active">
+                <a class="nav-link">Słowniki</a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item clickable">
                 <a class="nav-link" href="#">Wersje</a>
             </li>
         </ul>

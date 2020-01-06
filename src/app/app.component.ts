@@ -1,17 +1,41 @@
-import { Component } from '@angular/core';
-import { CepikDictionaryService } from 'src/app/shared/services/cepik-dictionary.service';
+import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
+import { AppState } from 'src/app/store';
+import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { Title } from '@angular/platform-browser';
+import { distinctUntilChanged, filter, pluck } from 'rxjs/operators';
+import { selectRouteData } from 'src/app/store/router/router.selectors';
 
 @Component({
     selector: 'cpk-root',
     templateUrl: './app.component.html',
     styleUrls: [ './app.component.scss' ],
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
+
+    private readonly subscription = new Subscription();
 
     constructor(
-        private readonly cepikApiService: CepikDictionaryService,
+        private readonly title: Title,
+        private readonly store: Store<AppState>,
     ) {
-        this.cepikApiService.getDictionaries().subscribe(console.log);
-        this.cepikApiService.getDictionary('wojewodztwa').subscribe(console.log);
+    }
+
+    ngOnInit() {
+        this.subscription.add(
+            this.store.pipe(
+                select(selectRouteData),
+                filter((data) => data && data.hasOwnProperty('title')),
+                pluck('title'),
+                distinctUntilChanged(),
+            ).subscribe((title: string) => {
+                this.title.setTitle(`CEPiK UI | ${title}`);
+            }),
+        );
+    }
+
+    ngOnDestroy() {
+        this.subscription.unsubscribe();
     }
 }

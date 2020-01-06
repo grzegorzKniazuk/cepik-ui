@@ -7,7 +7,7 @@ import { API_URL } from 'src/app/shared/tokens';
 @Injectable({
     providedIn: 'root',
 })
-export class CepikDictionaryService {
+export class DictionaryService {
 
     constructor(
         private readonly httpClient: HttpClient,
@@ -15,7 +15,7 @@ export class CepikDictionaryService {
     ) {
     }
 
-    public getDictionaries(limit = '100', page = '1'): Observable<ApiResponse<DictionaryDef[]>> {
+    public getDictionariesDef(limit = '100', page = '1'): Observable<ApiResponse<DictionaryDef[]>> {
         const params: HttpParams = new HttpParams({
             fromObject: {
                 limit,

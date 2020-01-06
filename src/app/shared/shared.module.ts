@@ -1,15 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NavBarComponent } from 'src/app/shared/components';
+import { NavBarComponent, PaginatorComponent } from 'src/app/shared/components';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 const components: any[] = [
     NavBarComponent,
-];
-
-const modules: any[] = [
-    CommonModule,
-    HttpClientModule,
+    PaginatorComponent,
 ];
 
 @NgModule({
@@ -17,13 +14,13 @@ const modules: any[] = [
         ...components,
     ],
     imports: [
-        ...modules,
+        CommonModule,
+        HttpClientModule,
+        RouterModule,
     ],
     exports: [
-        ...modules,
-        NavBarComponent,
+        ...components,
     ],
 })
 export class SharedModule {
-
 }
