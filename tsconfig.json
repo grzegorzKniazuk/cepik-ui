@@ -17,10 +17,18 @@
         "lib": [
             "es2018",
             "dom"
-        ]
+        ],
+        "noImplicitAny": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noFallthroughCasesInSwitch": true,
+        "strictFunctionTypes": true,
+        "pretty": true,
+        "removeComments": true
     },
     "angularCompilerOptions": {
         "fullTemplateTypeCheck": true,
-        "strictInjectionParameters": true
+        "strictInjectionParameters": true,
+        "preserveWhitespaces": true
     }
 }
