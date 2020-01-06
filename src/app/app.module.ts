@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { API_URL } from './shared/tokens';
+import { API_URL, DEFAULT_TIMEOUT } from './shared/tokens';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { DashboardComponent, DictionariesComponent } from 'src/app/views';
@@ -14,7 +14,7 @@ import { appReducers } from 'src/app/store';
 import { RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/constants';
 import { DictionaryIdsResolver, DictionaryItemsResolver } from 'src/app/resolvers';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HttpErrorInterceptor, HttpLoaderInterceptor } from 'src/app/shared/interceptors';
+import { HttpErrorInterceptor, HttpLoaderInterceptor, TimeoutInterceptor } from 'src/app/shared/interceptors';
 
 const components: any[] = [
     AppComponent,
@@ -35,6 +35,7 @@ const resolvers: any[] = [
 ];
 
 const interceptors: any[] = [
+    { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpLoaderInterceptor, multi: true },
 ];
@@ -52,6 +53,7 @@ const interceptors: any[] = [
     ],
     providers: [
         { provide: API_URL, useValue: environment.apiUrl },
+        { provide: DEFAULT_TIMEOUT, useValue: 5000 },
         ...resolvers,
         ...interceptors,
     ],
