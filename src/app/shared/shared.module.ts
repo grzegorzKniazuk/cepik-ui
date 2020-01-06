@@ -7,7 +7,7 @@ const modules: any[] = [
 
 @NgModule({
     imports: [
-        CommonModule,
+        ...modules,
     ],
     exports: [
         ...modules,

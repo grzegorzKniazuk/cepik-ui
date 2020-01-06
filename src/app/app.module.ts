@@ -14,8 +14,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     imports: [
         BrowserModule,
         HttpClientModule,
-        AppRoutingModule,
         CoreModule,
+        AppRoutingModule,
     ],
     providers: [
         { provide: API_URL, useValue: environment.apiUrl },
