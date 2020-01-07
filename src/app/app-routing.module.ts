@@ -19,6 +19,11 @@ const routes: Routes = [
         },
         runGuardsAndResolvers: 'always',
     },
+    {
+        path: '**',
+        redirectTo: '',
+        pathMatch: 'full',
+    },
 ];
 
 @NgModule({

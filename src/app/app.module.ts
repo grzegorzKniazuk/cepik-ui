@@ -15,6 +15,7 @@ import { RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/c
 import { DictionaryIdsResolver, DictionaryItemsResolver } from 'src/app/resolvers';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor, HttpLoaderInterceptor, TimeoutInterceptor } from 'src/app/shared/interceptors';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 const components: any[] = [
     AppComponent,
@@ -49,6 +50,7 @@ const interceptors: any[] = [
         HttpClientModule,
         SharedModule,
         AppRoutingModule,
+        ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
         ...store,
     ],
     providers: [
