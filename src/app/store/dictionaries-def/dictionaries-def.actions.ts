@@ -5,5 +5,5 @@ const ACTION_LABEL = '[DICTIONARIES_DEF]';
 
 export const SET_DICTIONARIES_DEF = createAction(
     `${ACTION_LABEL} SET_DICTIONARIES_DEF`,
-    props<{ def: DictionaryDef[] }>(),
+    props<{ defs: DictionaryDef[] }>(),
 );

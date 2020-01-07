@@ -14,7 +14,7 @@ import { appReducers } from 'src/app/store';
 import { RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/constants';
 import { DictionaryIdsResolver, DictionaryItemsResolver } from 'src/app/resolvers';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HttpErrorInterceptor, HttpLoaderInterceptor, TimeoutInterceptor } from 'src/app/shared/interceptors';
+import { HttpErrorInterceptor, HttpLoaderInterceptor, HttpTimeoutInterceptor } from 'src/app/shared/interceptors';
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 const components: any[] = [
@@ -36,7 +36,7 @@ const resolvers: any[] = [
 ];
 
 const interceptors: any[] = [
-    { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: HttpTimeoutInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpLoaderInterceptor, multi: true },
 ];

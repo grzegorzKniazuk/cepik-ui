@@ -15,8 +15,8 @@ const initialDictionaryDefState = adapter.getInitialState({
 
 const reducer = createReducer(
     initialDictionaryDefState,
-    on(SET_DICTIONARIES_DEF, (state, { def }) => {
-        return adapter.addAll(def, {
+    on(SET_DICTIONARIES_DEF, (state, { defs }) => {
+        return adapter.addAll(defs, {
             ...state,
             loaded: true,
         });

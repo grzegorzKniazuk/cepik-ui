@@ -5,7 +5,7 @@ import { timeout } from 'rxjs/operators';
 import { DEFAULT_TIMEOUT } from 'src/app/shared/tokens';
 
 @Injectable()
-export class TimeoutInterceptor implements HttpInterceptor {
+export class HttpTimeoutInterceptor implements HttpInterceptor {
 
     constructor(
         @Inject(DEFAULT_TIMEOUT) private readonly defaultTimeout: number,
@@ -13,6 +13,6 @@ export class TimeoutInterceptor implements HttpInterceptor {
     }
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        return next.handle(req.clone({})).pipe(timeout(+(req.headers.get('timeout') || this.defaultTimeout)));
+        return next.handle(req).pipe(timeout(+(req.headers.get('timeout') || this.defaultTimeout)));
     }
 }

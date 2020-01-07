@@ -41,14 +41,8 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     public onNavbarSearch(phrase: string | Event): void {
-        if (typeof phrase === 'string') {
+        if (typeof phrase === 'string' && phrase.length) {
             this.store.dispatch(SET_SEARCH_PHRASE({ phrase }));
-        } else {
-            this.resetNavSearch();
         }
-    }
-
-    public resetNavSearch(): void {
-        this.onNavbarSearch('');
     }
 }

@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { selectQueryParam } from 'src/app/store/router/router.selectors';
 import { combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, first, startWith, switchMap, tap } from 'rxjs/operators';
+import { distinctUntilChanged, share, skip, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { selectAllDictionariesDef } from 'src/app/store/dictionaries-def/dictionary-def.selectors';
 import { selectPaginationState } from 'src/app/store/pagination/pagination.selectors';
 import { selectDictionaryWithPaginationAndFilters } from 'src/app/store/dictionaries/dictionaries.selectors';
@@ -22,13 +22,14 @@ export class DictionariesComponent {
 
     public readonly dictionariesDef$: Observable<DictionaryDef[]> = this.store.pipe(select(selectAllDictionariesDef), startWith([]));
     public readonly selectedCategory$: Observable<string> = this.store.pipe(select(selectQueryParam('category')));
+
     public readonly dictionaryItems$: Observable<DictionaryItem[]> = combineLatest([
         this.selectedCategory$.pipe(distinctUntilChanged()),
-        this.store.pipe(select(selectPaginationState)),
-        this.store.pipe(select(selectFilterPhrase)),
+        this.store.pipe(select(selectFilterPhrase), distinctUntilChanged()),
     ]).pipe(
-        switchMap(([ id, pagination, phrase ]: [ string, Pagination, string ]) => {
-            return this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, pagination, phrase }), first());
+        withLatestFrom(this.store.pipe(select(selectPaginationState), skip(1))),
+        switchMap(([ [ id, phrase ], pagination ]: [ [ string, string ], Pagination ]) => {
+            return this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, pagination, phrase }));
         }),
         tap((dictionaryItems: DictionaryItem[] = []) => {
             this.store.dispatch(UPDATE_PAGINATION({
@@ -39,6 +40,7 @@ export class DictionariesComponent {
                 },
             }));
         }),
+        share(),
     );
 
     public readonly paginator$: Observable<Pagination> = this.store.pipe(select(selectPaginationState));
