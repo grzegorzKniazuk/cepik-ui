@@ -4,7 +4,7 @@ import { AppComponent } from './app.component';
 import { API_URL, DEFAULT_TIMEOUT } from './shared/tokens';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { DashboardComponent, DictionariesComponent } from 'src/app/views';
+import { DashboardComponent, DictionariesComponent, RegionsComponent } from 'src/app/views';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -21,6 +21,7 @@ const components: any[] = [
     AppComponent,
     DashboardComponent,
     DictionariesComponent,
+    RegionsComponent,
 ];
 
 const store: any[] = [

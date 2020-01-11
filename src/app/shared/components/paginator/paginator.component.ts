@@ -12,10 +12,10 @@ export class PaginatorComponent implements OnChanges {
     public pageNumbers: number[] = [];
 
     @Input() public set limit(limit: string) {
-        this._limit = +limit;
+        this._limit = limit ? +limit : 10;
     }
     @Input() public set page(page: string) {
-        this._page = +page;
+        this._page = page ? +page : 1;
     }
     @Input() public readonly total: number;
     public _limit: number;

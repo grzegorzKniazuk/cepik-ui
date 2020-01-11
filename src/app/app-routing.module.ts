@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent, DictionariesComponent } from 'src/app/views';
+import { DashboardComponent, DictionariesComponent, RegionsComponent } from 'src/app/views';
 import { DictionaryIdsResolver, DictionaryItemsResolver } from 'src/app/resolvers';
 
 const routes: Routes = [
@@ -17,6 +17,12 @@ const routes: Routes = [
             dictionaryIds: DictionaryIdsResolver,
             dictionaryItems: DictionaryItemsResolver,
         },
+        runGuardsAndResolvers: 'always',
+    },
+    {
+        path: 'regions',
+        component: RegionsComponent,
+        data: { title: 'Województwo' },
         runGuardsAndResolvers: 'always',
     },
     {
