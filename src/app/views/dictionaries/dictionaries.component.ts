@@ -46,7 +46,7 @@ export class DictionariesComponent {
     public onCategorySelect(category: string): void {
         this.router.navigate([], {
             relativeTo: this.activatedRoute,
-            queryParams: { category, page: 1, limit: this.activatedRoute.snapshot.queryParams[LIMIT_KEY], phrase: undefined },
+            queryParams: { category, page: 1, limit: this.activatedRoute.snapshot.queryParams[LIMIT_KEY] || 10, phrase: undefined },
             queryParamsHandling: 'merge',
         });
     }
