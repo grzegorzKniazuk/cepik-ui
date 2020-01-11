@@ -5,7 +5,7 @@ import { Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { distinctUntilChanged, filter, pluck } from 'rxjs/operators';
 import { selectRouteData } from 'src/app/store/router/router.selectors';
-import { SET_SEARCH_PHRASE } from 'src/app/store/filters/filters.actions';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'cpk-root',
@@ -15,16 +15,18 @@ import { SET_SEARCH_PHRASE } from 'src/app/store/filters/filters.actions';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-    private readonly subscription = new Subscription();
+    private readonly subscription$ = new Subscription();
 
     constructor(
         private readonly title: Title,
         private readonly store: Store<AppState>,
+        private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute,
     ) {
     }
 
     ngOnInit() {
-        this.subscription.add(
+        this.subscription$.add(
             this.store.pipe(
                 select(selectRouteData),
                 filter((data) => data && data.hasOwnProperty('title')),
@@ -37,12 +39,22 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscription.unsubscribe();
+        this.subscription$.unsubscribe();
     }
 
     public onNavbarSearch(phrase: string | Event): void {
         if (typeof phrase === 'string' && phrase.length) {
-            this.store.dispatch(SET_SEARCH_PHRASE({ phrase }));
+            this.router.navigate([], {
+                relativeTo: this.activatedRoute,
+                queryParams: { phrase, page: 1 },
+                queryParamsHandling: 'merge',
+            });
+        } else {
+            this.router.navigate([], {
+                relativeTo: this.activatedRoute,
+                queryParams: { phrase: undefined, page: 1 },
+                queryParamsHandling: 'merge',
+            });
         }
     }
 }

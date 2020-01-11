@@ -1,16 +1,14 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { DictionaryDef, DictionaryItem, Pagination } from 'src/app/shared/interfaces';
+import { ActivatedRoute, Router } from '@angular/router';
+import { DictionaryDef, DictionaryItem } from 'src/app/shared/interfaces';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { selectQueryParam } from 'src/app/store/router/router.selectors';
 import { combineLatest, Observable } from 'rxjs';
-import { distinctUntilChanged, share, skip, startWith, switchMap, tap, withLatestFrom } from 'rxjs/operators';
+import { switchMap } from 'rxjs/operators';
 import { selectAllDictionariesDef } from 'src/app/store/dictionaries-def/dictionary-def.selectors';
-import { selectPaginationState } from 'src/app/store/pagination/pagination.selectors';
-import { selectDictionaryWithPaginationAndFilters } from 'src/app/store/dictionaries/dictionaries.selectors';
-import { UPDATE_PAGINATION } from 'src/app/store/pagination/pagination.actions';
-import { selectFilterPhrase } from 'src/app/store/filters/filters.selectors';
+import { selectDictionaryWithPaginationAndFilters, selectNumberOfDictionaryItems } from 'src/app/store/dictionaries/dictionaries.selectors';
+import { CATEGORY_KEY, LIMIT_KEY, PAGE_KEY, PHRASE_KEY } from 'src/app/shared/constants';
 
 @Component({
     selector: 'cpk-dictionaries',
@@ -20,53 +18,53 @@ import { selectFilterPhrase } from 'src/app/store/filters/filters.selectors';
 })
 export class DictionariesComponent {
 
-    public readonly dictionariesDef$: Observable<DictionaryDef[]> = this.store.pipe(select(selectAllDictionariesDef), startWith([]));
-    public readonly selectedCategory$: Observable<string> = this.store.pipe(select(selectQueryParam('category')));
+    public readonly dictionariesDef$: Observable<DictionaryDef[]> = this.store.pipe(select(selectAllDictionariesDef));
+    public readonly selectedCategory$: Observable<string> = this.store.pipe(select(selectQueryParam(CATEGORY_KEY)));
+    public readonly selectPage$: Observable<string> = this.store.pipe(select(selectQueryParam(PAGE_KEY)));
+    public readonly selectLimit$: Observable<string> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)));
+    public readonly searchPhrase$: Observable<string> = this.store.pipe(select(selectQueryParam(PHRASE_KEY)));
+
+    public readonly numberOfDictionaryItems$: Observable<number> = combineLatest([
+        this.selectedCategory$,
+        this.searchPhrase$,
+    ]).pipe(switchMap(([ id, phrase ]: string[]) => this.store.pipe(select(selectNumberOfDictionaryItems, { id, phrase }))));
 
     public readonly dictionaryItems$: Observable<DictionaryItem[]> = combineLatest([
-        this.selectedCategory$.pipe(distinctUntilChanged()),
-        this.store.pipe(select(selectFilterPhrase), distinctUntilChanged()),
-    ]).pipe(
-        withLatestFrom(this.store.pipe(select(selectPaginationState), skip(1))),
-        switchMap(([ [ id, phrase ], pagination ]: [ [ string, string ], Pagination ]) => {
-            return this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, pagination, phrase }));
-        }),
-        tap((dictionaryItems: DictionaryItem[] = []) => {
-            this.store.dispatch(UPDATE_PAGINATION({
-                pagination: {
-                    page: 1,
-                    total: dictionaryItems.length,
-                    limit: 10,
-                },
-            }));
-        }),
-        share(),
-    );
-
-    public readonly paginator$: Observable<Pagination> = this.store.pipe(select(selectPaginationState));
+        this.selectedCategory$,
+        this.selectPage$,
+        this.selectLimit$,
+        this.searchPhrase$,
+    ]).pipe(switchMap(([ id, page, limit, phrase ]: string[]) => this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, page, limit, phrase }))));
 
     constructor(
         private readonly router: Router,
+        private readonly activatedRoute: ActivatedRoute,
         private readonly store: Store<AppState>,
     ) {
     }
 
     public onCategorySelect(category: string): void {
-        this.router.navigate([ './', 'dictionaries' ], { queryParams: { category }, queryParamsHandling: 'merge' });
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { category, page: 1, limit: this.activatedRoute.snapshot.queryParams[LIMIT_KEY], phrase: undefined },
+            queryParamsHandling: 'merge',
+        });
     }
 
-    public onPageChange({ page, limit, total }: Pick<Pagination, 'page' | 'limit' | 'total'>): void {
-        this.store.dispatch(UPDATE_PAGINATION({ pagination: { page, limit, total } }));
+    public onPageChange(page: number): void {
+        this.router.navigate([],
+            {
+                relativeTo: this.activatedRoute,
+                queryParams: { page },
+                queryParamsHandling: 'merge',
+            });
     }
 
-    public onLimitChange({ limit, total }: Pick<Pagination, 'limit' | 'total'>): void {
-        this.store.dispatch(UPDATE_PAGINATION({
-                pagination: {
-                    page: 1,
-                    total,
-                    limit,
-                },
-            },
-        ));
+    public onLimitChange(limit: number): void {
+        this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams: { page: 1, limit },
+            queryParamsHandling: 'merge',
+        });
     }
 }

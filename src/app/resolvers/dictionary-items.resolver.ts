@@ -8,6 +8,7 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { SET_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
 import { selectDictionary } from 'src/app/store/dictionaries/dictionaries.selectors';
+import { CATEGORY_KEY } from 'src/app/shared/constants';
 
 @Injectable()
 export class DictionaryItemsResolver implements Resolve<DictionaryItem[]> {
@@ -19,16 +20,22 @@ export class DictionaryItemsResolver implements Resolve<DictionaryItem[]> {
     }
 
     public resolve(route: ActivatedRouteSnapshot): Observable<DictionaryItem[]> {
-        if (route.queryParams.hasOwnProperty('category')) {
+        if (route.queryParams.hasOwnProperty(CATEGORY_KEY)) {
             return this.store.pipe(
-                select(selectDictionary, { id: route.queryParams['category'] }),
+                select(selectDictionary, { id: route.queryParams[CATEGORY_KEY] }),
                 switchMap((dictionaryItems: DictionaryItem[]) => {
                     if (Array.isArray(dictionaryItems)) {
                         return of(dictionaryItems);
                     }
-                    return this.dictionaryService.getDictionary(route.queryParams['category']).pipe(
+                    return this.dictionaryService.getDictionary(route.queryParams[CATEGORY_KEY]).pipe(
                         tap((response: ApiResponse<DictionaryItemList>) => {
-                            this.store.dispatch(SET_DICTIONARY_ITEM({ item: { id: response.data.id, items: response.data.attributes['dostepne-rekordy-slownika'] } }));
+                            this.store.dispatch(SET_DICTIONARY_ITEM({
+                                item: {
+                                    id: response.data.id,
+                                    items: response.data.attributes['dostepne-rekordy-slownika'],
+                                    total: response.data.attributes['ilosc-rekordow-slownika'],
+                                },
+                            }));
                         }),
                         map((response) => response.data.attributes['dostepne-rekordy-slownika']),
                     );
