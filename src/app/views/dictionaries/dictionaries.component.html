@@ -29,7 +29,7 @@
     </table>
     <cpk-paginator (pageChange)="onPageChange($event)"
                    (limitChange)="onLimitChange($event)"
-                   [page]="selectPage$ | async"
-                   [limit]="selectLimit$ | async"
+                   [page]="selectedPage$ | async"
+                   [limit]="selectedLimit$ | async"
                    [total]="numberOfDictionaryItems$ | async"></cpk-paginator>
 </div>

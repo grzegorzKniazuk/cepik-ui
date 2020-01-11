@@ -20,8 +20,8 @@ export class DictionariesComponent {
 
     public readonly dictionariesDef$: Observable<DictionaryDef[]> = this.store.pipe(select(selectAllDictionariesDef));
     public readonly selectedCategory$: Observable<string> = this.store.pipe(select(selectQueryParam(CATEGORY_KEY)));
-    public readonly selectPage$: Observable<string> = this.store.pipe(select(selectQueryParam(PAGE_KEY)));
-    public readonly selectLimit$: Observable<string> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)));
+    public readonly selectedPage$: Observable<string> = this.store.pipe(select(selectQueryParam(PAGE_KEY)));
+    public readonly selectedLimit$: Observable<string> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)));
     public readonly searchPhrase$: Observable<string> = this.store.pipe(select(selectQueryParam(PHRASE_KEY)));
 
     public readonly numberOfDictionaryItems$: Observable<number> = combineLatest([
@@ -31,8 +31,8 @@ export class DictionariesComponent {
 
     public readonly dictionaryItems$: Observable<DictionaryItem[]> = combineLatest([
         this.selectedCategory$,
-        this.selectPage$,
-        this.selectLimit$,
+        this.selectedPage$,
+        this.selectedLimit$,
         this.searchPhrase$,
     ]).pipe(switchMap(([ id, page, limit, phrase ]: string[]) => this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, page, limit, phrase }))));
 
