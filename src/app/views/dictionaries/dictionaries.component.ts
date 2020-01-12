@@ -32,7 +32,7 @@ export class DictionariesComponent extends BaseViewComponent {
         this.selectedPage$,
         this.selectedLimit$,
         this.searchPhrase$,
-    ]).pipe(switchMap(([ id, page, limit, phrase ]: string[]) => this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, page, limit, phrase }))));
+    ]).pipe(switchMap(([ id, page, limit, phrase ]: [ string, string, number, string ]) => this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, page, limit, phrase }))));
 
     constructor(
         activatedRoute: ActivatedRoute,

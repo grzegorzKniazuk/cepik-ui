@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
-import { API_URL } from './shared/tokens';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { DashboardComponent, DictionariesComponent, VehiclesComponent } from 'src/app/views';
@@ -17,7 +16,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor, HttpLoaderInterceptor } from 'src/app/shared/interceptors';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
+import { API_URL } from 'src/app/shared/constants/injection-tokens';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const views: any[] = [
     AppComponent,
@@ -52,10 +52,11 @@ const interceptors: any[] = [
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
-        ToastrModule.forRoot(),
         HttpClientModule,
         SharedModule,
         AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
         ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
         ...store,
     ],

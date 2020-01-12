@@ -2,8 +2,8 @@ import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ApiResponse, DictionaryDef, DictionaryItemList } from '../interfaces';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { API_URL } from 'src/app/shared/tokens';
 import { catchError } from 'rxjs/operators';
+import { API_URL } from 'src/app/shared/constants/injection-tokens';
 
 @Injectable({
     providedIn: 'root',

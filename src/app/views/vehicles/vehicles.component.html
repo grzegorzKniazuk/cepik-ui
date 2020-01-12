@@ -1,14 +1,29 @@
 <div class="container-fluid mt-4">
-    <div class="row col-12">
-        <div class="form-group">
-            <label for="dictionary-select">Wybierz województwo</label>
-            <select class="form-control" id="dictionary-select" [value]="selectedRegion$ | async" (change)="onRegionSelect($event.target.value)">
-                <option *ngFor="let region of regions" [value]="region['klucz-slownika']">{{ region["wartosc-slownika"] }}</option>
-            </select>
+    <div class="row col-12 d-flex justify-content-center">
+        <cpk-select-control [formControl]="selectedRegion" label="Wybierz województwo" optionValueName="klucz-slownika" optionKeyName="wartosc-slownika" [dataset]="regions"></cpk-select-control>
+    </div>
+    <div class="accordion" id="accordionExample">
+        <div class="card">
+            <div class="card-header" id="headingOne">
+                <h2 class="mb-0">
+                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">Opcje</button>
+                </h2>
+            </div>
+            <div id="collapseOne" class="collapse" data-parent="#accordionExample">
+                <div class="card-body">
+                    <form [formGroup]="optionsForm">
+                        <cpk-radio-control formControlName="typ-daty"
+                                           optionKeyName="key"
+                                           optionValueName="value"
+                                           [dataset]="dateTypeDataset"
+                                           label="Parametr określający jakiej daty dotyczy warunek wyszukiwania określony parametrami data-od i data-do"></cpk-radio-control>
+                        <cpk-boolean-radio-control formControlName="tylko-zarejestrowane" label="Parametr określający czy mają zostać zwrócone dane tylko pojazdów zarejestrowanych"></cpk-boolean-radio-control>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
     <table class="table mt-4">
-        <caption>Łącznie rekordów: {{ 0 }}</caption>
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>

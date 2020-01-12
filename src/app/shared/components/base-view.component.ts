@@ -1,9 +1,9 @@
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectQueryParam } from 'src/app/store/router/router.selectors';
 import { LIMIT_KEY, PAGE_KEY, PHRASE_KEY } from 'src/app/shared/constants';
 import { AppState } from 'src/app/store';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
 import { map, share } from 'rxjs/operators';
 import { PaginationLinksState } from 'src/app/store/pagination-links/pagination-links.reducer';
@@ -15,12 +15,25 @@ export abstract class BaseViewComponent {
     public readonly searchPhrase$: Observable<string> = this.store.pipe(select(selectQueryParam(PHRASE_KEY)), share());
     public readonly loadingState$: Observable<boolean> = this.store.pipe(select(selectLoaderState), share());
     public readonly paginationLinksState$: Observable<PaginationLinksState> = this.store.pipe(select(selectPaginationLinksState), share());
+    protected readonly subscriptions = new Subscription();
 
     protected constructor(
         protected readonly activatedRoute: ActivatedRoute,
         protected readonly router: Router,
         protected readonly store: Store<AppState>,
     ) {
+    }
+
+    protected unsubscribe(): void {
+        this.subscriptions.unsubscribe();
+    }
+
+    protected resolveParams(queryParams: Params): Promise<boolean> {
+        return this.router.navigate([], {
+            relativeTo: this.activatedRoute,
+            queryParams,
+            queryParamsHandling: 'merge',
+        });
     }
 
     public onPageChange(page: number): void {

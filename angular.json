@@ -55,9 +55,12 @@
                         "styles": [
                             "node_modules/reset-css/reset.css",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "node_modules/ngx-toastr/toastr.css",
                             "src/assets/fonts/roboto.css",
                             "src/styles.scss"
+                        ],
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
                         ]
                     },
                     "configurations": {
@@ -123,10 +126,21 @@
                             "src/assets",
                             "src/manifest.webmanifest"
                         ],
+                        "stylePreprocessorOptions": {
+                            "includePaths": [
+                                "src/assets/styles"
+                            ]
+                        },
                         "styles": [
+                            "node_modules/reset-css/reset.css",
+                            "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "src/assets/fonts/roboto.css",
                             "src/styles.scss"
                         ],
-                        "scripts": []
+                        "scripts": [
+                            "node_modules/jquery/dist/jquery.min.js",
+                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
+                        ]
                     }
                 },
                 "lint": {

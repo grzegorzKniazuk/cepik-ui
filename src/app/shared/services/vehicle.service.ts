@@ -1,9 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
-import { API_URL } from 'src/app/shared/tokens';
 import { Observable, of } from 'rxjs';
 import { ApiResponse, Vehicle, VehicleListQueryParams } from 'src/app/shared/interfaces';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
+import { API_URL } from 'src/app/shared/constants/injection-tokens';
 
 @Injectable({
     providedIn: 'root',

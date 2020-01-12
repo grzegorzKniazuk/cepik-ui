@@ -28,10 +28,10 @@ export const selectNumberOfDictionaryItems = createSelector(
 
 export const selectDictionaryWithPaginationAndFilters = createSelector(
     selectDictionariesEntities,
-    ((entities: Dictionary<{ id: string, items: DictionaryItem[], total: number }>, { id, page, limit, phrase }: { id: string, page: string, limit: string, phrase: string }) => {
+    ((entities: Dictionary<{ id: string, items: DictionaryItem[], total: number }>, { id, page, limit, phrase }: { id: string, page: string, limit: number, phrase: string }) => {
 
         if (entities[id] && Array.isArray(entities[id].items)) {
-            return entities[id].items.filter((entity: DictionaryItem) => filterDictionaryByPhrase(entity, phrase)).filter((_, index: number) => filterDictionaryByPageAndLimit(index, page, limit));
+            return entities[id].items.filter((entity: DictionaryItem) => filterDictionaryByPhrase(entity, phrase)).filter((_, index: number) => filterDictionaryByPageAndLimit(index, page, limit.toString()));
         }
 
         return [];

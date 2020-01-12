@@ -1,0 +1,6 @@
+<div class="form-group">
+    <label *ngIf="label" for="select">{{ label }}</label>
+    <select class="custom-select" id="select" [disabled]="_disabled" [value]="_value" (change)="setValue($event.target.value)">
+        <option *ngFor="let item of dataset" [value]="item[optionValueName]">{{ item[optionKeyName] }}</option>
+    </select>
+</div>

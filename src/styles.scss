@@ -19,6 +19,24 @@ html, body {
     cursor: pointer;
 }
 
+// bootstrap custom
 th.loading, td.loading {
     filter: blur(6px);
 }
+
+form {
+    fieldset {
+        padding: 16px;
+        border: 1px solid #ced4da;
+        border-radius: .25rem;
+
+        legend {
+            color: #212529;
+            font-size: 1rem;
+            width: 60px;
+            padding: 0 10px;
+            z-index: 1;
+        }
+    }
+}
+
