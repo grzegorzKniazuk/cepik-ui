@@ -1,4 +1,5 @@
 <cpk-nav-bar (search)="onNavbarSearch($event)"></cpk-nav-bar>
-<main class="container-fluid col-12 pl-0 pr-0 pt-0 pb-5">
+<cpk-loader *ngIf="loadingState$ | async"></cpk-loader>
+<main class="container-fluid col-12 pl-0 pr-0 pt-0">
     <router-outlet></router-outlet>
 </main>

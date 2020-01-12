@@ -8,7 +8,8 @@ import { combineLatest, Observable } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { selectAllDictionariesDef } from 'src/app/store/dictionaries-def/dictionary-def.selectors';
 import { selectDictionaryWithPaginationAndFilters, selectNumberOfDictionaryItems } from 'src/app/store/dictionaries/dictionaries.selectors';
-import { CATEGORY_KEY, LIMIT_KEY, PAGE_KEY, PHRASE_KEY } from 'src/app/shared/constants';
+import { CATEGORY_KEY, LIMIT_KEY } from 'src/app/shared/constants';
+import { BaseViewComponent } from 'src/app/shared/components';
 
 @Component({
     selector: 'cpk-dictionaries',
@@ -16,13 +17,10 @@ import { CATEGORY_KEY, LIMIT_KEY, PAGE_KEY, PHRASE_KEY } from 'src/app/shared/co
     styleUrls: [ './dictionaries.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class DictionariesComponent {
+export class DictionariesComponent extends BaseViewComponent {
 
     public readonly dictionariesDef$: Observable<DictionaryDef[]> = this.store.pipe(select(selectAllDictionariesDef));
     public readonly selectedCategory$: Observable<string> = this.store.pipe(select(selectQueryParam(CATEGORY_KEY)));
-    public readonly selectedPage$: Observable<string> = this.store.pipe(select(selectQueryParam(PAGE_KEY)));
-    public readonly selectedLimit$: Observable<string> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)));
-    public readonly searchPhrase$: Observable<string> = this.store.pipe(select(selectQueryParam(PHRASE_KEY)));
 
     public readonly numberOfDictionaryItems$: Observable<number> = combineLatest([
         this.selectedCategory$,
@@ -37,33 +35,17 @@ export class DictionariesComponent {
     ]).pipe(switchMap(([ id, page, limit, phrase ]: string[]) => this.store.pipe(select(selectDictionaryWithPaginationAndFilters, { id, page, limit, phrase }))));
 
     constructor(
-        private readonly router: Router,
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly store: Store<AppState>,
+        activatedRoute: ActivatedRoute,
+        router: Router,
+        store: Store<AppState>,
     ) {
+        super(activatedRoute, router, store);
     }
 
     public onCategorySelect(category: string): void {
         this.router.navigate([], {
             relativeTo: this.activatedRoute,
             queryParams: { category, page: 1, limit: this.activatedRoute.snapshot.queryParams[LIMIT_KEY] || 10, phrase: undefined },
-            queryParamsHandling: 'merge',
-        });
-    }
-
-    public onPageChange(page: number): void {
-        this.router.navigate([],
-            {
-                relativeTo: this.activatedRoute,
-                queryParams: { page },
-                queryParamsHandling: 'merge',
-            });
-    }
-
-    public onLimitChange(limit: number): void {
-        this.router.navigate([], {
-            relativeTo: this.activatedRoute,
-            queryParams: { page: 1, limit },
             queryParamsHandling: 'merge',
         });
     }

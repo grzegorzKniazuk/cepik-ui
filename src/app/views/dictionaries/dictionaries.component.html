@@ -27,9 +27,5 @@
             </tr>
         </tbody>
     </table>
-    <cpk-paginator (pageChange)="onPageChange($event)"
-                   (limitChange)="onLimitChange($event)"
-                   [page]="selectedPage$ | async"
-                   [limit]="selectedLimit$ | async"
-                   [total]="numberOfDictionaryItems$ | async"></cpk-paginator>
+    <cpk-paginator (pageChange)="onPageChange($event)" (limitChange)="onLimitChange($event)"></cpk-paginator>
 </div>

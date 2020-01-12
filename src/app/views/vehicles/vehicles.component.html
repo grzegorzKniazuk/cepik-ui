@@ -1,0 +1,55 @@
+<div class="container-fluid mt-4">
+    <div class="row col-12">
+        <div class="form-group">
+            <label for="dictionary-select">Wybierz województwo</label>
+            <select class="form-control" id="dictionary-select" [value]="selectedRegion$ | async" (change)="onRegionSelect($event.target.value)">
+                <option *ngFor="let region of regions" [value]="region['klucz-slownika']">{{ region["wartosc-slownika"] }}</option>
+            </select>
+        </div>
+    </div>
+    <table class="table mt-4">
+        <caption>Łącznie rekordów: {{ 0 }}</caption>
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Marka</th>
+            <th scope="col">Model</th>
+            <th scope="col">Rodzaj pojazdu</th>
+            <th scope="col">Rodzaj paliwa</th>
+            <th scope="col">Pojemność skokowa silnika</th>
+            <th scope="col">Masa własna</th>
+            <th scope="col">Data pierwszej rejestracji w kraju</th>
+            <th scope="col">Pochodzenie pojazdu</th>
+        </tr>
+        </thead>
+        <tbody *ngIf="vehicles$ | async as vehicles">
+        <tr *ngFor="let vehicle of vehicles; let i = index;">
+            <th [class.loading]="loadingState$ | async" scope="row">{{ i + 1 }}</th>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.marka }}</td>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.model }}</td>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['rodzaj-pojazdu'] }}</td>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['rodzaj-paliwa'] }}</td>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pojemnosc-skokowa-silnika'] }}</td>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['masa-wlasna'] }}</td>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['data-pierwszej-rejestracji-w-kraju'] }}</td>
+            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pochodzenie-pojazdu'] }}</td>
+        </tr>
+        <tr>
+            <td *ngIf="!vehicles.length" [colSpan]="9" class="text-center">Brak danych</td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="row">
+        <div class="col-12">
+            <cpk-paginator *ngIf="paginationLinksState$ | async as paginationLinksState"
+                           [first]="paginationLinksState.first"
+                           [last]="paginationLinksState.last"
+                           [next]="paginationLinksState.next"
+                           [prev]="paginationLinksState.prev"
+                           [self]="paginationLinksState.self"
+                           [limit]="selectedLimit$ | async"
+                           (pageChange)="onPageChange($event)"
+                           (limitChange)="onLimitChange($event)"></cpk-paginator>
+        </div>
+    </div>
+</div>

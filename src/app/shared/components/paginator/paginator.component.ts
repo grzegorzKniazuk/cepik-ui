@@ -11,44 +11,45 @@ export class PaginatorComponent implements OnChanges {
     public readonly limitButtonsParams = [ 10, 20, 50, 100, 200, 500 ];
     public pageNumbers: number[] = [];
 
-    @Input() public set limit(limit: string) {
-        this._limit = limit ? +limit : 10;
-    }
-    @Input() public set page(page: string) {
-        this._page = page ? +page : 1;
-    }
-    @Input() public readonly total: number;
-    public _limit: number;
-    public _page: number;
-    public pages : number;
+    @Input() public readonly first: number;
+    @Input() public readonly last: number;
+    @Input() public readonly next: number;
+    @Input() public readonly prev: number;
+    @Input() public readonly self: number;
+    @Input() public readonly limit: number;
 
     @Output() public readonly pageChange = new EventEmitter<number>();
     @Output() public readonly limitChange = new EventEmitter<number>();
 
+    ngOnChanges() {
+        if (this.self > 2 && this.next !== this.last && !this.isLastPage) {
+            this.pageNumbers = [ this.first, this.prev, this.self, this.next, this.last ];
+        } else if (this.self > 2 && !this.isLastPage) {
+            this.pageNumbers = [ this.first, this.prev, this.self, this.next ];
+        } else if (this.self > 1 && !this.isLastPage) {
+            this.pageNumbers = [ this.prev, this.self, this.next, this.last ];
+        } else if (this.isLastPage) {
+            this.pageNumbers = [ this.first, this.prev, this.self ];
+        } else if (this.isFirstPage) {
+            this.pageNumbers = [ this.self, this.next, this.last ];
+        }
+    }
+
+    public get isFirstPage(): boolean {
+        return  this.self !== null && this.self === 1;
+    }
+
+    public get isLastPage(): boolean {
+        return this.self !== null && this.self === this.last;
+    }
+
     public onPageChange(page: number): void {
-        if (page > 0 && page <= this.pages) {
+        if (page > 0 && page <= this.last) {
             this.pageChange.emit(page);
         }
     }
 
     public onLimitChange(limit: number): void {
         this.limitChange.emit(limit);
-    }
-
-    ngOnChanges() {
-        this.pageNumbers = [];
-
-        this.pages = Math.round(this.total / this._limit) || 1;
-        if (this.pages <= 5) {
-            for (let i = 1; i <= this.pages; i++) {
-                this.pageNumbers.push(i);
-            }
-        } else {
-            for (let i = this._page - 2; i <= this._page + 2; i++) {
-                if (i > 0 && i <= this.pages) {
-                    this.pageNumbers.push(i);
-                }
-            }
-        }
     }
 }

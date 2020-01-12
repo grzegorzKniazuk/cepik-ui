@@ -1,8 +1,9 @@
 import { Inject, Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { ApiResponse, DictionaryDef, DictionaryItemList } from '../interfaces';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { API_URL } from 'src/app/shared/tokens';
+import { catchError } from 'rxjs/operators';
 
 @Injectable({
     providedIn: 'root',
@@ -23,7 +24,9 @@ export class DictionaryService {
             },
         });
 
-        return this.httpClient.get(`${this.apiUrl}/slowniki`, { params }) as Observable<ApiResponse<DictionaryDef[]>>;
+        return this.httpClient.get(`${this.apiUrl}/slowniki`, { params }).pipe(
+            catchError(() => of([])),
+        ) as Observable<ApiResponse<DictionaryDef[]>>;
     }
 
     public getDictionary(dictionary: string): Observable<ApiResponse<DictionaryItemList>> {

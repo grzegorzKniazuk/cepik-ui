@@ -55,9 +55,10 @@
                         "styles": [
                             "node_modules/reset-css/reset.css",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
+                            "node_modules/ngx-toastr/toastr.css",
                             "src/assets/fonts/roboto.css",
                             "src/styles.scss"
-                        ],
+                        ]
                     },
                     "configurations": {
                         "production": {

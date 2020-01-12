@@ -5,3 +5,8 @@ export * from './meta';
 export * from './attributes';
 export * from './dictionary-item-list';
 export * from './dictionary-item';
+export * from './api-query-params';
+export * from './vehicle';
+export * from './vehicle-details';
+export * from './vehicle-base';
+export * from './api-error-response';

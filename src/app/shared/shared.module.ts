@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { NavBarComponent, PaginatorComponent } from 'src/app/shared/components';
+import { IconComponent, LoaderComponent, NavBarComponent, PaginatorComponent } from 'src/app/shared/components';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -8,6 +8,8 @@ import { FormsModule } from '@angular/forms';
 const components: any[] = [
     NavBarComponent,
     PaginatorComponent,
+    LoaderComponent,
+    IconComponent,
 ];
 
 @NgModule({

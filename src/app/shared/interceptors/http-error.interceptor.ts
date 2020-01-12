@@ -2,16 +2,27 @@ import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { ApiErrorResponse } from 'src/app/shared/interfaces';
+import { ToastService } from 'src/app/shared/services/toast.service';
 
 @Injectable()
 export class HttpErrorInterceptor implements HttpInterceptor {
+
+    constructor(
+        private readonly toastService: ToastService,
+    ) {
+    }
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         return next.handle(req).pipe(catchError((error: HttpErrorResponse) => this.handleError(error)));
     }
 
     private handleError(error: HttpErrorResponse): Observable<never> {
-        console.log(error);
+        if (error && error.error && Array.isArray(error.error.errors) && error.error.errors.length) {
+            error.error.errors.forEach((error: ApiErrorResponse) => {
+                this.toastService.error(error['error-result']);
+            });
+        }
 
         return throwError(error);
     }

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent, DictionariesComponent, RegionsComponent } from 'src/app/views';
-import { DictionaryIdsResolver, DictionaryItemsResolver } from 'src/app/resolvers';
+import { DashboardComponent, DictionariesComponent, VehiclesComponent } from 'src/app/views';
+import { DictionaryIdsResolver, DictionaryItemsResolver, RegionsResolver, VehiclesResolver } from 'src/app/resolvers';
 
 const routes: Routes = [
     {
@@ -20,9 +20,13 @@ const routes: Routes = [
         runGuardsAndResolvers: 'always',
     },
     {
-        path: 'regions',
-        component: RegionsComponent,
-        data: { title: 'Województwo' },
+        path: 'vehicles',
+        component: VehiclesComponent,
+        data: { title: 'Pojazdy' },
+        resolve: {
+            vehicles: VehiclesResolver,
+            regions: RegionsResolver,
+        },
         runGuardsAndResolvers: 'always',
     },
     {

@@ -1,5 +1,7 @@
 export interface Links {
     first: string;
-    self: string;
     last: string;
+    next?: string;
+    prev?: string;
+    self: string;
 }

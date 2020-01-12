@@ -1,11 +1,12 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { select, Store } from '@ngrx/store';
-import { Subscription } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { distinctUntilChanged, filter, pluck } from 'rxjs/operators';
 import { selectRouteData } from 'src/app/store/router/router.selectors';
 import { ActivatedRoute, Router } from '@angular/router';
+import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
 
 @Component({
     selector: 'cpk-root',
@@ -15,6 +16,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppComponent implements OnInit, OnDestroy {
 
+    public readonly loadingState$: Observable<boolean> = this.store.pipe(select(selectLoaderState));
     private readonly subscription$ = new Subscription();
 
     constructor(
