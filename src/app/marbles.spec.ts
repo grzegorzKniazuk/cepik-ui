@@ -1,5 +1,5 @@
 import { TestScheduler } from 'rxjs/testing';
-import { catchError, debounceTime, delay, distinctUntilChanged, map, pluck, startWith, switchMap } from 'rxjs/operators';
+import { catchError, debounceTime, delay, distinctUntilChanged, map, mergeMap, pluck, startWith, switchMap, toArray } from 'rxjs/operators';
 import { concat, EMPTY, from, fromEvent, interval, Observable, of, throwError } from 'rxjs';
 import { ajax } from 'rxjs/ajax';
 
@@ -188,5 +188,39 @@ describe('Marble testing in RxJS', () => {
 
             expectObservable(source$, unsubscribe).toBe(expected, { a: '1sec', b: '2sec', c: '3sec' });
         });
+    });
+});
+
+describe('subscribe & assert testing in RxJS', () => {
+    it('should compare each emitted value', () => {
+        const source$ = of(1, 2, 3);
+        const final$ = source$.pipe(
+            map(v => v * 10),
+            toArray(),
+        );
+
+        const expected = [ 10, 20, 30 ];
+
+        final$.subscribe(val => {
+            expect(val).toEqual(expected);
+        });
+    });
+
+    it('should let you test async operations with done callback', done => {
+        const source$ = of('Ready', 'Set', 'Go!').pipe(
+            mergeMap((message, index) => {
+                return of(message).pipe(
+                    delay(index * 1000),
+                );
+            }),
+        );
+
+        const expected = ['Ready', 'Set', 'Go!'];
+        let i = 0;
+
+        source$.subscribe(val => {
+            expect(val).toEqual(expected[i]);
+            i++;
+        }, null, done);
     });
 });

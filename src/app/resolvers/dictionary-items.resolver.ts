@@ -3,7 +3,7 @@ import { ApiResponse, DictionaryItem, DictionaryItemList } from 'src/app/shared/
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { DictionaryService } from 'src/app/shared/services/dictionary.service';
-import { first, map, switchMap, tap } from 'rxjs/operators';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { SET_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
@@ -40,10 +40,9 @@ export class DictionaryItemsResolver implements Resolve<DictionaryItem[]> {
                         map((response) => response.data.attributes['dostepne-rekordy-slownika']),
                     );
                 }),
-                first(),
             );
         }
 
-        return of([]).pipe(first());
+        return of([]);
     }
 }

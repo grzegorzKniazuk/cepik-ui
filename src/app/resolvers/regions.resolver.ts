@@ -41,5 +41,4 @@ export class RegionsResolver implements Resolve<DictionaryItem[]> {
             first(),
         );
     }
-
 }

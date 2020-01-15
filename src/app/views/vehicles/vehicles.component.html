@@ -2,27 +2,23 @@
     <div class="row col-12 d-flex justify-content-center">
         <cpk-select-control [formControl]="selectedRegion" label="Wybierz województwo" optionValueName="klucz-slownika" optionKeyName="wartosc-slownika" [dataset]="regions"></cpk-select-control>
     </div>
-    <div class="accordion" id="accordionExample">
-        <div class="card">
-            <div class="card-header" id="headingOne">
-                <h2 class="mb-0">
-                    <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapseOne">Opcje</button>
-                </h2>
-            </div>
-            <div id="collapseOne" class="collapse" data-parent="#accordionExample">
-                <div class="card-body">
-                    <form [formGroup]="optionsForm">
-                        <cpk-radio-control formControlName="typ-daty"
-                                           optionKeyName="key"
-                                           optionValueName="value"
-                                           [dataset]="dateTypeDataset"
-                                           label="Parametr określający jakiej daty dotyczy warunek wyszukiwania określony parametrami data-od i data-do"></cpk-radio-control>
-                        <cpk-boolean-radio-control formControlName="tylko-zarejestrowane" label="Parametr określający czy mają zostać zwrócone dane tylko pojazdów zarejestrowanych"></cpk-boolean-radio-control>
-                    </form>
-                </div>
-            </div>
+    <form [formGroup]="optionsForm" class="col-12">
+        <div class="row d-flex justify-content-start">
+            <cpk-date-control class="col-2" label="Data od" formControlName="data-od"></cpk-date-control>
+            <cpk-date-control class="col-2" label="Data do" formControlName="data-do"></cpk-date-control>
         </div>
-    </div>
+        <div class="row d-flex">
+            <cpk-radio-control formControlName="typ-daty"
+                               optionKeyName="key"
+                               optionValueName="value"
+                               [dataset]="dateTypeDataset"
+                               class="col-6"
+                               label="Parametr określający jakiej daty dotyczy warunek wyszukiwania"></cpk-radio-control>
+            <cpk-boolean-radio-control formControlName="tylko-zarejestrowane"
+                                       class="col-6"
+                                       label="Czy mają zostać zwrócone dane tylko pojazdów zarejestrowanych"></cpk-boolean-radio-control>
+        </div>
+     </form>
     <table class="table mt-4">
         <thead class="thead-dark">
         <tr>

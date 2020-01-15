@@ -9,7 +9,7 @@ import { switchMap } from 'rxjs/operators';
 import { selectAllDictionariesDef } from 'src/app/store/dictionaries-def/dictionary-def.selectors';
 import { selectDictionaryWithPaginationAndFilters, selectNumberOfDictionaryItems } from 'src/app/store/dictionaries/dictionaries.selectors';
 import { CATEGORY_KEY, LIMIT_KEY } from 'src/app/shared/constants';
-import { BaseViewComponent } from 'src/app/shared/components';
+import { BaseViewComponent } from '../base-view.component';
 
 @Component({
     selector: 'cpk-dictionaries',

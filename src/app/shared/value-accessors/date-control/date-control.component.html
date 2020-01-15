@@ -1,0 +1,4 @@
+<div class="form-group">
+    <label>{{ label }}</label>
+    <input [disabled]="_disabled" type="date" (change)="setValue($event.target.value)" [value]="_value | mask:'xxxx-xx-xx'">
+</div>

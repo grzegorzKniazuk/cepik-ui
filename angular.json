@@ -57,10 +57,6 @@
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/assets/fonts/roboto.css",
                             "src/styles.scss"
-                        ],
-                        "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
                         ]
                     },
                     "configurations": {
@@ -136,10 +132,6 @@
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/assets/fonts/roboto.css",
                             "src/styles.scss"
-                        ],
-                        "scripts": [
-                            "node_modules/jquery/dist/jquery.min.js",
-                            "node_modules/bootstrap/dist/js/bootstrap.min.js"
                         ]
                     }
                 },
