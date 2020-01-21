@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { IconComponent, LoaderComponent, NavBarComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
+import { ButtonComponent, IconComponent, LoaderComponent, ModalComponent, NavBarComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -9,6 +9,7 @@ import { MaskPipe } from 'src/app/shared/pipes';
 
 const entryComponents: any[] = [
     ToastComponent,
+    ModalComponent,
 ];
 
 const valueAccessors: any[] = [
@@ -25,6 +26,7 @@ const components: any[] = [
     PaginatorComponent,
     LoaderComponent,
     IconComponent,
+    ButtonComponent,
 ];
 
 const pipes: any[] = [

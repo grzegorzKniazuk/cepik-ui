@@ -10,6 +10,7 @@ import { VehicleQueryParamDate } from 'src/app/shared/enums';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { TimeService } from 'src/app/shared/services';
 import { BaseViewComponent } from 'src/app/views/base-view.component';
+import { dateRangeValidator } from 'src/app/shared/validators';
 
 @Component({
     selector: 'cpk-vehicles',
@@ -48,12 +49,18 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
         this.unsubscribe();
     }
 
+    public openVehiclesQueryOptionsModal(): void {
+
+    }
+
     private buildOptionsForm(): void {
         this.optionsForm = this.formBuilder.group({
-            [DATA_OD_KEY]: [ this.activatedRoute.snapshot.queryParams[DATA_OD_KEY] ],
-            [DATA_DO_KEY]: [ this.activatedRoute.snapshot.queryParams[DATA_DO_KEY] ],
-            [TYP_DATY_KEY]: [ this.activatedRoute.snapshot.queryParams[TYP_DATY_KEY] ],
-            [TYLKO_ZAREJESTROWANE_KEY]: [ this.activatedRoute.snapshot.queryParams[TYLKO_ZAREJESTROWANE_KEY] ],
+            [DATA_OD_KEY]: [ this.activatedRoute.snapshot.queryParams[DATA_OD_KEY] || this.timeService.yearsBackFromDate(this.timeService.todayDate) ],
+            [DATA_DO_KEY]: [ this.activatedRoute.snapshot.queryParams[DATA_DO_KEY] || this.timeService.todayDate ],
+            [TYP_DATY_KEY]: [ this.activatedRoute.snapshot.queryParams[TYP_DATY_KEY] || VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE ],
+            [TYLKO_ZAREJESTROWANE_KEY]: [ this.activatedRoute.snapshot.queryParams[TYLKO_ZAREJESTROWANE_KEY] || true ],
+        }, {
+            validators: [ dateRangeValidator(DATA_OD_KEY, DATA_DO_KEY, 2) ]
         });
     }
 
@@ -64,7 +71,7 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
                 [PAGE_KEY]: 1,
                 [LIMIT_KEY]: this.activatedRoute.snapshot.queryParams[LIMIT_KEY] || 10,
                 [TYP_DATY_KEY]: this.activatedRoute.snapshot.queryParams[TYP_DATY_KEY] || VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
-                [DATA_OD_KEY]: this.activatedRoute.snapshot.queryParams[DATA_OD_KEY] || this.timeService.yearsFromToday(),
+                [DATA_OD_KEY]: this.activatedRoute.snapshot.queryParams[DATA_OD_KEY] || this.timeService.yearsBackFromToday(),
                 [DATA_DO_KEY]: this.activatedRoute.snapshot.queryParams[DATA_DO_KEY] || this.timeService.todayDate,
                 [TYLKO_ZAREJESTROWANE_KEY]: this.activatedRoute.snapshot.queryParams[TYLKO_ZAREJESTROWANE_KEY] || true,
             });

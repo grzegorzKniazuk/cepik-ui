@@ -1,5 +1,5 @@
 <div @toast [class]="'position-fixed alert alert-'+toastOptions.type" role="alert">
-    <cpk-icon class="x clickable" icon="x" [size]="32" (click)="onClose()"></cpk-icon>
+    <!--<cpk-icon class="x clickable" icon="x" [size]="32" (click)="onClose()"></cpk-icon>-->
     <h4 class="alert-heading" *ngIf="toastOptions.title"><strong>{{ toastOptions.title }}</strong></h4>
     <p *ngIf="toastOptions.message">{{ toastOptions.message }}</p>
     <hr>

@@ -1,49 +1,61 @@
 {
-  "$schema": "./node_modules/@angular/service-worker/config/schema.json",
-  "index": "/index.html",
-  "assetGroups": [
-    {
-      "name": "cepik-ui",
-      "installMode": "prefetch",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/favicon.ico",
-          "/index.html",
-          "/manifest.webmanifest",
-          "/*.css",
-          "/*.js",
-          "/*.woff",
-          "/*.woff2",
-          "/*.ttf",
-          "/*.eot",
-          "/*.svg",
-          "/*.png"
-        ]
-      }
-    }, {
-      "name": "assets",
-      "installMode": "lazy",
-      "updateMode": "prefetch",
-      "resources": {
-        "files": [
-          "/assets/**",
-          "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
-        ]
-      }
-    }
-  ],
-  "dataGroups": [
-    {
-      "name": "cepik api",
-      "urls": [
-        "https://api.cepik.gov.pl/.+"
-      ],
-      "cacheConfig": {
-        "strategy": "performance",
-        "maxAge": "7d",
-        "maxSize": 1
-      }
-    }
-  ]
+    "$schema": "./node_modules/@angular/service-worker/config/schema.json",
+    "index": "/index.html",
+    "assetGroups": [
+        {
+            "name": "cepik-ui",
+            "installMode": "prefetch",
+            "updateMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/favicon.ico",
+                    "/index.html",
+                    "/manifest.webmanifest",
+                    "/*.css",
+                    "/*.js",
+                    "/*.woff",
+                    "/*.woff2",
+                    "/*.ttf",
+                    "/*.eot",
+                    "/*.svg",
+                    "/*.png"
+                ]
+            }
+        },
+        {
+            "name": "assets",
+            "installMode": "lazy",
+            "updateMode": "prefetch",
+            "resources": {
+                "files": [
+                    "/assets/**",
+                    "/*.(eot|svg|cur|jpg|png|webp|gif|otf|ttf|woff|woff2|ani)"
+                ]
+            }
+        }
+    ],
+    "dataGroups": [
+        {
+            "name": "cepik api",
+            "urls": [
+                "https://api.cepik.gov.pl/.+"
+            ],
+            "cacheConfig": {
+                "strategy": "performance",
+                "maxAge": "1d",
+                "maxSize": 1
+            }
+        },
+        {
+            "name": "google fonts",
+            "urls": [
+                "https://fonts.googleapis.com/.+"
+            ],
+            "cacheConfig": {
+                "strategy": "performance",
+                "maxAge": "7d",
+                "maxSize": 1
+            }
+        }
+    ]
 }
