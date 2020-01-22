@@ -12,6 +12,7 @@ export class ButtonComponent implements OnInit {
     @Input() public readonly type: string;
     @Input() public readonly size: string;
     @Input() public readonly outline: boolean;
+    @Input() public readonly disabled: boolean;
 
     constructor(
         private readonly renderer2: Renderer2,

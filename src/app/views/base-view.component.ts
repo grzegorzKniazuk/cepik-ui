@@ -1,39 +1,28 @@
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectQueryParam } from 'src/app/store/router/router.selectors';
 import { LIMIT_KEY, PAGE_KEY, PHRASE_KEY } from 'src/app/shared/constants';
 import { AppState } from 'src/app/store';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
 import { map, share } from 'rxjs/operators';
 import { PaginationLinksState } from 'src/app/store/pagination-links/pagination-links.reducer';
 import { selectPaginationLinksState } from 'src/app/store/pagination-links/pagination-links.selectors';
+import { BaseComponent } from 'src/app/views/base.component';
 
-export abstract class BaseViewComponent {
+export abstract class BaseViewComponent extends BaseComponent {
     public readonly selectedPage$: Observable<string> = this.store.pipe(select(selectQueryParam(PAGE_KEY)), share());
     public readonly selectedLimit$: Observable<number> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)), map(v => +v), share());
     public readonly searchPhrase$: Observable<string> = this.store.pipe(select(selectQueryParam(PHRASE_KEY)), share());
     public readonly loadingState$: Observable<boolean> = this.store.pipe(select(selectLoaderState), share());
     public readonly paginationLinksState$: Observable<PaginationLinksState> = this.store.pipe(select(selectPaginationLinksState), share());
-    protected readonly subscriptions = new Subscription();
 
     protected constructor(
-        protected readonly activatedRoute: ActivatedRoute,
-        protected readonly router: Router,
+        activatedRoute: ActivatedRoute,
+        router: Router,
         protected readonly store: Store<AppState>,
     ) {
-    }
-
-    protected unsubscribe(): void {
-        this.subscriptions.unsubscribe();
-    }
-
-    protected resolveParams(queryParams: Params): Promise<boolean> {
-        return this.router.navigate([], {
-            relativeTo: this.activatedRoute,
-            queryParams,
-            queryParamsHandling: 'merge',
-        });
+        super(activatedRoute, router);
     }
 
     public onPageChange(page: number): void {

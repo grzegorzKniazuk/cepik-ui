@@ -1,25 +1,8 @@
 <div class="container-fluid mt-4">
     <div class="row col-12 d-flex justify-content-center align-items-center">
         <cpk-select-control [formControl]="selectedRegion" label="Wybierz województwo" optionValueName="klucz-slownika" optionKeyName="wartosc-slownika" [dataset]="regions"></cpk-select-control>
-        <cpk-button class="ml-2 options-button" type="primary" (click)="openVehiclesQueryOptionsModal()"><cpk-icon>settings_applications</cpk-icon>Opcje</cpk-button>
+        <cpk-button [disabled]="selectedRegion.value" class="ml-2 options-button" type="primary" (click)="openVehiclesQueryOptionsModal()"><cpk-icon>settings_applications</cpk-icon>Opcje</cpk-button>
     </div>
-    <form [formGroup]="optionsForm" class="col-12">
-        <div class="row d-flex justify-content-start">
-            <cpk-date-control class="col-2" label="Data od" formControlName="data-od"></cpk-date-control>
-            <cpk-date-control class="col-2" label="Data do" formControlName="data-do"></cpk-date-control>
-        </div>
-        <div class="row d-flex">
-            <cpk-radio-control formControlName="typ-daty"
-                               optionKeyName="key"
-                               optionValueName="value"
-                               [dataset]="dateTypeDataset"
-                               class="col-6"
-                               label="Parametr określający jakiej daty dotyczy warunek wyszukiwania"></cpk-radio-control>
-            <cpk-boolean-radio-control formControlName="tylko-zarejestrowane"
-                                       class="col-6"
-                                       label="Czy mają zostać zwrócone dane tylko pojazdów zarejestrowanych"></cpk-boolean-radio-control>
-        </div>
-     </form>
     <table class="table mt-4">
         <thead class="thead-dark">
         <tr>

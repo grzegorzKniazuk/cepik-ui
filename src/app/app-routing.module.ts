@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent, DictionariesComponent, VehiclesComponent } from 'src/app/views';
-import { DictionaryIdsResolver, DictionaryItemsResolver, RegionsResolver, VehiclesResolver } from 'src/app/resolvers';
+import { DictionaryIdsResolver, DictionaryItemsResolver, RegionsResolver, VehiclesResolver } from 'src/app/shared/resolvers';
 
 const routes: Routes = [
     {
