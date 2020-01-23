@@ -37,8 +37,4 @@ export class TimeService {
     public yearsBackFromToday(years = 2): string {
         return TimeService.yearsFromToday(years);
     }
-
-    public yearsBackFromDate(date: string, years = 2): string {
-        return TimeService.yearsBackFromDate(date, years);
-    }
 }

@@ -1,5 +1,5 @@
 import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
-import { TimeService } from 'src/app/shared/services';
+import { TimeService } from 'src/app/shared/services/time.service';
 
 export function dateRangeValidator(dateFromControlName: string, dateToControlName: string, range: number): ValidatorFn {
     return (formGroup: AbstractControl): ValidationErrors | null => {
@@ -29,9 +29,11 @@ export function dateRangeValidator(dateFromControlName: string, dateToControlNam
 }
 
 function dateFromValueValidity(dateFromValue: string, dateToValue: string, range: number): boolean {
-    return TimeService.isSameOrBefore(dateFromValue, TimeService.yearsAheadFromDate(dateToValue, range)) && TimeService.isSameOrAfter(dateFromValue, TimeService.yearsBackFromDate(dateToValue, range));
+    return TimeService.isSameOrBefore(dateFromValue, TimeService.yearsAheadFromDate(dateToValue, range))
+        && TimeService.isSameOrAfter(dateFromValue, TimeService.yearsBackFromDate(dateToValue, range));
 }
 
 function dateToValueValidity(dateFromValue: string, dateToValue: string, range: number): boolean {
-    return TimeService.isSameOrBefore(dateToValue, TimeService.yearsAheadFromDate(dateFromValue, range)) && TimeService.isSameOrAfter(dateToValue, TimeService.yearsBackFromDate(dateFromValue, range));
+    return TimeService.isSameOrBefore(dateToValue, TimeService.yearsAheadFromDate(dateFromValue, range))
+        && TimeService.isSameOrAfter(dateToValue, TimeService.yearsBackFromDate(dateFromValue, range));
 }

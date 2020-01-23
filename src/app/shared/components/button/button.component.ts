@@ -12,7 +12,21 @@ export class ButtonComponent implements OnInit {
     @Input() public readonly type: string;
     @Input() public readonly size: string;
     @Input() public readonly outline: boolean;
-    @Input() public readonly disabled: boolean;
+
+    public isDisabled: boolean;
+
+    @Input()
+    public set disabled(disabled: boolean) {
+        this.isDisabled = disabled;
+
+        if (disabled) {
+            this.renderer2.addClass(this.button.nativeElement, `disabled`);
+            this.renderer2.setAttribute(this.button.nativeElement, 'title', 'Akcja niedostępna');
+        } else {
+            this.renderer2.removeClass(this.button.nativeElement, 'disabled');
+            this.renderer2.removeAttribute(this.button.nativeElement, 'title');
+        }
+    }
 
     constructor(
         private readonly renderer2: Renderer2,

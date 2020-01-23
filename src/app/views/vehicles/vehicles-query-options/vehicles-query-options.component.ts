@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { VehicleQueryParamDate } from 'src/app/shared/enums';
 import { VehiclesListOptions } from 'src/app/shared/interfaces';
 import { BaseComponent } from 'src/app/views/base.component';
+import { ModalService } from 'src/app/shared/services';
 
 @Component({
     selector: 'cpk-vehicles-query-options',
@@ -26,13 +27,17 @@ export class VehiclesQueryOptionsComponent extends BaseComponent implements OnIn
         activatedRoute: ActivatedRoute,
         router: Router,
         private readonly formBuilder: FormBuilder,
+        private readonly modalService: ModalService<VehiclesQueryOptionsComponent>,
     ) {
         super(activatedRoute, router);
     }
 
     ngOnInit() {
         this.buildOptionsForm();
-        this.subscriptions.add(this.optionsForm.valueChanges.subscribe((vehiclesListOptions: VehiclesListOptions) => this.onOptionsChange(vehiclesListOptions)));
+
+        this.subscriptions.add(this.optionsForm.valueChanges.subscribe((vehiclesListOptions: VehiclesListOptions) => {
+            this.onOptionsChange(vehiclesListOptions);
+        }));
     }
 
     ngOnDestroy() {
@@ -51,8 +56,12 @@ export class VehiclesQueryOptionsComponent extends BaseComponent implements OnIn
     }
 
     public onOptionsChange(vehiclesListOptions: VehiclesListOptions): void {
-        this.resolveParams({
-            ...vehiclesListOptions,
-        });
+        if (this.optionsForm.valid) {
+            this.modalService.close();
+
+            this.resolveParams({
+                ...vehiclesListOptions,
+            });
+        }
     }
 }

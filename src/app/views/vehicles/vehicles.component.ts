@@ -4,7 +4,7 @@ import { AppState } from 'src/app/store';
 import { ActivatedRoute, Data, Router } from '@angular/router';
 import { DictionaryItem, Vehicle } from 'src/app/shared/interfaces';
 import { DATA_DO_KEY, DATA_OD_KEY, LIMIT_KEY, PAGE_KEY, TYLKO_ZAREJESTROWANE_KEY, TYP_DATY_KEY, WOJEWODZTWO_KEY } from 'src/app/shared/constants';
-import { pluck } from 'rxjs/operators';
+import { pluck, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { VehicleQueryParamDate } from 'src/app/shared/enums';
 import { FormBuilder } from '@angular/forms';
@@ -22,7 +22,8 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
 
     public readonly regions: DictionaryItem[] = this.activatedRoute.snapshot.data['regions'];
     public readonly vehicles$: Observable<Vehicle[]> = this.activatedRoute.data.pipe(pluck<Data, Vehicle[]>('vehicles'));
-    public readonly selectedRegion = this.formBuilder.control([ this.activatedRoute.snapshot.queryParams[WOJEWODZTWO_KEY] ]);
+    public readonly selectedRegionControl = this.formBuilder.control(this.activatedRoute.snapshot.queryParams[WOJEWODZTWO_KEY]);
+    public readonly selectedRegion$ = this.selectedRegionControl.valueChanges.pipe(startWith(this.selectedRegionControl.value));
 
     constructor(
         activatedRoute: ActivatedRoute,
@@ -30,13 +31,13 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
         store: Store<AppState>,
         private readonly formBuilder: FormBuilder,
         private readonly timeService: TimeService,
-        private readonly modalService: ModalService,
+        private readonly modalService: ModalService<VehiclesQueryOptionsComponent>,
     ) {
         super(activatedRoute, router, store);
     }
 
     ngOnInit() {
-        this.subscriptions.add(this.selectedRegion.valueChanges.subscribe((region: string) => this.onRegionSelect(region)));
+        this.subscriptions.add(this.selectedRegionControl.valueChanges.subscribe((region: string) => this.onRegionSelect(region)));
     }
 
     ngOnDestroy() {
@@ -44,7 +45,7 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
     }
 
     public openVehiclesQueryOptionsModal(): void {
-        this.modalService.open<VehiclesQueryOptionsComponent>(VehiclesQueryOptionsComponent);
+        this.modalService.open(VehiclesQueryOptionsComponent);
     }
 
     public onRegionSelect(region: string): void {

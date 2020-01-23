@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, EventEmitter, Inject, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, EventEmitter, Inject } from '@angular/core';
 import { MODAL_OPTIONS } from 'src/app/shared/constants/injection-tokens';
 import { ModalOptions } from 'src/app/shared/interfaces';
 
@@ -8,7 +8,7 @@ import { ModalOptions } from 'src/app/shared/interfaces';
     styleUrls: [ './modal.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ModalComponent implements OnInit {
+export class ModalComponent {
 
     public readonly close$ = new EventEmitter<void>();
 
@@ -17,13 +17,14 @@ export class ModalComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {
+    public modalContainerClick(): void {
+        if (this.modalOptions.closeOnBackdropClick) {
+            this.close();
+        }
     }
 
-    public closeOnBackdropClick(): void {
-        if (this.modalOptions.closeOnBackdropClick) {
-            // this.close();
-        }
+    public modalBodyClick($event: Event): void {
+        $event.stopPropagation();
     }
 
     public close(): void {

@@ -1,15 +1,19 @@
 <form [formGroup]="optionsForm" class="col-12">
-    <div class="row d-flex justify-content-start">
-        <cpk-date-control class="col-2" label="Data od" formControlName="data-od"></cpk-date-control>
-        <cpk-date-control class="col-2" label="Data do" formControlName="data-do"></cpk-date-control>
+    <div class="row d-flex justify-content-center col-12">
+        <cpk-date-control class="col-6" label="Data od" formControlName="data-od"></cpk-date-control>
+        <cpk-date-control class="col-6" label="Data do" formControlName="data-do"></cpk-date-control>
     </div>
-    <div class="row d-flex">
+    <div class="row d-flex col-12">
         <cpk-radio-control formControlName="typ-daty"
                            optionKeyName="key"
                            optionValueName="value"
                            [dataset]="dateTypeDataset"
                            class="col-6"
-                           label="Parametr określający jakiej daty dotyczy warunek wyszukiwania"></cpk-radio-control>
-        <cpk-boolean-radio-control formControlName="tylko-zarejestrowane" class="col-6" label="Czy mają zostać zwrócone dane tylko pojazdów zarejestrowanych"></cpk-boolean-radio-control>
+                           label="Parametr określający jakiej daty dotyczy warunek wyszukiwania">
+        </cpk-radio-control>
+        <cpk-boolean-radio-control formControlName="tylko-zarejestrowane"
+                                   class="col-6"
+                                   label="Czy mają zostać zwrócone dane tylko pojazdów zarejestrowanych">
+        </cpk-boolean-radio-control>
     </div>
 </form>

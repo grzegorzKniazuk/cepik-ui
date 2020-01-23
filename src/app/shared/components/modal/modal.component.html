@@ -1,5 +1,5 @@
-<div class="modal-container" (click)="closeOnBackdropClick()">
-    <div class="modal-body">
+<div class="modal-container" (click)="modalContainerClick()">
+    <div class="modal-body-content col-6" (click)="modalBodyClick($event)">
         <ng-content></ng-content>
     </div>
 </div>
