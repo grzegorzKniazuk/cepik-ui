@@ -37,7 +37,7 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
     }
 
     ngOnInit() {
-        this.subscriptions.add(this.selectedRegionControl.valueChanges.subscribe((region: string) => this.onRegionSelect(region)));
+        this.subscriptions$.add(this.selectedRegionControl.valueChanges.subscribe((region: string) => this.onRegionSelect(region)));
     }
 
     ngOnDestroy() {

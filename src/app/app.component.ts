@@ -1,12 +1,13 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { select, Store } from '@ngrx/store';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
 import { distinctUntilChanged, filter, pluck } from 'rxjs/operators';
 import { selectRouteData } from 'src/app/store/router/router.selectors';
-import { ActivatedRoute, Router } from '@angular/router';
 import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
+import { BaseComponent } from 'src/app/views/base.component';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
     selector: 'cpk-root',
@@ -14,21 +15,21 @@ import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
     styleUrls: [ './app.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AppComponent implements OnInit, OnDestroy {
+export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
 
     public readonly loadingState$: Observable<boolean> = this.store.pipe(select(selectLoaderState));
-    private readonly subscription$ = new Subscription();
 
     constructor(
+        activatedRoute: ActivatedRoute,
+        router: Router,
         private readonly title: Title,
         private readonly store: Store<AppState>,
-        private readonly router: Router,
-        private readonly activatedRoute: ActivatedRoute,
     ) {
+        super(activatedRoute, router);
     }
 
     ngOnInit() {
-        this.subscription$.add(
+        this.subscriptions$.add(
             this.store.pipe(
                 select(selectRouteData),
                 filter((data) => data && data.hasOwnProperty('title')),
@@ -41,22 +42,6 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscription$.unsubscribe();
-    }
-
-    public onNavbarSearch(phrase: string | Event): void {
-        if (typeof phrase === 'string' && phrase.length) {
-            this.router.navigate([], {
-                relativeTo: this.activatedRoute,
-                queryParams: { phrase, page: 1 },
-                queryParamsHandling: 'merge',
-            });
-        } else {
-            this.router.navigate([], {
-                relativeTo: this.activatedRoute,
-                queryParams: { phrase: undefined, page: 1 },
-                queryParamsHandling: 'merge',
-            });
-        }
+        this.subscriptions$.unsubscribe();
     }
 }

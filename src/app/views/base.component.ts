@@ -3,7 +3,7 @@ import { Subscription } from 'rxjs';
 
 export abstract class BaseComponent {
 
-    protected readonly subscriptions = new Subscription();
+    protected readonly subscriptions$ = new Subscription();
 
     protected constructor(
         protected readonly activatedRoute: ActivatedRoute,
@@ -12,7 +12,7 @@ export abstract class BaseComponent {
     }
 
     protected unsubscribe(): void {
-        this.subscriptions.unsubscribe();
+        this.subscriptions$.unsubscribe();
     }
 
     protected resolveParams(queryParams: Params): Promise<boolean> {

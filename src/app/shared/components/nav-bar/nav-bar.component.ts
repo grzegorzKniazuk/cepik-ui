@@ -1,7 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { PHRASE_KEY } from 'src/app/shared/constants';
-import { first, pluck, skip, tap } from 'rxjs/operators';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 
 @Component({
     selector: 'cpk-nav-bar',
@@ -9,31 +6,5 @@ import { first, pluck, skip, tap } from 'rxjs/operators';
     styleUrls: [ './nav-bar.component.scss' ],
     changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class NavBarComponent implements OnInit {
-
-    @Output() public readonly search = new EventEmitter<string>();
-    public phrase: string;
-
-    constructor(
-        private readonly activatedRoute: ActivatedRoute,
-        private readonly changeDetectorRef: ChangeDetectorRef,
-    ) {
-    }
-
-    ngOnInit() {
-        this.setSearchPhraseFromQueryParams();
-    }
-
-    private setSearchPhraseFromQueryParams(): void {
-        this.activatedRoute.queryParams.pipe(
-            skip(1),
-            first((params) => params && params.hasOwnProperty(PHRASE_KEY)),
-            pluck<Params, string>('phrase'),
-            tap((phrase) => this.phrase = phrase),
-        ).subscribe(() => this.changeDetectorRef.detectChanges());
-    }
-
-    public onSearch(): void {
-        this.search.emit(this.phrase);
-    }
+export class NavBarComponent {
 }
