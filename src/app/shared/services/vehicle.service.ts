@@ -24,4 +24,8 @@ export class VehicleService {
             catchError(() => of([])),
         ) as Observable<ApiResponse<Vehicle[]>>;
     }
+
+    public getVehicle(id: string): Observable<ApiResponse<Vehicle>> {
+        return this.httpClient.get(`${this.apiUrl}/pojazdy/${id}`) as Observable<ApiResponse<Vehicle>>;
+    }
 }

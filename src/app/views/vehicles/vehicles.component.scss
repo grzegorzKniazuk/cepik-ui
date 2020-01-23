@@ -2,3 +2,9 @@
     position: relative;
     top: 6px;
 }
+
+table > tr > td {
+    &:hover {
+        cursor: zoom-in;
+    }
+}

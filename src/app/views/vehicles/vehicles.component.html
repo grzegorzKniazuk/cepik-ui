@@ -37,7 +37,7 @@
         </tr>
         </thead>
         <tbody *ngIf="vehicles$ | async as vehicles">
-        <tr *ngFor="let vehicle of vehicles; let i = index;">
+        <tr *ngFor="let vehicle of vehicles; let i = index;" (click)="openVehicleCard(vehicle.id)">
             <th [class.loading]="loadingState$ | async" scope="row">{{ i + 1 }}</th>
             <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.marka }}</td>
             <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.model }}</td>

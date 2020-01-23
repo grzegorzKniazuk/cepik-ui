@@ -1,23 +1,13 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DashboardComponent, DictionariesComponent, VehiclesComponent } from 'src/app/views';
-import { DictionaryIdsResolver, DictionaryItemsResolver, RegionsResolver, VehiclesResolver } from 'src/app/shared/resolvers';
+import { DashboardComponent, VehiclesComponent } from 'src/app/views';
+import { RegionsResolver, VehiclesResolver } from 'src/app/shared/resolvers';
 
 const routes: Routes = [
     {
         path: '',
         component: DashboardComponent,
         data: { title: 'Strona główna' },
-    },
-    {
-        path: 'dictionaries',
-        component: DictionariesComponent,
-        data: { title: 'Słowniki' },
-        resolve: {
-            dictionaryIds: DictionaryIdsResolver,
-            dictionaryItems: DictionaryItemsResolver,
-        },
-        runGuardsAndResolvers: 'always',
     },
     {
         path: 'vehicles',
