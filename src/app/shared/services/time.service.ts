@@ -18,7 +18,7 @@ export class TimeService {
         return moment().format('YYYYMMDD');
     }
 
-    public static yearsFromToday(years = 2): string {
+    public static yearsFromToday(years: number): string {
         return moment().add(-years, 'year').format('YYYYMMDD');
     }
 
@@ -34,7 +34,7 @@ export class TimeService {
         return TimeService.todayDate;
     }
 
-    public yearsBackFromToday(years = 2): string {
+    public yearsBackFromToday(years: number): string {
         return TimeService.yearsFromToday(years);
     }
 }

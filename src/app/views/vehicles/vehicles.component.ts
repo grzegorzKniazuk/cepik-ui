@@ -45,7 +45,19 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
     }
 
     public openVehiclesQueryOptionsModal(): void {
-        this.modalService.open(VehiclesQueryOptionsComponent);
+        this.modalService.open(VehiclesQueryOptionsComponent, { title: 'Parametry zapytania' });
+    }
+
+    public resetQueryOptions(): void {
+        this.resolveParams({
+            [WOJEWODZTWO_KEY]: this.activatedRoute.snapshot.queryParams[WOJEWODZTWO_KEY],
+            [PAGE_KEY]: 1,
+            [LIMIT_KEY]: 10,
+            [TYP_DATY_KEY]: VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
+            [DATA_OD_KEY]: this.timeService.yearsBackFromToday(2),
+            [DATA_DO_KEY]: this.timeService.todayDate,
+            [TYLKO_ZAREJESTROWANE_KEY]: true,
+        });
     }
 
     public onRegionSelect(region: string): void {
@@ -54,7 +66,7 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
             [PAGE_KEY]: 1,
             [LIMIT_KEY]: this.activatedRoute.snapshot.queryParams[LIMIT_KEY] || 10,
             [TYP_DATY_KEY]: this.activatedRoute.snapshot.queryParams[TYP_DATY_KEY] || VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
-            [DATA_OD_KEY]: this.activatedRoute.snapshot.queryParams[DATA_OD_KEY] || this.timeService.yearsBackFromToday(),
+            [DATA_OD_KEY]: this.activatedRoute.snapshot.queryParams[DATA_OD_KEY] || this.timeService.yearsBackFromToday(2),
             [DATA_DO_KEY]: this.activatedRoute.snapshot.queryParams[DATA_DO_KEY] || this.timeService.todayDate,
             [TYLKO_ZAREJESTROWANE_KEY]: this.activatedRoute.snapshot.queryParams[TYLKO_ZAREJESTROWANE_KEY] || true,
         });

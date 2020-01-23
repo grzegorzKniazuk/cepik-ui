@@ -11,6 +11,7 @@ import { ModalOptions } from 'src/app/shared/interfaces';
 export class ModalComponent {
 
     public readonly close$ = new EventEmitter<void>();
+    public readonly title = this.modalOptions.title;
 
     constructor(
         @Inject(MODAL_OPTIONS) private readonly modalOptions: ModalOptions,

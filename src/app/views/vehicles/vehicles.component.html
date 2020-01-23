@@ -6,12 +6,21 @@
                             optionKeyName="wartosc-slownika"
                             [dataset]="regions">
         </cpk-select-control>
-        <cpk-button [disabled]="(selectedRegion$ | async) === null"
-                    class="ml-2 options-button"
-                    type="primary"
-                    (click)="openVehiclesQueryOptionsModal()">
-            <cpk-icon>settings_applications</cpk-icon>Opcje
-        </cpk-button>
+        <div class="btn-group">
+            <cpk-button [disabled]="(selectedRegion$ | async) === null"
+                        class="ml-2 options-button"
+                        type="primary"
+                        (click)="openVehiclesQueryOptionsModal()">
+                <cpk-icon class="mr-1">settings_applications</cpk-icon>Opcje
+            </cpk-button>
+            <cpk-button [disabled]="(selectedRegion$ | async) === null"
+                        class="ml-1 options-button"
+                        type="danger"
+                        title="Resetuj opcje"
+                        (click)="resetQueryOptions()">
+                <cpk-icon>close</cpk-icon>
+            </cpk-button>
+        </div>
     </div>
     <table class="table mt-4">
         <thead class="thead-dark">

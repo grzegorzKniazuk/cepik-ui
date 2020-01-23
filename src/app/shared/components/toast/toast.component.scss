@@ -1,7 +1,12 @@
+@import "animations.scss";
+@import "variables.scss";
+
 div.alert {
     top: 70px;
     right: 1rem;
     z-index: 10;
+    animation: open 500ms cubic-bezier(.25, .8, .25, 1);
+    box-shadow: $box-shadow;
 
     .x {
         position: absolute;

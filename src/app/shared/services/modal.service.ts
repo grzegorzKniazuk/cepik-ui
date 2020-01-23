@@ -13,6 +13,7 @@ export class ModalService<T> {
 
     private readonly baseModalOptions: ModalOptions = {
         closeOnBackdropClick: true,
+        title: '',
     };
 
     private contentFactory: ComponentFactory<T>;
@@ -29,7 +30,7 @@ export class ModalService<T> {
     ) {
     }
 
-    public open(content: Type<T>, modalOptions?: ModalOptions): void {
+    public open(content: Type<T>, modalOptions?: Partial<ModalOptions>): void {
         this.contentFactory = this.componentFactoryResolver.resolveComponentFactory(content);
         this.contentComponentRef = this.contentFactory.create(this.injector);
 
