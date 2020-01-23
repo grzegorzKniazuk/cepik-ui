@@ -34,13 +34,13 @@
         border-radius: $border-radius;
         padding: 20px 0;
 
-        .navbar {
+        nav.navbar.navbar-dark {
             border-top-left-radius: $border-radius;
             border-top-right-radius: $border-radius;
             position: relative;
             bottom: 20px;
 
-            .navbar-dark .navbar-text {
+            span.navbar-text {
                 color: $white;
                 font-weight: 700;
                 text-transform: uppercase;
