@@ -53,18 +53,6 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
         this.store.dispatch(SHOW_VEHICLE_CARD({ id }));
     }
 
-    public resetQueryOptions(): void {
-        this.resolveParams({
-            [WOJEWODZTWO_KEY]: this.activatedRoute.snapshot.queryParams[WOJEWODZTWO_KEY],
-            [PAGE_KEY]: 1,
-            [LIMIT_KEY]: 10,
-            [TYP_DATY_KEY]: VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
-            [DATA_OD_KEY]: this.timeService.yearsBackFromToday(2),
-            [DATA_DO_KEY]: this.timeService.todayDate,
-            [TYLKO_ZAREJESTROWANE_KEY]: true,
-        });
-    }
-
     public onRegionSelect(region: string): void {
         this.resolveParams({
             [WOJEWODZTWO_KEY]: region,
@@ -75,5 +63,9 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
             [DATA_DO_KEY]: this.activatedRoute.snapshot.queryParams[DATA_DO_KEY] || this.timeService.todayDate,
             [TYLKO_ZAREJESTROWANE_KEY]: this.activatedRoute.snapshot.queryParams[TYLKO_ZAREJESTROWANE_KEY] || true,
         });
+    }
+
+    public vehiclesTrackBy(index: number): number {
+        return index;
     }
 }

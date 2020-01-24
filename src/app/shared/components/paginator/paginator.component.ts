@@ -21,6 +21,14 @@ export class PaginatorComponent implements OnChanges {
     @Output() public readonly pageChange = new EventEmitter<number>();
     @Output() public readonly limitChange = new EventEmitter<number>();
 
+    public get isFirstPage(): boolean {
+        return this.self !== null && this.self === 1;
+    }
+
+    public get isLastPage(): boolean {
+        return this.self !== null && this.self === this.last;
+    }
+
     ngOnChanges() {
         if (this.self > 2 && this.next !== this.last && !this.isLastPage) {
             if (this.next === this.last) {
@@ -45,14 +53,6 @@ export class PaginatorComponent implements OnChanges {
                 this.pageNumbers = [ this.self, this.next, this.last ];
             }
         }
-    }
-
-    public get isFirstPage(): boolean {
-        return  this.self !== null && this.self === 1;
-    }
-
-    public get isLastPage(): boolean {
-        return this.self !== null && this.self === this.last;
     }
 
     public onPageChange(page: number): void {

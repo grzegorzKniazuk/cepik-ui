@@ -1,9 +1,9 @@
-<div class="modal-container" (click)="modalContainerClick()">
-    <div class="modal-body-content" (click)="modalBodyClick($event)">
-        <nav class="navbar navbar-dark bg-primary" *ngIf="title">
-           <span class="navbar-text">{{ title }}</span>
+<div (click)="modalContainerClick()" class="modal-container">
+    <div (click)="modalBodyClick($event)" class="modal-body-content">
+        <nav *ngIf="title" class="navbar navbar-dark bg-primary">
+            <span class="navbar-text">{{ title }}</span>
         </nav>
-        <div class="close-icon" title="Zamknij okno" (click)="close()">
+        <div (click)="close()" class="close-icon" title="Zamknij okno">
             <cpk-icon>close</cpk-icon>
         </div>
         <ng-content></ng-content>

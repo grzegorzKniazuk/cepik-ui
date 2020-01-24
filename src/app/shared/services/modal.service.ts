@@ -38,6 +38,10 @@ export class ModalService<ComponentType, ModalParamsDataType = null> {
         this.pushComponentsIntoView();
     }
 
+    public close(): void {
+        return this.renderer2.removeChild(this.document.body, this.modalComponentRef.location.nativeElement);
+    }
+
     private buildContentComponent(content: Type<ComponentType>, modalOptions?: Partial<ModalOptions<ModalParamsDataType>>): void {
         this.contentFactory = this.componentFactoryResolver.resolveComponentFactory(content);
 
@@ -79,9 +83,5 @@ export class ModalService<ComponentType, ModalParamsDataType = null> {
         this.renderer2.appendChild(this.document.body, this.modalComponentRef.location.nativeElement);
 
         this.modalComponentRef.instance.close$.subscribe(() => this.close());
-    }
-
-    public close(): void {
-        return this.renderer2.removeChild(this.document.body, this.modalComponentRef.location.nativeElement);
     }
 }

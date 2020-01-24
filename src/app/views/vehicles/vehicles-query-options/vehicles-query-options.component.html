@@ -1,20 +1,29 @@
 <form [formGroup]="optionsForm" class="col-12 d-flex justify-content-center flex-column align-items-center">
     <div class="row d-flex justify-content-center col-12">
-        <cpk-date-control class="col-6" label="Data od" formControlName="data-od"></cpk-date-control>
-        <cpk-date-control class="col-6" label="Data do" formControlName="data-do"></cpk-date-control>
+        <cpk-date-control class="col-6" formControlName="data-od" label="Data od"></cpk-date-control>
+        <cpk-date-control class="col-6" formControlName="data-do" label="Data do"></cpk-date-control>
     </div>
     <div class="row d-flex col-12">
-        <cpk-radio-control formControlName="typ-daty"
-                           optionKeyName="key"
-                           optionValueName="value"
-                           [dataset]="dateTypeDataset"
+        <cpk-radio-control [dataset]="dateTypeDataset"
                            class="col-6"
-                           label="Parametr określający jakiej daty dotyczy warunek wyszukiwania">
+                           formControlName="typ-daty"
+                           label="Parametr określający jakiej daty dotyczy warunek wyszukiwania"
+                           optionKeyName="key"
+                           optionValueName="value">
         </cpk-radio-control>
-        <cpk-boolean-radio-control formControlName="tylko-zarejestrowane"
-                                   class="col-6"
+        <cpk-boolean-radio-control class="col-6"
+                                   formControlName="tylko-zarejestrowane"
                                    label="Czy mają zostać zwrócone dane tylko pojazdów zarejestrowanych">
         </cpk-boolean-radio-control>
     </div>
-    <cpk-button class="mt-3" type="primary" (click)="onQuerySubmit()"><cpk-icon class="mr-1">done</cpk-icon>Zatwierdź</cpk-button>
+    <div class="mt-3">
+        <cpk-button (click)="onQuerySubmit()" type="primary">
+            <cpk-icon class="mr-1">done</cpk-icon>
+            Zatwierdź
+        </cpk-button>
+        <cpk-button (click)="onQueryReset()" class="mr-1" type="danger">
+            <cpk-icon class="mr-1">restore</cpk-icon>
+            Użyj domyślnych
+        </cpk-button>
+    </div>
 </form>

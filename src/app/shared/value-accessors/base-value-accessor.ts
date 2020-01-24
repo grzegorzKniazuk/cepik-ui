@@ -3,28 +3,22 @@ import { Input, Optional, Self } from '@angular/core';
 
 export abstract class BaseValueAccessor<T> implements ControlValueAccessor {
     @Input() public readonly label: string;
-
-    @Input()
-    public set disabled(disabled: boolean) {
-        this._disabled = disabled;
-    }
-
-    public _disabled: boolean;
     public _value: T;
-
     public readonly validationMessages: ValidationErrors = {
         invalidRange: 'Zakres dat nie może być większy niż 2 lata',
-    };
-
-    public propagateChange: any = () => {
-    };
-    public propagateTouch: any = () => {
     };
 
     protected constructor(
         @Self() @Optional() protected readonly ngControl: NgControl,
     ) {
         this.ngControl.valueAccessor = this;
+    }
+
+    public _disabled: boolean;
+
+    @Input()
+    public set disabled(disabled: boolean) {
+        this._disabled = disabled;
     }
 
     public get invalid(): boolean {
@@ -34,6 +28,12 @@ export abstract class BaseValueAccessor<T> implements ControlValueAccessor {
     public get errors(): ValidationErrors | null {
         return this.ngControl ? this.ngControl.errors : null;
     }
+
+    public propagateChange: any = () => {
+    };
+
+    public propagateTouch: any = () => {
+    };
 
     public registerOnChange(fn: any): void {
         this.propagateChange = fn;

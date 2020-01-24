@@ -215,7 +215,7 @@ describe('subscribe & assert testing in RxJS', () => {
             }),
         );
 
-        const expected = ['Ready', 'Set', 'Go!'];
+        const expected = [ 'Ready', 'Set', 'Go!' ];
         let i = 0;
 
         source$.subscribe(val => {

@@ -1,10 +1,10 @@
 <div class="form-group">
     <label>{{ label }}</label>
-    <input [disabled]="_disabled"
+    <input (change)="setValue($event.target.value)"
+           [disabled]="_disabled"
+           [value]="_value | mask:'xxxx-xx-xx'"
            class="form-control"
-           type="date"
-           (change)="setValue($event.target.value)"
-           [value]="_value | mask:'xxxx-xx-xx'">
+           type="date">
     <ng-container *ngIf="invalid">
         <div *ngFor="let error of errors | keyvalue" class="invalid-feedback">{{ validationMessages[error.key] }}</div>
     </ng-container>

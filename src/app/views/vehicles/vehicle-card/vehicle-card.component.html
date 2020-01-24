@@ -1,16 +1,16 @@
 <div class="row col-12">
     <div class="col-3">
         <div class="list-group clickable">
-            <a class="list-group-item list-group-item-action"
-               (click)="selectTab(tab.id)"
-               *ngFor="let tab of tabs" [class.active]="(activeTabId$ | async) === tab.id">{{ tab.title }}</a>
+            <a (click)="selectTab(tab.id)"
+               *ngFor="let tab of tabs"
+               [class.active]="(activeTabId$ | async) === tab.id" class="list-group-item list-group-item-action">{{ tab.title }}</a>
         </div>
     </div>
     <div class="col-9">
         <div class="tab-content">
-            <div *ngFor="let tab of tabs" class="tab-pane fade"
+            <div *ngFor="let tab of tabs" [class.active]="(activeTabId$ | async) === tab.id"
                  [class.show]="(activeTabId$ | async) === tab.id"
-                 [class.active]="(activeTabId$ | async) === tab.id">
+                 class="tab-pane fade">
                 <ng-container [ngSwitch]="activeTabId$ | async">
                     <ng-container *ngSwitchCase="0" [ngTemplateOutlet]="basic"></ng-container>
                     <ng-container *ngSwitchCase="1" [ngTemplateOutlet]="engine"></ng-container>

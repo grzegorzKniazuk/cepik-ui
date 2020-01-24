@@ -1,24 +1,18 @@
 <div class="container-fluid mt-4">
-    <div class="row col-12 d-flex justify-content-center align-items-center">
-        <cpk-select-control [formControl]="selectedRegionControl"
+    <div class="col-12 d-flex justify-content-center align-items-center">
+        <cpk-select-control [dataset]="regions"
+                            [formControl]="selectedRegionControl"
                             label="Wybierz województwo"
-                            optionValueName="klucz-slownika"
                             optionKeyName="wartosc-slownika"
-                            [dataset]="regions">
+                            optionValueName="klucz-slownika">
         </cpk-select-control>
         <div class="btn-group">
-            <cpk-button [disabled]="(selectedRegion$ | async) === null"
+            <cpk-button (click)="openVehiclesQueryOptionsModal()"
+                        [disabled]="(selectedRegion$ | async) === null"
                         class="ml-2 options-button"
-                        type="primary"
-                        (click)="openVehiclesQueryOptionsModal()">
-                <cpk-icon class="mr-1">settings_applications</cpk-icon>Opcje
-            </cpk-button>
-            <cpk-button [disabled]="(selectedRegion$ | async) === null"
-                        class="ml-1 options-button"
-                        type="danger"
-                        title="Resetuj opcje"
-                        (click)="resetQueryOptions()">
-                <cpk-icon>close</cpk-icon>
+                        type="primary">
+                <cpk-icon class="mr-1">settings_applications</cpk-icon>
+                Opcje
             </cpk-button>
         </div>
     </div>
@@ -37,7 +31,7 @@
         </tr>
         </thead>
         <tbody *ngIf="vehicles$ | async as vehicles">
-        <tr *ngFor="let vehicle of vehicles; let i = index;" (click)="openVehicleCard(vehicle.id)">
+        <tr (click)="openVehicleCard(vehicle.id)" *ngFor="let vehicle of vehicles; let i = index; trackBy: vehiclesTrackBy">
             <th [class.loading]="loadingState$ | async" scope="row">{{ i + 1 }}</th>
             <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.marka }}</td>
             <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.model }}</td>
@@ -55,15 +49,15 @@
     </table>
     <div class="row">
         <div class="col-12">
-            <cpk-paginator *ngIf="paginationLinksState$ | async as paginationLinksState"
+            <cpk-paginator (limitChange)="onLimitChange($event)"
+                           (pageChange)="onPageChange($event)"
+                           *ngIf="paginationLinksState$ | async as paginationLinksState"
                            [first]="paginationLinksState.first"
                            [last]="paginationLinksState.last"
+                           [limit]="selectedLimit$ | async"
                            [next]="paginationLinksState.next"
                            [prev]="paginationLinksState.prev"
-                           [self]="paginationLinksState.self"
-                           [limit]="selectedLimit$ | async"
-                           (pageChange)="onPageChange($event)"
-                           (limitChange)="onLimitChange($event)"></cpk-paginator>
+                           [self]="paginationLinksState.self"></cpk-paginator>
         </div>
     </div>
 </div>

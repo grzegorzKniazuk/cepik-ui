@@ -8,12 +8,16 @@ import { ChangeDetectionStrategy, Component, ElementRef, Input, OnInit, Renderer
 })
 export class ButtonComponent implements OnInit {
 
-    @ViewChild('button', { static: true }) private readonly button: ElementRef;
     @Input() public readonly type: string;
     @Input() public readonly size: string;
     @Input() public readonly outline: boolean;
-
     public isDisabled: boolean;
+    @ViewChild('button', { static: true }) private readonly button: ElementRef;
+
+    constructor(
+        private readonly renderer2: Renderer2,
+    ) {
+    }
 
     @Input()
     public set disabled(disabled: boolean) {
@@ -26,11 +30,6 @@ export class ButtonComponent implements OnInit {
             this.renderer2.removeClass(this.button.nativeElement, 'disabled');
             this.renderer2.removeAttribute(this.button.nativeElement, 'title');
         }
-    }
-
-    constructor(
-        private readonly renderer2: Renderer2,
-    ) {
     }
 
     ngOnInit() {

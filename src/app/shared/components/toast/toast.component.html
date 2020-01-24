@@ -1,6 +1,6 @@
 <div [class]="'position-fixed alert alert-'+toastOptions.type" role="alert">
-    <cpk-icon class="x clickable" (click)="onClose()">close</cpk-icon>
-    <h4 class="alert-heading" *ngIf="toastOptions.title"><strong>{{ toastOptions.title }}</strong></h4>
+    <cpk-icon (click)="onClose()" class="x clickable">close</cpk-icon>
+    <h4 *ngIf="toastOptions.title" class="alert-heading"><strong>{{ toastOptions.title }}</strong></h4>
     <p *ngIf="toastOptions.message">{{ toastOptions.message }}</p>
     <hr>
     <small *ngIf="toastOptions.id" class="mb-0"><strong>Identyfikator błędu:</strong> {{ toastOptions.id }}</small>

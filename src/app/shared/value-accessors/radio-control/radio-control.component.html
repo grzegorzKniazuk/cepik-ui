@@ -1,14 +1,14 @@
 <div class="form-group">
     <label>{{ label }}</label>
-    <div class="form-check" *ngFor="let item of dataset; let i = index" [class.disabled]="_disabled">
-        <input [disabled]="_disabled"
-               class="form-check-input"
-               type="radio"
-               name="radio"
+    <div *ngFor="let item of dataset; let i = index" [class.disabled]="_disabled" class="form-check">
+        <input (change)="setValue($event.target.value)"
+               [checked]="item[optionValueName] === _value"
+               [disabled]="_disabled"
                [id]="'radio'+i"
                [value]="item[optionValueName]"
-               [checked]="item[optionValueName] === _value"
-               (change)="setValue($event.target.value)">
-        <label class="form-check-label" [for]="'radio'+i">{{ item[optionKeyName] }}</label>
+               class="form-check-input"
+               name="radio"
+               type="radio">
+        <label [for]="'radio'+i" class="form-check-label">{{ item[optionKeyName] }}</label>
     </div>
 </div>

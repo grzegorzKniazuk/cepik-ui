@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector, MemoizedSelectorWithProps } from '@ngrx/store';
-import { VehiclesState, selectEntities } from 'src/app/store/vehicles/vehicles.reducer';
+import { selectEntities, VehiclesState } from 'src/app/store/vehicles/vehicles.reducer';
 import { Dictionary } from '@ngrx/entity';
 import { Vehicle, VehicleDetails } from 'src/app/shared/interfaces';
 import { AppState } from 'src/app/store/index';

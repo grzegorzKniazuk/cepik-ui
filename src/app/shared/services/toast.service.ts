@@ -23,6 +23,10 @@ export class ToastService {
         this.renderer2 = this.rendererFactory2.createRenderer(document.body, null);
     }
 
+    public error(title: string, message: string, id?: string): void {
+        this.open(ToastType.DANGER, title, message, id);
+    }
+
     private open(type: ToastType, title: string, message: string, id?: string): void {
         this.toastComponentRef = this.toastComponentFactory.create(Injector.create({
             providers: [
@@ -51,9 +55,5 @@ export class ToastService {
 
     private hide(): void {
         this.renderer2.removeChild(this.document.body, this.toastComponentRef.location.nativeElement);
-    }
-
-    public error(title: string, message: string, id?: string): void {
-        this.open(ToastType.DANGER, title, message, id);
     }
 }
