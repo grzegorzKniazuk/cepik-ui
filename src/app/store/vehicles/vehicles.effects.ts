@@ -33,7 +33,7 @@ export class VehiclesEffects {
             }),
             tap((details: VehicleDetails) => {
                 this.modalService.open(VehicleCardComponent, {
-                    title: `Szczegóły pojazdu ${details.marka} ${details.model} ${details['podrodzaj-pojazdu']} (${details['rodzaj-pojazdu']})`,
+                    title: this.prepareVehicleCardTitle(details),
                     data: details,
                 });
             }),
@@ -46,5 +46,9 @@ export class VehiclesEffects {
         private readonly store: Store<AppState>,
         private readonly modalService: ModalService<VehicleCardComponent, VehicleDetails>,
     ) {
+    }
+
+    private prepareVehicleCardTitle(details: VehicleDetails): string {
+        return `Szczegóły pojazdu ${details.marka} ${details.model} ${details['podrodzaj-pojazdu'] !== '---' ? details['podrodzaj-pojazdu'] : ''} (${details['rodzaj-pojazdu']})`;
     }
 }

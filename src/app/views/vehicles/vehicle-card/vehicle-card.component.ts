@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
 import { MODAL_DATA } from 'src/app/shared/constants/injection-tokens';
 import { VehicleDetails } from 'src/app/shared/interfaces';
 import { BehaviorSubject } from 'rxjs';
@@ -24,15 +24,15 @@ export class VehicleCardComponent {
         },
         {
             id: 2,
-            title: 'Emisja spalin'
+            title: 'Emisja spalin',
         },
         {
             id: 3,
-            title: 'Masa',
+            title: 'Zawieszenie',
         },
         {
             id: 4,
-            title: 'Rejestracja',
+            title: 'Układ kierowniczy',
         },
         {
             id: 5,
@@ -40,20 +40,30 @@ export class VehicleCardComponent {
         },
         {
             id: 6,
-            title: 'Daty',
+            title: 'Rejestracja',
         },
         {
             id: 7,
+            title: 'Wyrejestrowanie',
+        },
+        {
+            id: 8,
+            title: 'Daty',
+        },
+        {
+            id: 9,
             title: 'Pozostałe',
         },
     ];
 
     constructor(
         @Inject(MODAL_DATA) public readonly details: VehicleDetails,
+        private readonly changeDetectorRef: ChangeDetectorRef,
     ) {
     }
 
     public selectTab(id: number): void {
         this.activeTabId$.next(id);
+        this.changeDetectorRef.detectChanges();
     }
 }

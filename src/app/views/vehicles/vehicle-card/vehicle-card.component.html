@@ -1,17 +1,28 @@
 <div class="row col-12">
-    <div class="col-4">
+    <div class="col-3">
         <div class="list-group clickable">
             <a class="list-group-item list-group-item-action"
                (click)="selectTab(tab.id)"
                *ngFor="let tab of tabs" [class.active]="(activeTabId$ | async) === tab.id">{{ tab.title }}</a>
         </div>
     </div>
-    <div class="col-8">
+    <div class="col-9">
         <div class="tab-content">
             <div *ngFor="let tab of tabs" class="tab-pane fade"
                  [class.show]="(activeTabId$ | async) === tab.id"
                  [class.active]="(activeTabId$ | async) === tab.id">
-                <ng-container *ngTemplateOutlet="basic"></ng-container>
+                <ng-container [ngSwitch]="activeTabId$ | async">
+                    <ng-container *ngSwitchCase="0" [ngTemplateOutlet]="basic"></ng-container>
+                    <ng-container *ngSwitchCase="1" [ngTemplateOutlet]="engine"></ng-container>
+                    <ng-container *ngSwitchCase="2" [ngTemplateOutlet]="exhaustEmissions"></ng-container>
+                    <ng-container *ngSwitchCase="3" [ngTemplateOutlet]="suspension"></ng-container>
+                    <ng-container *ngSwitchCase="4" [ngTemplateOutlet]="steeringSystem"></ng-container>
+                    <ng-container *ngSwitchCase="5" [ngTemplateOutlet]="owner"></ng-container>
+                    <ng-container *ngSwitchCase="6" [ngTemplateOutlet]="registration"></ng-container>
+                    <ng-container *ngSwitchCase="7" [ngTemplateOutlet]="deregistration"></ng-container>
+                    <ng-container *ngSwitchCase="8" [ngTemplateOutlet]="date"></ng-container>
+                    <ng-container *ngSwitchCase="9" [ngTemplateOutlet]="others"></ng-container>
+                </ng-container>
             </div>
         </div>
     </div>
@@ -31,7 +42,6 @@
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Typ</strong>: {{ details.typ}}</li>
             <li class="list-group-item"><strong>Pochodzenie</strong>: {{ details["pochodzenie-pojazdu"] }}</li>
-            <li class="list-group-item"><strong>Liczba osi</strong>: {{ details["liczba-osi"] }}</li>
             <li class="list-group-item"><strong>Liczba miejsc siedzących</strong>: {{ details["liczba-miejsc-siedzacych"] }}</li>
             <li class="list-group-item"><strong>Hak</strong>: {{ details.hak | yesNo }}</li>
         </ul>
@@ -45,7 +55,6 @@
             <li *ngIf="isMotorcycle" class="list-group-item"><strong>Stosunek mocy do masy własnej</strong>: {{ details["stosunek-mocy-silnika-do-masy-wlasnej-motocykle"] }}</li>
             <li class="list-group-item"><strong>Moc silnika hybrydowego</strong>: {{ details["moc-netto-silnika-hybrydowego"] }}</li>
             <li class="list-group-item"><strong>Średnie zużycie paliwa</strong>: {{ details["srednie-zuzycie-paliwa"] }}</li>
-
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Rodzaj paliwa</strong>: {{ details["rodzaj-paliwa"] }}</li>
@@ -55,6 +64,10 @@
     </div>
 </ng-template>
 
+<ng-template #hybrid>
+
+</ng-template>
+
 <ng-template #exhaustEmissions>
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
@@ -62,38 +75,46 @@
             <li class="list-group-item"><strong>Poziom emisji CO<sup>2</sup></strong>: {{ details["poziom-emisji-co2"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Redukcja emisji spalin</strong>: {{ details["redukcja-emisji-spalin"] | yesNo }}</li>
+            <li class="list-group-item"><strong>Redukcja emisji spalin</strong>: {{ details["redukcja-emisji-spalin"] }}</li>
             <li class="list-group-item"><strong>Poziom emisji CO<sup>2</sup> dla paliwa alternatywnego</strong>: {{ details["poziom-emisji-co2-paliwo-alternatywne-1"] }}</li>
         </ul>
     </div>
 </ng-template>
 
-<ng-template #weight>
+<ng-template #suspension>
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Masa własna</strong>: {{ details["masa-wlasna"] }} kg</li>
-            <li class="list-group-item"><strong>Dopuszczalna masa całkowita</strong>: {{ details["dopuszczalna-masa-calkowita"] }} kg</li>
-            <li class="list-group-item"><strong>Dopuszczalna ładowność</strong>: {{ details["dopuszczalna-ladownosc"] }} kg</li>
-            <li class="list-group-item"><strong>Dopszczalna masa całkowita zespołu pojazdów</strong>: {{ details["dopuszczalna-masa-calkowita-zespolu-pojazdow"] }} kg</li>
-            <li class="list-group-item"><strong>Maksymalny nacisk osi</strong>: {{ details["maksymalny-nacisk-osi"] }} kg</li>
-            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy bez hamulca</strong>: {{ details["max-masa-calkowita-przyczepy-bez-hamulca"] }} kg</li>
+            <li class="list-group-item"><strong>Rodzaj zawieszenia</strong>: {{ details["rodzaj-zawieszenia"] }}</li>
+            <li class="list-group-item"><strong>Dopuszczalna masa całkowita</strong>: {{ details["dopuszczalna-masa-calkowita"] }}</li>
+            <li class="list-group-item"><strong>Dopuszczalna ładowność</strong>: {{ details["dopuszczalna-ladownosc"] }}</li>
+            <li class="list-group-item"><strong>Dopszczalna masa całkowita zespołu pojazdów</strong>: {{ details["dopuszczalna-masa-calkowita-zespolu-pojazdow"] }}</li>
+            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy bez hamulca</strong>: {{ details["max-masa-calkowita-przyczepy-bez-hamulca"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Masa pojazdu gotowego do jazdy</strong>: {{ details["masa-pojazdu-gotowego-do-jazdy"] }} kg</li>
-            <li class="list-group-item"><strong>Maksymalna masa całkowita</strong>: {{ details["max-masa-calkowita"] }} kg</li>
-            <li class="list-group-item"><strong>Maksymalna ładowność</strong>: {{ details["max-ladownosc"] }} kg</li>
-            <li class="list-group-item"><strong>Dopuszczalny nacisk osi</strong>: {{ details["dopuszczalny-nacisk-osi"] }} kg</li>
-            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy z hamulcem</strong>: {{ details["max-masa-calkowita-przyczepy-z-hamulcem"] }} kg</li>
+            <li class="list-group-item"><strong>Masa własna</strong>: {{ details["masa-wlasna"] }}</li>
+            <li class="list-group-item"><strong>Masa pojazdu gotowego do jazdy</strong>: {{ details["masa-pojazdu-gotowego-do-jazdy"] }}</li>
+            <li class="list-group-item"><strong>Maksymalna masa całkowita</strong>: {{ details["max-masa-calkowita"] }}</li>
+            <li class="list-group-item"><strong>Maksymalna ładowność</strong>: {{ details["max-ladownosc"] }}</li>
+            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy z hamulcem</strong>: {{ details["max-masa-calkowita-przyczepy-z-hamulcem"] }}</li>
         </ul>
     </div>
 </ng-template>
 
-<ng-template #registration>
+<ng-template #steeringSystem>
+
     <div class="d-flex col-12">
-        <ul class="list-group list-group-flush col-12">
-            <li class="list-group-item"><strong>Województwo</strong>: {{ details["rejestracja-wojewodztwo"] }}</li>
-            <li class="list-group-item"><strong>Powiat</strong>: {{ details["rejestracja-powiat"] }}</li>
-            <li class="list-group-item"><strong>Gmina</strong>: {{ details["rejestracja-gmina"] }}</li>
+        <ul class="list-group list-group-flush col-6">
+            <li class="list-group-item"><strong>Liczba osi</strong>: {{ details["liczba-osi"] }}</li>
+            <li class="list-group-item"><strong>Minimalny rozstaw kół</strong>: {{ details["min-rozstaw-kol"] }}</li>
+            <li class="list-group-item"><strong>Maksymalny rozstaw kół</strong>: {{ details["max-rozstaw-kol"] }}</li>
+            <li class="list-group-item"><strong>Kierownica po prawej stronie</strong>: {{ details["kierownica-po-prawej-stronie"] | yesNo }}</li>
+            <li class="list-group-item"><strong>Kierownica po prawej stronie pierwotnie</strong>: {{ details["kierownica-po-prawej-stronie-pierwotnie"] | yesNo }}</li>
+        </ul>
+        <ul class="list-group list-group-flush col-6">
+            <li class="list-group-item"><strong>Dopuszczalny nacisk osi</strong>: {{ details["dopuszczalny-nacisk-osi"] }}</li>
+            <li class="list-group-item"><strong>Maksymalny nacisk osi</strong>: {{ details["maksymalny-nacisk-osi"] }}</li>
+            <li class="list-group-item"><strong>Rozstaw kół osi</strong>: {{ details["rozstaw-kol-osi-kierowanej-pozostalych-osi"] }}</li>
+            <li class="list-group-item"><strong>Średni rozstaw kół</strong>: {{ details["avg-rozstaw-kol"] }}</li>
         </ul>
     </div>
 </ng-template>
@@ -108,18 +129,36 @@
     </div>
 </ng-template>
 
-<ng-template #dates>
+<ng-template #registration>
+    <div class="d-flex col-12">
+        <ul class="list-group list-group-flush col-12">
+            <li class="list-group-item"><strong>Województwo</strong>: {{ details["rejestracja-wojewodztwo"] }}</li>
+            <li class="list-group-item"><strong>Powiat</strong>: {{ details["rejestracja-powiat"] }}</li>
+            <li class="list-group-item"><strong>Gmina</strong>: {{ details["rejestracja-gmina"] }}</li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #deregistration>
+    <div class="d-flex col-12">
+        <ul class="list-group list-group-flush col-12">
+            <li class="list-group-item"><strong>Data wyrejestrowania</strong>: {{ details["data-wyrejestrowania-pojazdu"] }}</li>
+            <li class="list-group-item"><strong>Przyczyna wyrejestrowania pojazdu</strong>: {{ details["przyczyna-wyrejestrowania-pojazdu"] }}</li>
+        </ul>
+    </div>
+</ng-template>
+
+<ng-template #date>
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Rok produkcji</strong>: {{ details["rok-produkcji"] }}</li>
-            <li class="list-group-item"><strong>Ostatnia rejestracja w kraju</strong>: {{ details["data-ostatniej-rejestracji-w-kraju"] }}</li>
-            <li class="list-group-item"><strong>Data pierwszej rejestracji</strong>: {{ details["data-pierwszej-rejestracji"] }}</li>
-            <li class="list-group-item"><strong>Data wprowadzenia danych</strong>: {{ details["data-wprowadzenia-danych"] }}</li>
-        </ul>
-        <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Pierwsza rejestracja w kraju</strong>: {{ details["data-pierwszej-rejestracji-w-kraju"] }}</li>
             <li class="list-group-item"><strong>Rejestracja za granicą</strong>: {{ details["data-rejestracji-za-granica"] }}</li>
-            <li class="list-group-item"><strong>Data wyrejestrowania</strong>: {{ details["data-wyrejestrowania-pojazdu"] }}</li>
+        </ul>
+        <ul class="list-group list-group-flush col-6">
+            <li class="list-group-item"><strong>Data pierwszej rejestracji</strong>: {{ details["data-pierwszej-rejestracji"] }}</li>
+            <li class="list-group-item"><strong>Ostatnia rejestracja w kraju</strong>: {{ details["data-ostatniej-rejestracji-w-kraju"] }}</li>
+            <li class="list-group-item"><strong>Data wprowadzenia danych</strong>: {{ details["data-wprowadzenia-danych"] }}</li>
         </ul>
     </div>
 </ng-template>
@@ -128,21 +167,13 @@
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Rodzaj tabliczki znamionowej</strong>: {{ details["rodzaj-tabliczki-znamionowej"] }}</li>
-            <li class="list-group-item"><strong>Rodzaj zawieszenia</strong>: {{ details["rodzaj-zawieszenia"] }}</li>
-            <li class="list-group-item"><strong>Kierownica po prawej stronie</strong>: {{ details["kierownica-po-prawej-stronie"] | yesNo }}</li>
             <li class="list-group-item"><strong>Kod instytutu transportu samochodowego</strong>: {{ details["kod-instytutu-transaportu-samochodowego"] }}</li>
-            <li class="list-group-item"><strong>Maksymalny rozstaw kół</strong>: {{ details["max-rozstaw-kol"] }}</li>
-            <li class="list-group-item"><strong>Minimalny rozstaw kół</strong>: {{ details["min-rozstaw-kol"] }}</li>
             <li class="list-group-item"><strong>Rodzaj/Podrodzaj przeznaczenie</strong>: {{ details["od-rodzaj-podrodzaj-przeznaczenie"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Sposób produkcji</strong>: {{ details["sposob-produkcji"] }}</li>
             <li class="list-group-item"><strong>Wyposażenie i rodzaj urządzenia radarowego</strong>: {{ details["wyposazenie-i-rodzaj-urzadzenia-radarowego"] }}</li>
-            <li class="list-group-item"><strong>Kierownica po prawej stronie pierwotnie</strong>: {{ details["kierownica-po-prawej-stronie-pierwotnie"] | yesNo }}</li>
-            <li class="list-group-item"><strong>Rozstaw kół osi</strong>: {{ details["rozstaw-kol-osi-kierowanej-pozostalych-osi"] }}</li>
-            <li class="list-group-item"><strong>Średni rozstaw kół</strong>: {{ details["avg-rozstaw-kol"] }}</li>
             <li class="list-group-item"><strong>Rodzaj kodowania/Rodzaj-podrodzaj przeznaczenie</strong>: {{ details["rodzaj-kodowania-rodzaj-podrodzaj-przeznaczenie"] }}</li>
-            <li class="list-group-item"><strong>Przyczyna wyrejestrowania pojazdu</strong>: {{ details["przyczyna-wyrejestrowania-pojazdu"] }}</li>
         </ul>
     </div>
 </ng-template>

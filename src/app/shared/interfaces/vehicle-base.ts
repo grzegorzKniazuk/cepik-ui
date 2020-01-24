@@ -1,15 +1,15 @@
 export interface VehicleBase {
-    marka: string;
-    model: string;
-    'rodzaj-pojazdu': string;
-    'kategoria-pojazdu': string;
-    typ: string;
-    wariant: string;
-    'pochodzenie-pojazdu': string;
-    'rok-produkcji': string;
-    'data-pierwszej-rejestracji-w-kraju': string;
-    'pojemnosc-skokowa-silnika'?: number;
-    'masa-wlasna': number;
-    'rodzaj-paliwa': string;
-    'wojewodztwo-kod': string;
+    marka: string; // Marka
+    model: string; // Model
+    'rodzaj-pojazdu': string; // Rodzaj pojazdu
+    'kategoria-pojazdu': string; // Kategoria pojazdu
+    typ: string; // Typ pojazdu
+    wariant: string; // Wariant pojazdu
+    'pochodzenie-pojazdu': string; // Pochodzenie pojazdu
+    'rok-produkcji': string; // Rok produkcji
+    'data-pierwszej-rejestracji-w-kraju': string; // Data pierwszej rejestracji w kraju
+    'pojemnosc-skokowa-silnika': number; // Pojemność skokowa silnika
+    'masa-wlasna': number; // Masa wlasna
+    'rodzaj-paliwa': string; // Rodzaj paliwa
+    'wojewodztwo-kod': string; // Kod teryt wojewodztwa
 }
