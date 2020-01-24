@@ -1,10 +1,10 @@
 export const CATEGORY_KEY = 'category';
 export const PAGE_KEY = 'page';
 export const LIMIT_KEY = 'limit';
-export const PHRASE_KEY = 'phrase';
 export const WOJEWODZTWO_KEY = 'wojewodztwo';
 export const TYP_DATY_KEY = 'typ-daty';
 export const TYLKO_ZAREJESTROWANE_KEY = 'tylko-zarejestrowane';
 export const POKAZ_WSZYSTKIE_POLA_KEY = 'pokaz-wszystkie-pola';
 export const DATA_OD_KEY = 'data-od';
 export const DATA_DO_KEY = 'data-do';
+export const MARKA_KEY = 'marka';

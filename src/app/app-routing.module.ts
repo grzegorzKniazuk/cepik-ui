@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent, VehiclesComponent } from 'src/app/views';
-import { RegionsResolver, VehiclesResolver } from 'src/app/shared/resolvers';
+import { RegionsResolver, VehiclesBrandsResolver, VehiclesResolver } from 'src/app/shared/resolvers';
 
 const routes: Routes = [
     {
@@ -16,6 +16,7 @@ const routes: Routes = [
         resolve: {
             vehicles: VehiclesResolver,
             regions: RegionsResolver,
+            brands: VehiclesBrandsResolver,
         },
         runGuardsAndResolvers: 'always',
     },

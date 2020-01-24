@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
-import { DictionaryService } from 'src/app/shared/services/dictionary.service';
+import { DictionaryService } from 'src/app/shared/services';
 import { BaseDictionaryResolver } from 'src/app/shared/resolvers/base-dictionary.resolver';
 
 @Injectable()
-export class RegionsResolver extends BaseDictionaryResolver {
+export class VehiclesBrandsResolver extends BaseDictionaryResolver {
 
-    protected readonly dictionaryKeyName = 'wojewodztwa';
+    protected readonly dictionaryKeyName = 'marka';
 
     constructor(
         store: Store<AppState>,

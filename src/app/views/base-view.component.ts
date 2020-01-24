@@ -1,7 +1,7 @@
 import { Observable } from 'rxjs';
 import { select, Store } from '@ngrx/store';
 import { selectQueryParam } from 'src/app/store/router/router.selectors';
-import { LIMIT_KEY, PAGE_KEY, PHRASE_KEY } from 'src/app/shared/constants';
+import { LIMIT_KEY } from 'src/app/shared/constants';
 import { AppState } from 'src/app/store';
 import { ActivatedRoute, Router } from '@angular/router';
 import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
@@ -11,9 +11,7 @@ import { selectPaginationLinksState } from 'src/app/store/pagination-links/pagin
 import { BaseComponent } from 'src/app/views/base.component';
 
 export abstract class BaseViewComponent extends BaseComponent {
-    public readonly selectedPage$: Observable<string> = this.store.pipe(select(selectQueryParam(PAGE_KEY)), share());
-    public readonly selectedLimit$: Observable<number> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)), map(v => +v), share());
-    public readonly searchPhrase$: Observable<string> = this.store.pipe(select(selectQueryParam(PHRASE_KEY)), share());
+    public readonly selectedLimit$: Observable<number> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)), map(Number), share());
     public readonly loadingState$: Observable<boolean> = this.store.pipe(select(selectLoaderState), share());
     public readonly paginationLinksState$: Observable<PaginationLinksState> = this.store.pipe(select(selectPaginationLinksState), share());
 

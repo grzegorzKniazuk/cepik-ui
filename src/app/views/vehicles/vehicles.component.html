@@ -1,12 +1,19 @@
 <div class="container-fluid mt-4">
-    <div class="col-12 d-flex justify-content-center align-items-center">
-        <cpk-select-control [dataset]="regions"
-                            [formControl]="selectedRegionControl"
-                            label="Wybierz województwo"
-                            optionKeyName="wartosc-slownika"
-                            optionValueName="klucz-slownika">
-        </cpk-select-control>
-        <div class="btn-group">
+    <div class="row">
+        <div class="col-12 d-flex justify-content-center align-items-center">
+            <cpk-button (click)="openVehiclesFiltersOptionsModal()"
+                        [disabled]="(selectedRegion$ | async) === null"
+                        class="mr-2 options-button"
+                        type="primary">
+                <cpk-icon class="mr-1">filter_list</cpk-icon>
+                Filtry
+            </cpk-button>
+            <cpk-select-control [dataset]="regions"
+                                [formControl]="selectedRegionControl"
+                                label="Wybierz województwo"
+                                optionKeyName="wartosc-slownika"
+                                optionValueName="klucz-slownika">
+            </cpk-select-control>
             <cpk-button (click)="openVehiclesQueryOptionsModal()"
                         [disabled]="(selectedRegion$ | async) === null"
                         class="ml-2 options-button"
@@ -16,37 +23,41 @@
             </cpk-button>
         </div>
     </div>
-    <table class="table mt-4">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col">Marka</th>
-            <th scope="col">Model</th>
-            <th scope="col">Rodzaj pojazdu</th>
-            <th scope="col">Rodzaj paliwa</th>
-            <th scope="col">Pojemność skokowa silnika</th>
-            <th scope="col">Masa własna</th>
-            <th scope="col">Data pierwszej rejestracji w kraju</th>
-            <th scope="col">Pochodzenie pojazdu</th>
-        </tr>
-        </thead>
-        <tbody *ngIf="vehicles$ | async as vehicles">
-        <tr (click)="openVehicleCard(vehicle.id)" *ngFor="let vehicle of vehicles; let i = index; trackBy: vehiclesTrackBy">
-            <th [class.loading]="loadingState$ | async" scope="row">{{ i + 1 }}</th>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.marka }}</td>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.model }}</td>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['rodzaj-pojazdu'] }}</td>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['rodzaj-paliwa'] }}</td>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pojemnosc-skokowa-silnika'] }}</td>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['masa-wlasna'] }}</td>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['data-pierwszej-rejestracji-w-kraju'] }}</td>
-            <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pochodzenie-pojazdu'] }}</td>
-        </tr>
-        <tr>
-            <td *ngIf="!vehicles.length" [colSpan]="9" class="text-center">Brak danych</td>
-        </tr>
-        </tbody>
-    </table>
+    <div class="row">
+        <div class="col-12">
+            <table class="table mt-4">
+                <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Marka</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Rodzaj pojazdu</th>
+                    <th scope="col">Rodzaj paliwa</th>
+                    <th scope="col">Pojemność skokowa silnika</th>
+                    <th scope="col">Masa własna</th>
+                    <th scope="col">Data pierwszej rejestracji w kraju</th>
+                    <th scope="col">Pochodzenie pojazdu</th>
+                </tr>
+                </thead>
+                <tbody *ngIf="vehicles$ | async as vehicles">
+                <tr (click)="openVehicleCard(vehicle.id)" *ngFor="let vehicle of vehicles; let i = index; trackBy: vehiclesTrackBy">
+                    <th [class.loading]="loadingState$ | async" scope="row">{{ i + 1 }}</th>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.marka }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes.model }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['rodzaj-pojazdu'] }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['rodzaj-paliwa'] }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pojemnosc-skokowa-silnika'] }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['masa-wlasna'] }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['data-pierwszej-rejestracji-w-kraju'] }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pochodzenie-pojazdu'] }}</td>
+                </tr>
+                <tr>
+                    <td *ngIf="!vehicles.length" [colSpan]="9" class="text-center">Brak danych</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
     <div class="row">
         <div class="col-12">
             <cpk-paginator (limitChange)="onLimitChange($event)"

@@ -9,6 +9,7 @@ import { AppState } from 'src/app/store/index';
 import { selectVehicle } from 'src/app/store/vehicles/vehicles.selectors';
 import { of } from 'rxjs';
 import { VehicleCardComponent } from 'src/app/views';
+import { MARKA_KEY } from 'src/app/shared/constants';
 
 @Injectable()
 export class VehiclesEffects {
@@ -49,6 +50,6 @@ export class VehiclesEffects {
     }
 
     private prepareVehicleCardTitle(details: VehicleDetails): string {
-        return `Szczegóły pojazdu ${details.marka} ${details.model} ${details['podrodzaj-pojazdu'] !== '---' ? details['podrodzaj-pojazdu'] : ''} (${details['rodzaj-pojazdu']})`;
+        return `Szczegóły pojazdu ${details[MARKA_KEY]} ${details.model} ${details['podrodzaj-pojazdu'] !== '---' ? details['podrodzaj-pojazdu'] : ''} (${details['rodzaj-pojazdu']})`;
     }
 }

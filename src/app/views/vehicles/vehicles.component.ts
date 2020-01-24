@@ -12,6 +12,7 @@ import { ModalService, TimeService } from 'src/app/shared/services';
 import { BaseViewComponent } from 'src/app/views/base-view.component';
 import { VehiclesQueryOptionsComponent } from 'src/app/views/vehicles/vehicles-query-options/vehicles-query-options.component';
 import { SHOW_VEHICLE_CARD } from 'src/app/store/vehicles/vehicles.actions';
+import { VehiclesQueryFilersComponent } from 'src/app/views/vehicles/vehicles-query-filers/vehicles-query-filers.component';
 
 @Component({
     selector: 'cpk-vehicles',
@@ -32,7 +33,7 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
         store: Store<AppState>,
         private readonly formBuilder: FormBuilder,
         private readonly timeService: TimeService,
-        private readonly modalService: ModalService<VehiclesQueryOptionsComponent>,
+        private readonly modalService: ModalService<VehiclesQueryOptionsComponent | VehiclesQueryFilersComponent>,
     ) {
         super(activatedRoute, router, store);
     }
@@ -43,6 +44,10 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
 
     ngOnDestroy() {
         this.unsubscribe();
+    }
+
+    public openVehiclesFiltersOptionsModal(): void {
+        this.modalService.open(VehiclesQueryFilersComponent, { title: 'Filtry zapytania' });
     }
 
     public openVehiclesQueryOptionsModal(): void {
