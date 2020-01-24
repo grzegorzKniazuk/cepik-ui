@@ -36,13 +36,13 @@
             <li class="list-group-item"><strong>Wersja</strong>: {{ details.wersja }}</li>
             <li class="list-group-item"><strong>Przeznaczenie</strong>: {{ details["przeznaczenie-pojazdu"] }}</li>
             <li class="list-group-item"><strong>Liczba miejsc ogółem</strong>: {{ details["liczba-miejsc-ogolem"] }}</li>
-            <li class="list-group-item"><strong>Liczba miejsc stojących</strong>: {{ details["liczba-miejsc-stojacych"] }}</li>
             <li class="list-group-item"><strong>Nazwa producenta</strong>: {{ details["nazwa-producenta"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Typ</strong>: {{ details.typ}}</li>
             <li class="list-group-item"><strong>Pochodzenie</strong>: {{ details["pochodzenie-pojazdu"] }}</li>
             <li class="list-group-item"><strong>Liczba miejsc siedzących</strong>: {{ details["liczba-miejsc-siedzacych"] }}</li>
+            <li class="list-group-item"><strong>Liczba miejsc stojących</strong>: {{ details["liczba-miejsc-stojacych"] }}</li>
             <li class="list-group-item"><strong>Hak</strong>: {{ details.hak | yesNo }}</li>
         </ul>
     </div>
@@ -168,7 +168,7 @@
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Rodzaj tabliczki znamionowej</strong>: {{ details["rodzaj-tabliczki-znamionowej"] }}</li>
             <li class="list-group-item"><strong>Kod instytutu transportu samochodowego</strong>: {{ details["kod-instytutu-transaportu-samochodowego"] }}</li>
-            <li class="list-group-item"><strong>Rodzaj/Podrodzaj przeznaczenie</strong>: {{ details["od-rodzaj-podrodzaj-przeznaczenie"] }}</li>
+            <li class="list-group-item"><strong>Rodzaj/Podrodzaj przeznaczenie</strong>: {{ details["kod-rodzaj-podrodzaj-przeznaczenie"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Sposób produkcji</strong>: {{ details["sposob-produkcji"] }}</li>
