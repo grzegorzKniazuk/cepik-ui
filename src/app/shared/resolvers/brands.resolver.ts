@@ -5,7 +5,7 @@ import { DictionaryService } from 'src/app/shared/services';
 import { BaseDictionaryResolver } from 'src/app/shared/resolvers/base-dictionary.resolver';
 
 @Injectable()
-export class VehiclesBrandsResolver extends BaseDictionaryResolver {
+export class BrandsResolver extends BaseDictionaryResolver {
 
     protected readonly dictionaryKeyName = 'marka';
 
