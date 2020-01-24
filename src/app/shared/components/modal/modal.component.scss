@@ -50,8 +50,11 @@
 
         .close-icon {
             position: absolute;
-            top: 12px;
+            top: 0;
             right: 10px;
+            height: 60px;
+            display: flex;
+            align-items: center;
             transition: color 150ms ease-in-out;
             z-index: 10001;
             cursor: pointer;

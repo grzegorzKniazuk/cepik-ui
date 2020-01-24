@@ -23,15 +23,27 @@ export class PaginatorComponent implements OnChanges {
 
     ngOnChanges() {
         if (this.self > 2 && this.next !== this.last && !this.isLastPage) {
-            this.pageNumbers = [ this.first, this.prev, this.self, this.next, this.last ];
+            if (this.next === this.last) {
+                this.pageNumbers = [ this.first, this.prev, this.self, this.next ];
+            } else {
+                this.pageNumbers = [ this.first, this.prev, this.self, this.next, this.last ];
+            }
         } else if (this.self > 2 && !this.isLastPage) {
             this.pageNumbers = [ this.first, this.prev, this.self, this.next ];
         } else if (this.self > 1 && !this.isLastPage) {
-            this.pageNumbers = [ this.prev, this.self, this.next, this.last ];
+            if (this.next === this.last) {
+                this.pageNumbers = [ this.prev, this.self, this.next ];
+            } else {
+                this.pageNumbers = [ this.prev, this.self, this.next, this.last ];
+            }
         } else if (this.isLastPage) {
             this.pageNumbers = [ this.first, this.prev, this.self ];
         } else if (this.isFirstPage) {
-            this.pageNumbers = [ this.self, this.next, this.last ];
+            if (this.next === this.last) {
+                this.pageNumbers = [ this.self, this.next ];
+            } else {
+                this.pageNumbers = [ this.self, this.next, this.last ];
+            }
         }
     }
 
