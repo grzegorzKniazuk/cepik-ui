@@ -3,8 +3,8 @@ import { Vehicle } from 'src/app/shared/interfaces';
 
 const ACTION_LABEL = '[VEHICLES]';
 
-export const LOAD_VEHICLE = createAction(
-    `${ACTION_LABEL} LOAD_VEHICLE`,
+export const SHOW_VEHICLE_CARD = createAction(
+    `${ACTION_LABEL} SHOW_VEHICLE_CARD`,
     props<{ id: string }>(),
 );
 

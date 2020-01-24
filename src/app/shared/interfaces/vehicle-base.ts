@@ -1,10 +1,10 @@
 export interface VehicleBase {
     marka: string;
+    model: string;
+    'rodzaj-pojazdu': string;
     'kategoria-pojazdu': string;
     typ: string;
-    model: string;
     wariant: string;
-    'rodzaj-pojazdu': string;
     'pochodzenie-pojazdu': string;
     'rok-produkcji': string;
     'data-pierwszej-rejestracji-w-kraju': string;

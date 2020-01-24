@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BooleanRadioControlComponent, DateControlComponent, RadioControlComponent, SelectControlComponent } from 'src/app/shared/value-accessors';
-import { MaskPipe } from 'src/app/shared/pipes';
+import { MaskPipe, YesNoPipe } from 'src/app/shared/pipes';
 
 const entryComponents: any[] = [
     ToastComponent,
@@ -31,6 +31,7 @@ const components: any[] = [
 
 const pipes: any[] = [
     MaskPipe,
+    YesNoPipe,
 ];
 
 @NgModule({

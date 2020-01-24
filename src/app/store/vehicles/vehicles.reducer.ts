@@ -20,3 +20,5 @@ const reducer = createReducer(
 export function vehiclesReducer(state: VehiclesState, action: Action): VehiclesState {
     return reducer(state, action);
 }
+
+export const { selectEntities } = adapter.getSelectors();

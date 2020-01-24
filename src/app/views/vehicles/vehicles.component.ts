@@ -11,7 +11,7 @@ import { FormBuilder } from '@angular/forms';
 import { ModalService, TimeService } from 'src/app/shared/services';
 import { BaseViewComponent } from 'src/app/views/base-view.component';
 import { VehiclesQueryOptionsComponent } from 'src/app/views/vehicles/vehicles-query-options/vehicles-query-options.component';
-import { LOAD_VEHICLE } from 'src/app/store/vehicles/vehicles.actions';
+import { SHOW_VEHICLE_CARD } from 'src/app/store/vehicles/vehicles.actions';
 
 @Component({
     selector: 'cpk-vehicles',
@@ -50,7 +50,7 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
     }
 
     public openVehicleCard(id: string): void {
-        this.store.dispatch(LOAD_VEHICLE({ id }));
+        this.store.dispatch(SHOW_VEHICLE_CARD({ id }));
     }
 
     public resetQueryOptions(): void {

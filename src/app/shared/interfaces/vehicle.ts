@@ -6,5 +6,5 @@ export interface Vehicle {
     id: string;
     type: string;
     links: Pick<Links, 'self'>;
-    attributes: VehicleBase & Partial<VehicleDetails>
+    attributes: VehicleBase | VehicleDetails;
 }
