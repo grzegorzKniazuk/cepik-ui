@@ -45,17 +45,6 @@
                 "maxAge": "1d",
                 "maxSize": 1
             }
-        },
-        {
-            "name": "google fonts",
-            "urls": [
-                "https://fonts.googleapis.com/.+"
-            ],
-            "cacheConfig": {
-                "strategy": "performance",
-                "maxAge": "7d",
-                "maxSize": 1
-            }
         }
     ]
 }

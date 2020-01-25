@@ -1,10 +1,19 @@
+@import "colors.scss";
+
 .options-button {
     position: relative;
     top: 6px;
 }
 
-table > tr > td {
+.table td, .table th {
+    cursor: pointer;
+}
+
+.table tr {
+    transition: color 150ms ease-in;
+
     &:hover {
-        cursor: pointer;
+        background: #f8f9fa;
+        color: $blue;
     }
 }

@@ -11,5 +11,4 @@ export * from './vehicle-details';
 export * from './vehicle-base';
 export * from './api-error-response';
 export * from './toast-options';
-export * from './vehicles-list-options';
 export * from './modal-options';

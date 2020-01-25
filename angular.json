@@ -64,6 +64,7 @@
                             "node_modules/reset-css/reset.css",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
                             "src/assets/fonts/roboto.css",
+                            "src/assets/icons/material-icons/material-icons.css",
                             "src/styles.scss"
                         ]
                     },

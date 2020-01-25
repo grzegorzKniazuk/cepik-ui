@@ -21,7 +21,6 @@ import {
 
 export interface VehicleListQueryParams {
     readonly [index: string]: boolean | string | string[];
-
     [WOJEWODZTWO_KEY]: string;
     [DATA_OD_KEY]: string;
     [DATA_DO_KEY]: string;
