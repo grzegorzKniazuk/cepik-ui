@@ -16,9 +16,13 @@ export class VehicleService {
     }
 
     public getVehicles(queryParams: VehicleListQueryParams): Observable<ApiResponse<Vehicle[]>> {
-        const params: HttpParams = new HttpParams({
-            fromObject: { ...queryParams },
-        });
+        let params: HttpParams = new HttpParams();
+
+        for (const key in queryParams) {
+            if (queryParams.hasOwnProperty(key) && queryParams[key] !== undefined && queryParams[key] !== null) {
+                params = params.set(key, queryParams[key].toString());
+            }
+        }
 
         return this.httpClient.get(`${this.apiUrl}/pojazdy`, { params }).pipe(
             catchError(() => of([])),

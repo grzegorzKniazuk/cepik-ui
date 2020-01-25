@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { DashboardComponent, VehiclesComponent } from 'src/app/views';
-import { RegionsResolver, BrandsResolver, VehiclesResolver } from 'src/app/shared/resolvers';
+import { BrandsResolver, FuelTypesResolver, RegionsResolver, VehicleOriginResolver, VehiclesResolver, VehicleTypesResolver } from 'src/app/shared/resolvers';
 
 const routes: Routes = [
     {
@@ -17,6 +17,9 @@ const routes: Routes = [
             vehicles: VehiclesResolver,
             regions: RegionsResolver,
             brands: BrandsResolver,
+            vehicleTypes: VehicleTypesResolver,
+            fuelTypes: FuelTypesResolver,
+            origin: VehicleOriginResolver,
         },
         runGuardsAndResolvers: 'always',
     },

@@ -44,14 +44,16 @@ export class PaginatorComponent implements OnChanges {
             } else {
                 this.pageNumbers = [ this.prev, this.self, this.next, this.last ];
             }
-        } else if (this.isLastPage) {
-            this.pageNumbers = [ this.first, this.prev, this.self ];
         } else if (this.isFirstPage) {
-            if (this.next === this.last) {
+            if (this.self === this.last) {
+                this.pageNumbers = [ this.self ];
+            } else if (this.next === this.last) {
                 this.pageNumbers = [ this.self, this.next ];
             } else {
                 this.pageNumbers = [ this.self, this.next, this.last ];
             }
+        } else if (this.isLastPage) {
+            this.pageNumbers = [ this.first, this.prev, this.self ];
         }
     }
 

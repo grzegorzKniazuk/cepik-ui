@@ -1,5 +1,6 @@
 import { ControlValueAccessor, NgControl, ValidationErrors } from '@angular/forms';
-import { Input, Optional, Self } from '@angular/core';
+import { Input, Optional, Renderer2, Self } from '@angular/core';
+import { UuidService } from 'src/app/shared/services';
 
 export abstract class BaseValueAccessor<T> implements ControlValueAccessor {
     @Input() public readonly label: string;
@@ -10,6 +11,8 @@ export abstract class BaseValueAccessor<T> implements ControlValueAccessor {
 
     protected constructor(
         @Self() @Optional() protected readonly ngControl: NgControl,
+        protected readonly renderer2: Renderer2,
+        protected readonly uuidService: UuidService,
     ) {
         this.ngControl.valueAccessor = this;
     }

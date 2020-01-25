@@ -4,7 +4,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BooleanRadioControlComponent, DateControlComponent, RadioControlComponent, SelectControlComponent } from 'src/app/shared/value-accessors';
+import { BooleanRadioControlComponent, DateControlComponent, RadioControlComponent, SelectControlComponent, TextControlComponent } from 'src/app/shared/value-accessors';
 import { MaskPipe, YesNoPipe } from 'src/app/shared/pipes';
 
 const entryComponents: any[] = [
@@ -17,6 +17,7 @@ const valueAccessors: any[] = [
     RadioControlComponent,
     BooleanRadioControlComponent,
     DateControlComponent,
+    TextControlComponent,
 ];
 
 const components: any[] = [

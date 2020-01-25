@@ -1,26 +1,32 @@
 <form [formGroup]="filersForm" class="col-12 d-flex justify-content-center flex-column align-items-center">
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
-
+            <cpk-text-control class="mr-4" formControlName="filter[marka]" label="Marka" [dataList]="brands$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
+            <cpk-text-control formControlName="filter[model]" label="Model"></cpk-text-control>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12 d-flex">
-
+    <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-center">
+            <cpk-text-control class="mr-4" formControlName="filter[rodzaj-pojazdu]" label="Rodzaj pojazdu" [dataList]="vehicleTypes$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
+            <cpk-text-control formControlName="filter[rodzaj-paliwa]" label="Rodzaj paliwa" [dataList]="fuelTypes$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
         </div>
     </div>
-    <div class="row">
+    <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-center">
+            <cpk-text-control class="mr-4" formControlName="filter[pochodzenie-pojazdu]" label="Pochodzenie pojazdu" [dataList]="origin$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
+            <cpk-text-control formControlName="filter[przeznaczenie-pojazdu]" label="Przeznaczenie pojazdu"></cpk-text-control>
+        </div>
+    </div>
+    <div class="row mt-4">
+        <div class="col-12 d-flex justify-content-center">
+            <cpk-text-control class="mr-4" formControlName="filter[rejestracja-powiat]" label="Powiat (rejestracja)"></cpk-text-control>
+            <cpk-text-control formControlName="filter[rejestracja-gmina]" label="Gmina (rejestracja)"></cpk-text-control>
+        </div>
+    </div>
+    <div class="row mt-4">
         <div class="col-12">
-            <div class="mt-3">
-                <cpk-button (click)="onFilterSubmit()" type="primary">
-                    <cpk-icon class="mr-1">done</cpk-icon>
-                    Zatwierdź
-                </cpk-button>
-                <cpk-button (click)="onFilterReset()" class="mr-1" type="danger">
-                    <cpk-icon class="mr-1">clear</cpk-icon>
-                    Wyczyść
-                </cpk-button>
-            </div>
+            <cpk-button (click)="onFilterSubmit()" type="primary"><cpk-icon class="mr-1">done</cpk-icon>Zatwierdź</cpk-button>
+            <cpk-button (click)="onFilterReset()" class="mr-1" type="danger"><cpk-icon class="mr-1">clear</cpk-icon>Wyczyść wszystko</cpk-button>
         </div>
     </div>
 </form>

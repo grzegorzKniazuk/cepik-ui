@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from 'src/app/store';
 import { RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/constants';
-import { RegionsResolver, BrandsResolver, VehiclesResolver } from 'src/app/shared/resolvers';
+import { BrandsResolver, FuelTypesResolver, RegionsResolver, VehicleOriginResolver, VehiclesResolver, VehicleTypesResolver } from 'src/app/shared/resolvers';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor, HttpLoaderInterceptor } from 'src/app/shared/interceptors';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -48,6 +48,9 @@ const resolvers: any[] = [
     VehiclesResolver,
     RegionsResolver,
     BrandsResolver,
+    VehicleTypesResolver,
+    FuelTypesResolver,
+    VehicleOriginResolver,
 ];
 
 const interceptors: any[] = [
