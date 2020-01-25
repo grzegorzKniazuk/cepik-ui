@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { SET_VEHICLE, SHOW_VEHICLE_CARD } from 'src/app/store/vehicles/vehicles.actions';
+import { ADD_ONE_VEHICLE, SHOW_VEHICLE_CARD } from 'src/app/store/vehicles/vehicles.actions';
 import { concatMap, pluck, switchMap, tap, withLatestFrom } from 'rxjs/operators';
 import { ModalService, VehicleService } from 'src/app/shared/services';
 import { ApiResponse, Vehicle, VehicleDetails } from 'src/app/shared/interfaces';
@@ -26,7 +26,7 @@ export class VehiclesEffects {
                 return this.vehicleService.getVehicle(id).pipe(
                     pluck<ApiResponse<Vehicle>, Vehicle>('data'),
                     tap((response: Vehicle) => {
-                        this.store.dispatch(SET_VEHICLE({ vehicle: response }));
+                        this.store.dispatch(ADD_ONE_VEHICLE({ vehicle: response }));
                     }),
                     pluck<Vehicle, VehicleDetails>('attributes'),
                 );

@@ -36,6 +36,7 @@
                     <th scope="col">Pojemność skokowa silnika</th>
                     <th scope="col">Masa własna</th>
                     <th scope="col">Data pierwszej rejestracji w kraju</th>
+                    <th scope="col">Data ostatniej rejestracji w kraju</th>
                     <th scope="col">Pochodzenie pojazdu</th>
                 </tr>
                 </thead>
@@ -49,6 +50,7 @@
                     <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pojemnosc-skokowa-silnika'] }}</td>
                     <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['masa-wlasna'] }}</td>
                     <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['data-pierwszej-rejestracji-w-kraju'] }}</td>
+                    <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['data-ostatniej-rejestracji-w-kraju'] }}</td>
                     <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pochodzenie-pojazdu'] }}</td>
                 </tr>
                 <tr>

@@ -8,7 +8,12 @@ export const SHOW_VEHICLE_CARD = createAction(
     props<{ id: string }>(),
 );
 
-export const SET_VEHICLE = createAction(
-    `${ACTION_LABEL} SET_VEHICLE`,
+export const ADD_ONE_VEHICLE = createAction(
+    `${ACTION_LABEL} ADD_ONE_VEHICLE`,
     props<{ vehicle: Vehicle }>(),
+);
+
+export const ADD_MANY_VEHICLES = createAction(
+    `${ACTION_LABEL} ADD_MANY_VEHICLES`,
+    props<{ vehicles: Vehicle[] }>(),
 );

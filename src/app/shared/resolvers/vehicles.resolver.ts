@@ -25,6 +25,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { SET_PAGINATION_LINKS } from 'src/app/store/pagination-links/pagination-links.actions';
+import { ADD_MANY_VEHICLES } from 'src/app/store/vehicles/vehicles.actions';
 
 @Injectable()
 export class VehiclesResolver implements Resolve<Vehicle[]> {
@@ -45,7 +46,7 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
                 [DATA_OD_KEY]: route.queryParams[DATA_OD_KEY],
                 [DATA_DO_KEY]: route.queryParams[DATA_DO_KEY],
                 [TYLKO_ZAREJESTROWANE_KEY]: route.queryParams[TYLKO_ZAREJESTROWANE_KEY],
-                [POKAZ_WSZYSTKIE_POLA_KEY]: false,
+                [POKAZ_WSZYSTKIE_POLA_KEY]: true,
                 [FILTER_MARKA_KEY]: route.queryParams[FILTER_MARKA_KEY],
                 [FILTER_MODEL_KEY]: route.queryParams[FILTER_MODEL_KEY],
                 [FILTER_RODZAJ_POJAZDU_KEY]: route.queryParams[FILTER_RODZAJ_POJAZDU_KEY],
@@ -57,6 +58,7 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
             }).pipe(
                 tap(({ links }: ApiResponse<Vehicle[]>) => this.store.dispatch(SET_PAGINATION_LINKS({ links }))),
                 pluck<ApiResponse<Vehicle[]>, Vehicle[]>('data'),
+                tap((vehicles) => this.store.dispatch(ADD_MANY_VEHICLES({ vehicles }))),
             );
         }
 
