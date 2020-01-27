@@ -1,4 +1,3 @@
-export * from 'src/app/shared/interfaces/dictionary-def';
 export * from './api-response';
 export * from './links';
 export * from './meta';
@@ -8,7 +7,8 @@ export * from './dictionary-item';
 export * from './api-query-params';
 export * from './vehicle';
 export * from './vehicle-details';
-export * from './vehicle-base';
 export * from './api-error-response';
 export * from './toast-options';
 export * from './modal-options';
+export * from './driving-license-stat';
+export * from './version';

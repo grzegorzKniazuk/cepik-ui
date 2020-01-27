@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class VehicleOriginResolver extends BaseDictionaryResolver {
 
-    protected readonly dictionaryKeyName = 'pochodzenie-pojazdu';
+    protected readonly dictionaryKey = 'pochodzenie-pojazdu';
 
     constructor(
         store: Store<AppState>,

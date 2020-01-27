@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector, MemoizedSelectorWithProps } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { DictionariesState, selectEntities } from 'src/app/store/dictionaries/dictionaries.reducer';
 import { DictionaryItem } from 'src/app/shared/interfaces';
 import { Dictionary } from '@ngrx/entity';
@@ -11,9 +11,9 @@ export const selectDictionariesEntities = createSelector(
     selectEntities,
 );
 
-export const selectDictionary: MemoizedSelectorWithProps<AppState, { id: string }, DictionaryItem[] | null> = createSelector(
+export const selectDictionary = createSelector(
     selectDictionariesEntities,
-    ((entities: Dictionary<{ id: string, items: DictionaryItem[], total: number }>, { id }: { id: string }) => {
+    ((entities: Dictionary<{ id: string, items: DictionaryItem[] }>, { id }: { id: string }) => {
         return entities[id] ? entities[id].items : null;
     }),
 );

@@ -3,12 +3,10 @@ import { DictionaryItem } from 'src/app/shared/interfaces';
 import { Action, createReducer, on } from '@ngrx/store';
 import { SET_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
 
-export interface DictionariesState extends EntityState<{ id: string, items: DictionaryItem[], total: number }> {
+export interface DictionariesState extends EntityState<{ id: string, items: DictionaryItem[] }> {
 }
 
-const adapter = createEntityAdapter<{ id: string, items: DictionaryItem[], total: number }>({
-    selectId: (state) => state.id,
-});
+const adapter = createEntityAdapter<{ id: string, items: DictionaryItem[] }>();
 
 const initialState: DictionariesState = adapter.getInitialState();
 

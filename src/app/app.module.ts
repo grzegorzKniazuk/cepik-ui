@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from 'src/app/store';
 import { RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/constants';
-import { BrandsResolver, FuelTypesResolver, RegionsResolver, VehicleOriginResolver, VehiclesResolver, VehicleTypesResolver } from 'src/app/shared/resolvers';
+import { BrandsResolver, DrivingLicensesStatisticsResolver, FuelTypesResolver, RegionsResolver, VehicleOriginResolver, VehiclesResolver, VehicleTypesResolver } from 'src/app/shared/resolvers';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor, HttpLoaderInterceptor } from 'src/app/shared/interceptors';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { API_URL } from 'src/app/shared/constants/injection-tokens';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehiclesEffects } from 'src/app/store/vehicles/vehicles.effects';
+import { VersionEffects } from 'src/app/store/version/version.effects';
 
 const entryComponents: any[] = [
     VehiclesQueryOptionsComponent,
@@ -40,7 +41,7 @@ const components: any[] = [
 const store: any[] = [
     StoreModule.forRoot(appReducers, { runtimeChecks: RUNTIME_CHECKS }),
     StoreRouterConnectingModule.forRoot(STORE_ROUTER_CONNECTING_CONFIG),
-    EffectsModule.forRoot([ VehiclesEffects ]),
+    EffectsModule.forRoot([ VersionEffects, VehiclesEffects ]),
     environment.production ? [] : [ StoreDevtoolsModule.instrument() ],
 ];
 
@@ -51,6 +52,7 @@ const resolvers: any[] = [
     VehicleTypesResolver,
     FuelTypesResolver,
     VehicleOriginResolver,
+    DrivingLicensesStatisticsResolver,
 ];
 
 const interceptors: any[] = [

@@ -7,7 +7,7 @@ import { DictionaryService } from 'src/app/shared/services';
 @Injectable()
 export class VehicleTypesResolver extends BaseDictionaryResolver {
 
-    protected readonly dictionaryKeyName = 'rodzaj-pojazdu';
+    protected readonly dictionaryKey = 'rodzaj-pojazdu';
 
     constructor(
         store: Store<AppState>,

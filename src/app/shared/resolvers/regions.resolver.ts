@@ -7,7 +7,7 @@ import { BaseDictionaryResolver } from 'src/app/shared/resolvers/base-dictionary
 @Injectable()
 export class RegionsResolver extends BaseDictionaryResolver {
 
-    protected readonly dictionaryKeyName = 'wojewodztwa';
+    protected readonly dictionaryKey = 'wojewodztwa';
 
     constructor(
         store: Store<AppState>,

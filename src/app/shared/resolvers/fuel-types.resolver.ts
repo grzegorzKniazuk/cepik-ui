@@ -7,7 +7,7 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class FuelTypesResolver extends BaseDictionaryResolver {
 
-    protected readonly dictionaryKeyName = 'rodzaj-paliwa';
+    protected readonly dictionaryKey = 'rodzaj-paliwa';
 
     constructor(
         store: Store<AppState>,

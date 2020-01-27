@@ -3,6 +3,6 @@ import { Meta } from 'src/app/shared/interfaces/meta';
 
 export interface ApiResponse<T> {
     meta: Meta;
-    links: Links;
+    links: Partial<Links>;
     data: T;
 }

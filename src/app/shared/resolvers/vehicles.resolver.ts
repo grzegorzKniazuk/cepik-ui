@@ -6,7 +6,7 @@ import { ApiResponse, Vehicle } from 'src/app/shared/interfaces';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { selectPageData } from 'src/app/store/loader/loader.selectors';
-import { defaultIfEmpty, first, pluck, switchMap, tap } from 'rxjs/operators';
+import { first, pluck, switchMap, tap } from 'rxjs/operators';
 import {
     DATA_DO_KEY,
     DATA_OD_KEY,
@@ -69,13 +69,11 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
                     );
                 }
 
-                return of(null);
+                return of({ meta: null, links: null, data: [] });
             }),
-            first((data: ApiResponse<Vehicle[]> | null) => data !== null),
             tap(({ links }: ApiResponse<Vehicle[]>) => this.store.dispatch(SET_PAGINATION_LINKS({ links }))),
             pluck<ApiResponse<Vehicle[]>, Vehicle[]>('data'),
             tap((vehicles) => this.store.dispatch(ADD_MANY_VEHICLES({ vehicles }))),
-            defaultIfEmpty([]),
         );
     }
 }

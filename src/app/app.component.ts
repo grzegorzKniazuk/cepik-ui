@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit } from '@angular/core';
 import { AppState } from 'src/app/store';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
 import { Title } from '@angular/platform-browser';
-import { distinctUntilChanged, filter, pluck } from 'rxjs/operators';
+import { distinctUntilChanged, pluck } from 'rxjs/operators';
 import { selectRouteData } from 'src/app/store/router/router.selectors';
 import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
 import { BaseComponent } from 'src/app/views/base.component';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Data, Router } from '@angular/router';
+import { hasProperty } from 'src/app/shared/operators';
+import { selectVersionState } from 'src/app/store/version/version.selectors';
 
 @Component({
     selector: 'cpk-root',
@@ -17,7 +18,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
 
-    public readonly loadingState$: Observable<boolean> = this.store.pipe(select(selectLoaderState));
+    public readonly loadingState$ = this.store.pipe(select(selectLoaderState));
+    public readonly apiVersion$ = this.store.pipe(select(selectVersionState));
 
     constructor(
         activatedRoute: ActivatedRoute,
@@ -32,8 +34,8 @@ export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
         this.subscriptions$.add(
             this.store.pipe(
                 select(selectRouteData),
-                filter((data) => data && data.hasOwnProperty('title')),
-                pluck('title'),
+                hasProperty<Data>('title'),
+                pluck<Data, string>('title'),
                 distinctUntilChanged(),
             ).subscribe((title: string) => {
                 this.title.setTitle(`CEPiK UI | ${title}`);

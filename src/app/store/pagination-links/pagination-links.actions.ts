@@ -5,5 +5,5 @@ const ACTION_LABEL = '[PAGINATION_LINKS]';
 
 export const SET_PAGINATION_LINKS = createAction(
     `${ACTION_LABEL} SET_PAGINATION_LINKS`,
-    props<{ links: Links }>(),
+    props<{ links: Partial<Links> }>(),
 );

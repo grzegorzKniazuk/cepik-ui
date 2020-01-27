@@ -7,7 +7,7 @@ import { BaseDictionaryResolver } from 'src/app/shared/resolvers/base-dictionary
 @Injectable()
 export class BrandsResolver extends BaseDictionaryResolver {
 
-    protected readonly dictionaryKeyName = 'marka';
+    protected readonly dictionaryKey = 'marka';
 
     constructor(
         store: Store<AppState>,

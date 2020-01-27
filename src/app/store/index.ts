@@ -4,12 +4,14 @@ import { dictionariesReducer, DictionariesState } from 'src/app/store/dictionari
 import { loaderReducer, LoaderState } from 'src/app/store/loader/loader.reducer';
 import { paginationLinksReducer, PaginationLinksState } from 'src/app/store/pagination-links/pagination-links.reducer';
 import { vehiclesReducer, VehiclesState } from 'src/app/store/vehicles/vehicles.reducer';
+import { versionReducer, VersionState } from 'src/app/store/version/version.reducer';
 
 export interface AppState {
     router: RouterReducerState;
     dictionaries: DictionariesState;
     vehicles: VehiclesState;
     loader: LoaderState;
+    version: VersionState;
     paginationLinks: PaginationLinksState;
 }
 
@@ -18,5 +20,6 @@ export const appReducers: ActionReducerMap<AppState> = {
     dictionaries: dictionariesReducer,
     vehicles: vehiclesReducer,
     loader: loaderReducer,
+    version: versionReducer,
     paginationLinks: paginationLinksReducer,
 };

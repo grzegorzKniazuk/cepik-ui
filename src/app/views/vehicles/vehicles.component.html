@@ -54,13 +54,13 @@
                     <td [class.loading]="loadingState$ | async">{{ vehicle.attributes['pochodzenie-pojazdu'] }}</td>
                 </tr>
                 <tr>
-                    <td *ngIf="!vehicles.length" [colSpan]="9" class="text-center">Brak danych</td>
+                    <td *ngIf="!vehicles.length" [colSpan]="10" class="text-center">Brak danych</td>
                 </tr>
                 </tbody>
             </table>
         </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="selectedRegion$ | async">
         <div class="col-12">
             <cpk-paginator (limitChange)="onLimitChange($event)"
                            (pageChange)="onPageChange($event)"

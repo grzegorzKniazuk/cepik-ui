@@ -10,7 +10,7 @@ import { SET_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.act
 
 export abstract class BaseDictionaryResolver implements Resolve<DictionaryItem[]> {
 
-    protected abstract readonly dictionaryKeyName: string;
+    protected abstract readonly dictionaryKey: string;
 
     protected constructor(
         protected readonly store: Store<AppState>,
@@ -20,18 +20,17 @@ export abstract class BaseDictionaryResolver implements Resolve<DictionaryItem[]
 
     public resolve(): Observable<DictionaryItem[]> {
         return this.store.pipe(
-            select(selectDictionary, { id: this.dictionaryKeyName }),
+            select(selectDictionary, { id: this.dictionaryKey }),
             switchMap((dictionaryItems: DictionaryItem[]) => {
                 if (Array.isArray(dictionaryItems)) {
                     return of(dictionaryItems);
                 }
-                return this.dictionaryService.getDictionary(this.dictionaryKeyName).pipe(
+                return this.dictionaryService.getDictionary(this.dictionaryKey).pipe(
                     tap((response: ApiResponse<DictionaryItemList>) => {
                         this.store.dispatch(SET_DICTIONARY_ITEM({
                             item: {
                                 id: response.data.id,
                                 items: response.data.attributes['dostepne-rekordy-slownika'],
-                                total: response.data.attributes['ilosc-rekordow-slownika'],
                             },
                         }));
                     }),
