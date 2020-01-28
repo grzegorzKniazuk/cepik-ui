@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject } from '@angular/core';
-import { TOAST_OPTIONS } from 'src/app/shared/constants/injection-tokens';
+import { TOAST_OPTIONS } from 'src/app/shared/constants';
 import { ToastOptions } from 'src/app/shared/interfaces';
 
 @Component({

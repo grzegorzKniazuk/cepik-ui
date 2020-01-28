@@ -1,7 +1,8 @@
 import { createAction, props } from '@ngrx/store';
 import { Vehicle } from 'src/app/shared/interfaces';
+import { VEHICLES_FEATURE_KEY } from 'src/app/store/feature-names';
 
-const ACTION_LABEL = '[VEHICLES]';
+const ACTION_LABEL = `[${VEHICLES_FEATURE_KEY.toUpperCase()}]`;
 
 export const SHOW_VEHICLE_CARD = createAction(
     `${ACTION_LABEL} SHOW_VEHICLE_CARD`,

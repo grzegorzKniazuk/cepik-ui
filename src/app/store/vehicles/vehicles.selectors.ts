@@ -3,8 +3,9 @@ import { selectEntities, VehiclesState } from 'src/app/store/vehicles/vehicles.r
 import { Dictionary } from '@ngrx/entity';
 import { Vehicle, VehicleDetails } from 'src/app/shared/interfaces';
 import { AppState } from 'src/app/store/index';
+import { VEHICLES_FEATURE_KEY } from 'src/app/store/feature-names';
 
-export const selectVehiclesState = createFeatureSelector<AppState, VehiclesState>('vehicles');
+export const selectVehiclesState = createFeatureSelector<AppState, VehiclesState>(VEHICLES_FEATURE_KEY);
 
 export const selectVehiclesEntities = createSelector(
     selectVehiclesState,

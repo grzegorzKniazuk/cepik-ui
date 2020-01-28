@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@angular/core';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/base/api.service';
 import { HttpClient } from '@angular/common/http';
-import { API_URL } from 'src/app/shared/constants/injection-tokens';
+import { API_URL } from 'src/app/shared/constants';
 import { Observable } from 'rxjs';
 import { Version } from 'src/app/shared/interfaces';
 

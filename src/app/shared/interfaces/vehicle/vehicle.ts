@@ -1,5 +1,5 @@
 import { Links } from 'src/app/shared/interfaces/links';
-import { VehicleDetails } from 'src/app/shared/interfaces/vehicle-details';
+import { VehicleDetails } from 'src/app/shared/interfaces/vehicle/vehicle-details';
 
 export interface Vehicle {
     id: string;

@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
-import { ApiResponse, Vehicle, VehicleListQueryParams } from 'src/app/shared/interfaces';
+import { ApiResponse, Vehicle, VehicleQueryParams } from 'src/app/shared/interfaces';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
-import { API_URL } from 'src/app/shared/constants/injection-tokens';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { API_URL } from 'src/app/shared/constants';
+import { ApiService } from 'src/app/shared/services/base/api.service';
 
 @Injectable({
     providedIn: 'root',
@@ -18,7 +18,7 @@ export class VehicleService extends ApiService {
         super();
     }
 
-    public getVehicles(queryParams: VehicleListQueryParams): Observable<ApiResponse<Vehicle[]>> {
+    public getVehicles(queryParams: VehicleQueryParams): Observable<ApiResponse<Vehicle[]>> {
         let params: HttpParams = new HttpParams();
 
         for (const key in queryParams) {

@@ -44,6 +44,6 @@ export class AppComponent extends BaseComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy() {
-        this.subscriptions$.unsubscribe();
+        this.unsubscribe();
     }
 }

@@ -1,8 +1,9 @@
 import { createFeatureSelector, createSelector, MemoizedSelectorWithProps } from '@ngrx/store';
 import { LoaderState } from 'src/app/store/loader/loader.reducer';
 import { AppState } from 'src/app/store/index';
+import { LOADER_FEATURE_KEY } from 'src/app/store/feature-names';
 
-export const loaderState = createFeatureSelector<AppState, LoaderState>('loader');
+export const loaderState = createFeatureSelector<AppState, LoaderState>(LOADER_FEATURE_KEY);
 
 export const selectLoaderState = createSelector(
     loaderState,

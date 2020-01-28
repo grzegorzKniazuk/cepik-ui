@@ -1,10 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
-import { ApiService } from 'src/app/shared/services/api.service';
+import { ApiService } from 'src/app/shared/services/base/api.service';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { API_URL } from 'src/app/shared/constants/injection-tokens';
+import { API_URL } from 'src/app/shared/constants';
 import { Observable } from 'rxjs';
-import { first, map, pluck } from 'rxjs/operators';
-import { ApiResponse, DrivingLicenseStat, Meta } from 'src/app/shared/interfaces';
+import { pluck } from 'rxjs/operators';
+import { ApiResponse, DrivingLicenseStat, PermissionStat } from 'src/app/shared/interfaces';
 
 @Injectable({
     providedIn: 'root',
@@ -18,11 +18,9 @@ export class StatisticsService extends ApiService {
         super();
     }
 
-    public getNumberOfRecords(): Observable<number> {
-        return this.httpClient.get<ApiResponse<DrivingLicenseStat[]>>(`${this.apiUrl}/prawa-jazdy?limit=1`).pipe(
-            map((response) => response.meta),
-            pluck<Meta, number>('count'),
-            first(),
+    public getNumberOfDrivingLicensesRecords(): Observable<number> {
+        return this.getDrivingLicensesStatistics(1).pipe(
+            pluck<ApiResponse<DrivingLicenseStat[]>, number>('meta', 'count'),
         );
     }
 
@@ -32,5 +30,19 @@ export class StatisticsService extends ApiService {
         });
 
         return this.httpClient.get(`${this.apiUrl}/prawa-jazdy`, { params }) as Observable<ApiResponse<DrivingLicenseStat[]>>;
+    }
+
+    public getNumberOfPermissionsRecords(): Observable<number> {
+        return this.getPermissionsStatistics(1).pipe(
+            pluck<ApiResponse<PermissionStat[]>, number>('meta', 'count'),
+        );
+    }
+
+    public getPermissionsStatistics(limit: number): Observable<ApiResponse<PermissionStat[]>> {
+        const params: HttpParams = new HttpParams({
+            fromObject: { limit: `${limit}` },
+        });
+
+        return this.httpClient.get(`${this.apiUrl}/uprawnienia`, { params }) as Observable<ApiResponse<PermissionStat[]>>;
     }
 }

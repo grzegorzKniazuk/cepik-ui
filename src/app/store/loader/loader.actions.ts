@@ -1,6 +1,7 @@
 import { createAction, props } from '@ngrx/store';
+import { LOADER_FEATURE_KEY } from 'src/app/store/feature-names';
 
-const ACTION_LABEL = '[LOADER]';
+const ACTION_LABEL = `[${LOADER_FEATURE_KEY.toUpperCase()}]`;
 
 export const SHOW_LOADER = createAction(
     `${ACTION_LABEL} SHOW_LOADER`,

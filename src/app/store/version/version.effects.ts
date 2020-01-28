@@ -4,14 +4,14 @@ import { Action } from '@ngrx/store';
 import { VersionService } from 'src/app/shared/services';
 import { map, switchMap } from 'rxjs/operators';
 import { Version } from 'src/app/shared/interfaces';
-import { SET_VERSION } from 'src/app/store/version/version.actions';
+import { SET_VERSION, VERSION_EFFECTS_INIT } from 'src/app/store/version/version.actions';
 
 @Injectable()
 export class VersionEffects implements OnInitEffects {
 
     public readonly init$ = createEffect(() => {
         return this.actions$.pipe(
-            ofType('VERSION_EFFECT_INIT'),
+            ofType(VERSION_EFFECTS_INIT),
             switchMap(() => this.versionService.getVersion()),
             map((version: Version) => SET_VERSION({ version })),
         );
@@ -24,6 +24,6 @@ export class VersionEffects implements OnInitEffects {
     }
 
     ngrxOnInitEffects(): Action {
-        return { type: 'VERSION_EFFECT_INIT' };
+        return VERSION_EFFECTS_INIT();
     }
 }

@@ -3,8 +3,9 @@ import { DictionariesState, selectEntities } from 'src/app/store/dictionaries/di
 import { DictionaryItem } from 'src/app/shared/interfaces';
 import { Dictionary } from '@ngrx/entity';
 import { AppState } from 'src/app/store/index';
+import { DICTIONARIES_FEATURE_KEY } from 'src/app/store/feature-names';
 
-export const selectDictionariesState = createFeatureSelector<AppState, DictionariesState>('dictionaries');
+export const selectDictionariesState = createFeatureSelector<AppState, DictionariesState>(DICTIONARIES_FEATURE_KEY);
 
 export const selectDictionariesEntities = createSelector(
     selectDictionariesState,

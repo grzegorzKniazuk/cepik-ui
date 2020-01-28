@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, EventEmitter, Inject } from '@angular/core';
-import { MODAL_OPTIONS } from 'src/app/shared/constants/injection-tokens';
+import { MODAL_OPTIONS } from 'src/app/shared/constants';
 import { ModalOptions } from 'src/app/shared/interfaces';
 
 @Component({

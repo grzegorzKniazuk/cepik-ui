@@ -1,7 +1,7 @@
 import { ComponentFactoryResolver, ComponentRef, Inject, Injectable, Injector, Renderer2, RendererFactory2 } from '@angular/core';
 import { ToastComponent } from 'src/app/shared/components';
 import { DOCUMENT } from '@angular/common';
-import { TOAST_OPTIONS } from 'src/app/shared/constants/injection-tokens';
+import { TOAST_OPTIONS } from 'src/app/shared/constants';
 import { ToastType } from 'src/app/shared/enums';
 import { animationFrameScheduler, timer } from 'rxjs';
 

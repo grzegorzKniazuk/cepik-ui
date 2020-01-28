@@ -6,7 +6,7 @@ import { DictionaryItem, Vehicle } from 'src/app/shared/interfaces';
 import { DATA_DO_KEY, DATA_OD_KEY, LIMIT_KEY, PAGE_KEY, TYLKO_ZAREJESTROWANE_KEY, TYP_DATY_KEY, WOJEWODZTWO_KEY } from 'src/app/shared/constants';
 import { pluck, startWith } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { VehicleQueryParamDate } from 'src/app/shared/enums';
+import { VehicleDateParam } from 'src/app/shared/enums';
 import { FormBuilder } from '@angular/forms';
 import { ModalService, TimeService } from 'src/app/shared/services';
 import { BaseViewComponent } from 'src/app/views/base-view.component';
@@ -63,7 +63,7 @@ export class VehiclesComponent extends BaseViewComponent implements OnInit, OnDe
             [WOJEWODZTWO_KEY]: region,
             [PAGE_KEY]: 1,
             [LIMIT_KEY]: this.activatedRoute.snapshot.queryParams[LIMIT_KEY] || 10,
-            [TYP_DATY_KEY]: this.activatedRoute.snapshot.queryParams[TYP_DATY_KEY] || VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
+            [TYP_DATY_KEY]: this.activatedRoute.snapshot.queryParams[TYP_DATY_KEY] || VehicleDateParam.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
             [DATA_OD_KEY]: this.activatedRoute.snapshot.queryParams[DATA_OD_KEY] || this.timeService.yearsBackFromToday(2),
             [DATA_DO_KEY]: this.activatedRoute.snapshot.queryParams[DATA_DO_KEY] || this.timeService.todayDate,
             [TYLKO_ZAREJESTROWANE_KEY]: this.activatedRoute.snapshot.queryParams[TYLKO_ZAREJESTROWANE_KEY] || true,

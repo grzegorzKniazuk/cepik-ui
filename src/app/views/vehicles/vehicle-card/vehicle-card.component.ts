@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Inject } from '@angular/core';
-import { MODAL_DATA } from 'src/app/shared/constants/injection-tokens';
+import { MODAL_DATA } from 'src/app/shared/constants';
 import { VehicleDetails } from 'src/app/shared/interfaces';
 import { BehaviorSubject } from 'rxjs';
 
@@ -7,7 +7,7 @@ import { BehaviorSubject } from 'rxjs';
     selector: 'cpk-vehicle-card',
     templateUrl: './vehicle-card.component.html',
     styleUrls: [ './vehicle-card.component.scss' ],
-    changeDetection: ChangeDetectionStrategy.Default,
+    changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class VehicleCardComponent {
 

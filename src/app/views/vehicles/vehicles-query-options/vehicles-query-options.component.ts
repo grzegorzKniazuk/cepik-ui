@@ -3,7 +3,7 @@ import { DATA_DO_KEY, DATA_OD_KEY, PAGE_KEY, TYLKO_ZAREJESTROWANE_KEY, TYP_DATY_
 import { dateRangeValidator } from 'src/app/shared/validators';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { VehicleQueryParamDate } from 'src/app/shared/enums';
+import { VehicleDateParam } from 'src/app/shared/enums';
 import { BaseComponent } from 'src/app/views/base.component';
 import { ModalService, TimeService } from 'src/app/shared/services';
 
@@ -16,8 +16,8 @@ import { ModalService, TimeService } from 'src/app/shared/services';
 export class VehiclesQueryOptionsComponent extends BaseComponent implements OnInit {
 
     public readonly dateTypeDataset = [
-        { key: 'Data pierwszej rejestracji pojazdu w Polsce', value: VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE },
-        { key: 'Data ostatniej rejestracji pojazdu', value: VehicleQueryParamDate.OSTATNIA_REJESTRACJA_POJAZDU },
+        { key: 'Data pierwszej rejestracji pojazdu w Polsce', value: VehicleDateParam.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE },
+        { key: 'Data ostatniej rejestracji pojazdu', value: VehicleDateParam.OSTATNIA_REJESTRACJA_POJAZDU },
     ];
 
     public optionsForm: FormGroup;
@@ -51,7 +51,7 @@ export class VehiclesQueryOptionsComponent extends BaseComponent implements OnIn
 
         this.resolveParams({
             [PAGE_KEY]: 1,
-            [TYP_DATY_KEY]: VehicleQueryParamDate.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
+            [TYP_DATY_KEY]: VehicleDateParam.PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE,
             [DATA_OD_KEY]: this.timeService.yearsBackFromToday(2),
             [DATA_DO_KEY]: this.timeService.todayDate,
             [TYLKO_ZAREJESTROWANE_KEY]: true,

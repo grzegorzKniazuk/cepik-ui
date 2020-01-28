@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
-import { VehicleService } from 'src/app/shared/services/vehicle.service';
+import { VehicleService } from 'src/app/shared/services';
 import { Observable, of } from 'rxjs';
 import { ApiResponse, Vehicle } from 'src/app/shared/interfaces';
 import { select, Store } from '@ngrx/store';

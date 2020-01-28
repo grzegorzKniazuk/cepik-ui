@@ -1,4 +1,4 @@
-export enum VehicleQueryParamDate {
+export enum VehicleDateParam {
     PIERWSZA_REJESTRACJA_POJAZDU_W_POLSCE = '1',
     OSTATNIA_REJESTRACJA_POJAZDU = '2',
 }

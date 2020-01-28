@@ -1,7 +1,7 @@
 import { ComponentFactory, ComponentFactoryResolver, ComponentRef, Inject, Injectable, Injector, RendererFactory2, Type } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { ModalComponent } from 'src/app/shared/components';
-import { MODAL_DATA, MODAL_OPTIONS } from 'src/app/shared/constants/injection-tokens';
+import { MODAL_DATA, MODAL_OPTIONS } from 'src/app/shared/constants';
 import { ModalOptions } from 'src/app/shared/interfaces';
 
 @Injectable({
