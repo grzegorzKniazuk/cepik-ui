@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector, MemoizedSelectorWithProps } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { LoaderState } from 'src/app/store/loader/loader.reducer';
 import { AppState } from 'src/app/store/index';
 import { LOADER_FEATURE_KEY } from 'src/app/store/feature-names';
@@ -10,7 +10,7 @@ export const selectLoaderState = createSelector(
     (state) => state.enabled,
 );
 
-export const selectPageData: MemoizedSelectorWithProps<AppState, { url: string }, any> = createSelector(
+export const selectPageData = createSelector(
     loaderState,
     (state: LoaderState, { url }: { url: string }) => {
         if (state.loadedPages) {

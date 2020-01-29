@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { BaseComponent } from 'src/app/views/base.component';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
@@ -64,6 +64,7 @@ export class VehiclesQueryFilersComponent extends BaseComponent implements OnIni
         });
     }
 
+    @HostListener('document:keyup.enter')
     public onFilterSubmit(): void {
         if (this.filersForm.valid) {
             this.modalService.close();

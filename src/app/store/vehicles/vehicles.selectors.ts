@@ -1,4 +1,4 @@
-import { createFeatureSelector, createSelector, MemoizedSelectorWithProps } from '@ngrx/store';
+import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { selectEntities, VehiclesState } from 'src/app/store/vehicles/vehicles.reducer';
 import { Dictionary } from '@ngrx/entity';
 import { Vehicle, VehicleDetails } from 'src/app/shared/interfaces';
@@ -12,9 +12,24 @@ export const selectVehiclesEntities = createSelector(
     selectEntities,
 );
 
-export const selectVehicle: MemoizedSelectorWithProps<AppState, { id: string }, VehicleDetails | null> = createSelector(
+export const selectVehicle = createSelector(
     selectVehiclesEntities,
     ((entities: Dictionary<Vehicle>, { id }: { id: string }) => {
         return entities[id] ? entities[id].attributes as VehicleDetails : null;
+    }),
+);
+
+export const selectVehicles = createSelector(
+    selectVehiclesEntities,
+    ((entities: Dictionary<Vehicle>, { ids }: { ids: string[] }) => {
+        const items: Vehicle[] = [];
+
+        ids.forEach((id) => {
+            if (entities[id]) {
+                items.push(entities[id]);
+            }
+        });
+
+        return items;
     }),
 );

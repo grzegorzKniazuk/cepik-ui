@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ButtonComponent, IconComponent, LoaderComponent, ModalComponent, NavBarComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
+import { ButtonComponent, IconComponent, LoaderComponent, ModalComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -23,12 +23,13 @@ const valueAccessors: any[] = [
 const components: any[] = [
     ...entryComponents,
     ...valueAccessors,
-    NavBarComponent,
     PaginatorComponent,
     LoaderComponent,
     IconComponent,
     ButtonComponent,
 ];
+
+const directives: any[] = [];
 
 const pipes: any[] = [
     MaskPipe,
@@ -41,6 +42,7 @@ const pipes: any[] = [
     ],
     declarations: [
         ...components,
+        ...directives,
         ...pipes,
     ],
     imports: [
@@ -52,6 +54,7 @@ const pipes: any[] = [
     ],
     exports: [
         ...components,
+        ...directives,
         ...pipes,
     ],
 })

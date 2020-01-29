@@ -2,32 +2,16 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, RouterStateSnapshot } from '@angular/router';
 import { VehicleService } from 'src/app/shared/services';
 import { Observable, of } from 'rxjs';
-import { ApiResponse, Vehicle } from 'src/app/shared/interfaces';
+import { ApiResponse, Links, Meta, Vehicle } from 'src/app/shared/interfaces';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { selectPageData } from 'src/app/store/loader/loader.selectors';
-import { first, pluck, switchMap, tap } from 'rxjs/operators';
-import {
-    DATA_DO_KEY,
-    DATA_OD_KEY,
-    FILTER_MARKA_KEY,
-    FILTER_MODEL_KEY,
-    FILTER_POCHODZENIE_POJAZDU_KEY,
-    FILTER_PRZEZNACZENIE_POJAZDU_KEY,
-    FILTER_REJESTRACJA_GMINA_KEY,
-    FILTER_REJESTRACJA_POWIAT_KEY,
-    FILTER_RODZAJ_PALIWA_KEY,
-    FILTER_RODZAJ_POJAZDU_KEY,
-    LIMIT_KEY,
-    PAGE_KEY,
-    POKAZ_WSZYSTKIE_POLA_KEY,
-    TYLKO_ZAREJESTROWANE_KEY,
-    TYP_DATY_KEY,
-    WOJEWODZTWO_KEY,
-} from 'src/app/shared/constants';
-import { ADD_MANY_VEHICLES } from 'src/app/store/vehicles/vehicles.actions';
+import { first, map, pluck, switchMap, tap } from 'rxjs/operators';
+import { DATA_DO_KEY, DATA_OD_KEY, FILTER_MARKA_KEY, FILTER_MODEL_KEY, FILTER_POCHODZENIE_POJAZDU_KEY, FILTER_PRZEZNACZENIE_POJAZDU_KEY, FILTER_REJESTRACJA_GMINA_KEY, FILTER_REJESTRACJA_POWIAT_KEY, FILTER_RODZAJ_PALIWA_KEY, FILTER_RODZAJ_POJAZDU_KEY, LIMIT_KEY, PAGE_KEY, POKAZ_WSZYSTKIE_POLA_KEY, TYLKO_ZAREJESTROWANE_KEY, TYP_DATY_KEY, WOJEWODZTWO_KEY } from 'src/app/shared/constants';
+import { UPSERT_MANY_VEHICLES } from 'src/app/store/vehicles/vehicles.actions';
 import { SET_PAGINATION_LINKS } from 'src/app/store/pagination-links/pagination-links.actions';
 import { SET_LOADED_PAGE_DATA } from 'src/app/store/loader/loader.actions';
+import { selectVehicles } from 'src/app/store/vehicles/vehicles.selectors';
 
 @Injectable()
 export class VehiclesResolver implements Resolve<Vehicle[]> {
@@ -42,10 +26,21 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
         return this.store.pipe(
             select(selectPageData, { url }),
             first(),
-            switchMap((pageData: any) => {
+            switchMap((pageData: { meta: Meta; links: Partial<Links>, data: string[] } | null) => {
                 if (pageData) {
-                    return of(pageData);
+                    return this.store.pipe(
+                        select(selectVehicles, { ids: pageData.data }),
+                        map((vehicles) => {
+                            return {
+                                meta: pageData.meta,
+                                links: pageData.links,
+                                data: vehicles,
+                            };
+                        }),
+                        first(),
+                    );
                 }
+
                 if (queryParams[WOJEWODZTWO_KEY]) {
                     return this.vehicleService.getVehicles({
                         [WOJEWODZTWO_KEY]: queryParams[WOJEWODZTWO_KEY],
@@ -65,7 +60,19 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
                         [FILTER_REJESTRACJA_POWIAT_KEY]: queryParams[FILTER_REJESTRACJA_POWIAT_KEY],
                         [FILTER_REJESTRACJA_GMINA_KEY]: queryParams[FILTER_REJESTRACJA_GMINA_KEY],
                     }).pipe(
-                        tap((data: ApiResponse<Vehicle[]>) => this.store.dispatch(SET_LOADED_PAGE_DATA({ url, data }))),
+                        tap((data: ApiResponse<Vehicle[]>) => {
+                            this.store.dispatch(SET_LOADED_PAGE_DATA({
+                                url,
+                                data: {
+                                    meta: data.meta,
+                                    links: data.links,
+                                    data: this.extractVehiclesIds(data.data),
+                                }
+                            }));
+                        }),
+                        tap(({ data }) => {
+                            this.store.dispatch(UPSERT_MANY_VEHICLES({ vehicles: data }));
+                        }),
                     );
                 }
 
@@ -73,7 +80,10 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
             }),
             tap(({ links }: ApiResponse<Vehicle[]>) => this.store.dispatch(SET_PAGINATION_LINKS({ links }))),
             pluck<ApiResponse<Vehicle[]>, Vehicle[]>('data'),
-            tap((vehicles) => this.store.dispatch(ADD_MANY_VEHICLES({ vehicles }))),
         );
+    }
+
+    private extractVehiclesIds(vehicles: Vehicle[]): string[] {
+        return vehicles.map((vehicle) => vehicle.id);
     }
 }

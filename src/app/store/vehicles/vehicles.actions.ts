@@ -14,7 +14,7 @@ export const ADD_ONE_VEHICLE = createAction(
     props<{ vehicle: Vehicle }>(),
 );
 
-export const ADD_MANY_VEHICLES = createAction(
+export const UPSERT_MANY_VEHICLES = createAction(
     `${ACTION_LABEL} ADD_MANY_VEHICLES`,
     props<{ vehicles: Vehicle[] }>(),
 );

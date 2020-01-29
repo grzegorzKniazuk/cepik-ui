@@ -1,9 +1,16 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { HIDE_LOADER, SET_LOADED_PAGE_DATA, SHOW_LOADER } from 'src/app/store/loader/loader.actions';
+import { Links, Meta } from 'src/app/shared/interfaces';
 
 export interface LoaderState {
     enabled: boolean;
-    loadedPages: { [key: string]: any }
+    loadedPages: {
+        [key: string]: {
+            meta: Meta;
+            links: Partial<Links>,
+            data: string[]
+        }
+    };
 }
 
 const initialLoaderState: LoaderState = {

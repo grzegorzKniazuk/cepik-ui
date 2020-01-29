@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-import { DashboardComponent, StatisticsComponent, VehicleCardComponent, VehiclesComponent, VehiclesQueryFilersComponent, VehiclesQueryOptionsComponent } from 'src/app/views';
+import { VehicleCardComponent, VehiclesComponent, VehiclesQueryFilersComponent, VehiclesQueryOptionsComponent } from 'src/app/views';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { StoreModule } from '@ngrx/store';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -11,7 +11,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { appReducers } from 'src/app/store';
 import { RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/constants';
-import { BrandsResolver, DrivingLicensesStatisticsResolver, FuelTypesResolver, PermissionsStatisticsResolver, RegionsResolver, VehicleOriginResolver, VehiclesResolver, VehicleTypesResolver } from 'src/app/shared/resolvers';
+import { BrandsResolver, FuelTypesResolver, RegionsResolver, VehicleOriginResolver, VehiclesResolver, VehicleTypesResolver } from 'src/app/shared/resolvers';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { HttpErrorInterceptor, HttpLoaderInterceptor } from 'src/app/shared/interceptors';
 import { ServiceWorkerModule } from '@angular/service-worker';
@@ -29,9 +29,7 @@ const entryComponents: any[] = [
 
 const views: any[] = [
     AppComponent,
-    DashboardComponent,
     VehiclesComponent,
-    StatisticsComponent,
 ];
 
 const components: any[] = [
@@ -53,8 +51,6 @@ const resolvers: any[] = [
     VehicleTypesResolver,
     FuelTypesResolver,
     VehicleOriginResolver,
-    DrivingLicensesStatisticsResolver,
-    PermissionsStatisticsResolver,
 ];
 
 const interceptors: any[] = [
