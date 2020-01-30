@@ -4,7 +4,6 @@ import { selectQueryParam } from 'src/app/store/router/router.selectors';
 import { LIMIT_KEY } from 'src/app/shared/constants';
 import { AppState } from 'src/app/store';
 import { ActivatedRoute, Router } from '@angular/router';
-import { selectLoaderState } from 'src/app/store/loader/loader.selectors';
 import { map, share } from 'rxjs/operators';
 import { PaginationLinksState } from 'src/app/store/pagination-links/pagination-links.reducer';
 import { selectPaginationLinksState } from 'src/app/store/pagination-links/pagination-links.selectors';
@@ -12,7 +11,6 @@ import { BaseComponent } from 'src/app/views/base.component';
 
 export abstract class BaseViewComponent extends BaseComponent {
     public readonly selectedLimit$: Observable<number> = this.store.pipe(select(selectQueryParam(LIMIT_KEY)), map(Number), share());
-    public readonly loadingState$: Observable<boolean> = this.store.pipe(select(selectLoaderState), share());
     public readonly paginationLinksState$: Observable<PaginationLinksState> = this.store.pipe(select(selectPaginationLinksState), share());
 
     protected constructor(

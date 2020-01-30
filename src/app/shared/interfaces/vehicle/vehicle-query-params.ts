@@ -20,7 +20,7 @@ import {
 } from 'src/app/shared/constants';
 
 export interface VehicleQueryParams {
-    readonly [index: string]: boolean | string | string[];
+    readonly [index: string]: boolean | string;
     [WOJEWODZTWO_KEY]: string;
     [DATA_OD_KEY]: string;
     [DATA_DO_KEY]: string;
@@ -29,7 +29,7 @@ export interface VehicleQueryParams {
     [POKAZ_WSZYSTKIE_POLA_KEY]: boolean;
     [LIMIT_KEY]: string;
     [PAGE_KEY]: string;
-    [SORT_KEY]?: string[];
+    [SORT_KEY]?: string;
     [FILTER_MARKA_KEY]?: string;
     [FILTER_MODEL_KEY]?: string;
     [FILTER_RODZAJ_POJAZDU_KEY]?: string;

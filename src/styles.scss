@@ -19,11 +19,6 @@ html, body {
     cursor: pointer;
 }
 
-// bootstrap custom
-th.loading, td.loading {
-    filter: blur(6px);
-}
-
 .disabled {
     cursor: not-allowed;
 }
