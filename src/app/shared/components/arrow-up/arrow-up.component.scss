@@ -1,0 +1,20 @@
+@import "colors.scss";
+@import "variables.scss";
+
+div {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 5px;
+    padding: 0 2px;
+    border-radius: 50%;
+    background: $blue;
+    color: #fff;
+    z-index: 10;
+    box-shadow: $box-shadow;
+
+    cpk-icon {
+        position: relative;
+        top: 2px;
+    }
+}

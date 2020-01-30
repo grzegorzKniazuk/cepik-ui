@@ -22,4 +22,12 @@ export class WindowService {
     public open(url?: string, target?: string, features?: string, replace?: boolean): void {
         this.nativeWindow.open(url, target, features, replace);
     }
+
+    public scrollTo(options?: ScrollToOptions): void {
+        this.nativeWindow.scrollTo(options);
+    }
+
+    public get pageYOffset(): number {
+        return this.nativeWindow.pageYOffset;
+    }
 }

@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ButtonComponent, IconComponent, LoaderComponent, ModalComponent, NavBarComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
+import { ArrowUpComponent, ButtonComponent, IconComponent, LoaderComponent, ModalComponent, NavBarComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -12,6 +12,7 @@ const entryComponents: any[] = [
     ToastComponent,
     ModalComponent,
     IconComponent,
+    ArrowUpComponent,
 ];
 
 const valueAccessors: any[] = [
