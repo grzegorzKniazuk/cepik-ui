@@ -7,7 +7,7 @@ import { isPlatformBrowser } from '@angular/common';
 export class WindowService {
 
     constructor(
-        @Inject(PLATFORM_ID) private readonly platformId: string,
+        @Inject(PLATFORM_ID) private readonly platformId: Object,
     ) {
     }
 
