@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { ButtonComponent, IconComponent, LoaderComponent, ModalComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
+import { ButtonComponent, IconComponent, LoaderComponent, ModalComponent, NavBarComponent, PaginatorComponent, ToastComponent } from 'src/app/shared/components';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -11,6 +11,7 @@ import { LoadingBlurDirective, SortableDirective } from 'src/app/shared/directiv
 const entryComponents: any[] = [
     ToastComponent,
     ModalComponent,
+    IconComponent,
 ];
 
 const valueAccessors: any[] = [
@@ -26,8 +27,8 @@ const components: any[] = [
     ...valueAccessors,
     PaginatorComponent,
     LoaderComponent,
-    IconComponent,
     ButtonComponent,
+    NavBarComponent,
 ];
 
 const directives: any[] = [

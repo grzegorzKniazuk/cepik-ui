@@ -4,3 +4,4 @@ export * from './icon/icon.component';
 export * from './toast/toast.component';
 export * from './button/button.component';
 export * from './modal/modal.component';
+export * from './nav-bar/nav-bar.component';
