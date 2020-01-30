@@ -53,7 +53,6 @@ const resolvers: any[] = [
 ];
 
 const interceptors: any[] = [
-    // { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpLoaderInterceptor, multi: true },
 ];

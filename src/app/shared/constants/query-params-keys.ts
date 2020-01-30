@@ -7,6 +7,7 @@ export const POKAZ_WSZYSTKIE_POLA_KEY = 'pokaz-wszystkie-pola';
 export const DATA_OD_KEY = 'data-od';
 export const DATA_DO_KEY = 'data-do';
 export const SORT_KEY = 'sort';
+export const DATA_OSTATNIEJ_REJESTRACJI_W_KRAJU_KEY = 'data-ostatniej-rejestracji-w-kraju';
 export const FILTER_MARKA_KEY = 'filter[marka]';
 export const FILTER_MODEL_KEY = 'filter[model]';
 export const FILTER_RODZAJ_POJAZDU_KEY = 'filter[rodzaj-pojazdu]';
