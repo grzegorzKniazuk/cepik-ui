@@ -26,7 +26,7 @@
     .modal-body-content {
         position: relative;
         display: block;
-        background: white;
+        background: #ffffff;
         opacity: 1;
         animation: open 500ms cubic-bezier(.25, .8, .25, 1);
         box-shadow: $box-shadow;
@@ -41,7 +41,7 @@
             bottom: 20px;
 
             span.navbar-text {
-                color: $white;
+                color: #ffffff;
                 font-weight: 700;
                 font-size: 20px;
                 text-transform: uppercase;
@@ -58,7 +58,7 @@
             transition: color 150ms ease-in-out;
             z-index: 10001;
             cursor: pointer;
-            color: $white;
+            color: #ffffff;
 
             &:hover {
                 color: $red;

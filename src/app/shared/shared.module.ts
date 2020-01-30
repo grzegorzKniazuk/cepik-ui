@@ -6,7 +6,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BooleanRadioControlComponent, DateControlComponent, RadioControlComponent, SelectControlComponent, TextControlComponent } from 'src/app/shared/value-accessors';
 import { MaskPipe, YesNoPipe } from 'src/app/shared/pipes';
-import { LoadingBlurDirective, SortableDirective } from 'src/app/shared/directives';
+import { ArrowUpDirective, LoadingBlurDirective, SortableDirective } from 'src/app/shared/directives';
 
 const entryComponents: any[] = [
     ToastComponent,
@@ -34,6 +34,7 @@ const components: any[] = [
 const directives: any[] = [
     LoadingBlurDirective,
     SortableDirective,
+    ArrowUpDirective,
 ];
 
 const pipes: any[] = [

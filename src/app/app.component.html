@@ -4,5 +4,6 @@
     <router-outlet></router-outlet>
 </main>
 <footer *ngIf="apiVersion$ | async as version">
-    Wersja API: {{ version.major }}.{{ version.minor }}.{{ version.patch }} Ostatnia zmiana: {{ version.dateMod }}
+    <div><strong>Wersja API:</strong> {{ version.major }}.{{ version.minor }}.{{ version.patch }} <strong>Ostatnia zmiana:</strong> {{ version.dateMod }}</div>
+    <div><strong>Źródło wytworzenia i pozyskania informacji:</strong> <a href="http://www.cepik.gov.pl/interfejs-dla-cepik" target="_blank">www.cepik.gov.pl</a></div>
 </footer>

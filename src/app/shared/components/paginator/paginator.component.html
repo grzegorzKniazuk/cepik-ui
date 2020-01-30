@@ -1,5 +1,5 @@
-<div class="btn-group float-left mt-4" role="group">
-    <button (click)="onLimitChange(params)" *ngFor="let params of limitButtonsParams" [ngClass]="params === limit ? 'btn-primary' : 'btn-secondary'" class="btn" type="button">{{ params }}</button>
+<div class="btn-group float-left mt-4 pb-5">
+    <button (click)="onLimitChange(params)" *ngFor="let params of limitButtonsParams" [ngClass]="params === limit ? 'btn-primary' : 'btn-secondary'" class="btn">{{ params }}</button>
 </div>
 <nav>
     <ul class="pagination float-right mt-4">
