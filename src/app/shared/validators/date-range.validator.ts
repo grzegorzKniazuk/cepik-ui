@@ -7,24 +7,17 @@ export function dateRangeValidator(dateFromControlName: string, dateToControlNam
         const dateFromValue = formGroup.value[dateFromControlName];
         const dateToValue = formGroup.value[dateToControlName];
 
-        if (!dateFromValue || !dateToValue) {
+        if (!formGroup.value.hasOwnProperty(dateFromControlName) || !formGroup.value.hasOwnProperty(dateToControlName)) {
             throw new Error('Nie znaleziono kontrolki daty o podanej nazwie');
         }
 
         if (dateFromValueValidity(dateFromValue, dateToValue, range) && dateToValueValidity(dateFromValue, dateToValue, range)) {
-            if (formGroup.get(dateFromControlName).errors) {
-                delete formGroup.get(dateFromControlName).errors['invalidRange'];
-            }
-
-            if (formGroup.get(dateToControlName).errors) {
-                delete formGroup.get(dateToControlName).errors['invalidRange'];
-            }
-
             return null;
         }
 
-        formGroup.get(dateFromControlName).setErrors({ invalidRange: true });
-        formGroup.get(dateToControlName).setErrors({ invalidRange: true });
+        return {
+            invalidRange: true,
+        };
     };
 }
 

@@ -1,0 +1,7 @@
+@import "variables.scss";
+
+.alert {
+    box-shadow: $box-shadow;
+    display: flex;
+    align-items: center;
+}

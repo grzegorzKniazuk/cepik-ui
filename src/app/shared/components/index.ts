@@ -6,3 +6,4 @@ export * from './button/button.component';
 export * from './modal/modal.component';
 export * from './nav-bar/nav-bar.component';
 export * from './arrow-up/arrow-up.component';
+export * from './validation-error/validation-error.component';

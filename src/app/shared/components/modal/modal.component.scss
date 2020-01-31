@@ -28,7 +28,7 @@
         display: block;
         background: #ffffff;
         opacity: 1;
-        animation: open 500ms cubic-bezier(.25, .8, .25, 1);
+        animation: $open-animation;
         box-shadow: $box-shadow;
         z-index: 10000;
         border-radius: $border-radius;

@@ -5,7 +5,4 @@
            [value]="_value | mask:'xxxx-xx-xx'"
            class="form-control"
            type="date">
-    <ng-container *ngIf="invalid">
-        <div *ngFor="let error of errors | keyvalue" class="invalid-feedback">{{ validationMessages[error.key] }}</div>
-    </ng-container>
 </div>

@@ -5,9 +5,6 @@ import { UuidService } from 'src/app/shared/services';
 export abstract class BaseValueAccessor<T> implements ControlValueAccessor {
     @Input() public readonly label: string;
     public _value: T;
-    public readonly validationMessages: ValidationErrors = {
-        invalidRange: 'Zakres dat nie może być większy niż 2 lata',
-    };
 
     protected constructor(
         @Self() @Optional() protected readonly ngControl: NgControl,
