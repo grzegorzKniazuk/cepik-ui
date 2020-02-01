@@ -1,0 +1,37 @@
+$base-animation-duration: 150ms;
+
+@mixin opacity-transition($speed: $base-animation-duration) {
+    transition: opacity $speed ease-in-out;
+}
+
+@mixin color-transition($speed: $base-animation-duration) {
+    transition: color $speed ease-in-out;
+}
+
+@mixin background-color-transition($speed: $base-animation-duration) {
+    transition: background-color $speed ease-in-out;
+}
+
+@mixin height-transition($speed: $base-animation-duration) {
+    transition: height $speed ease-in-out;
+}
+
+@mixin width-transition($speed: $base-animation-duration) {
+    transition: width $speed ease-in-out;
+}
+
+@mixin box-shadow-transition($speed: $base-animation-duration) {
+    transition: box-shadow $speed ease-in-out;
+}
+
+@mixin border-color-transition($speed: $base-animation-duration) {
+    transition: border-top-color $speed ease-in-out, border-right-color $speed ease-in-out, border-bottom-color $speed ease-in-out, border-left-color $speed ease-in-out;
+}
+
+@mixin visibility-transition($speed: $base-animation-duration) {
+    transition: visibility $speed ease-in-out;
+}
+
+@mixin all-transition($speed: $base-animation-duration) {
+    transition: all $speed ease-in-out;
+}

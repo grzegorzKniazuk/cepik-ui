@@ -1,4 +1,5 @@
 @import "colors.scss";
+@import "transitions.scss";
 
 .options-button {
     position: relative;
@@ -10,7 +11,7 @@
 }
 
 .table tr {
-    transition: color 150ms ease-in;
+    @include color-transition();
 
     &:hover {
         background: #f8f9fa;

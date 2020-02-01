@@ -21,7 +21,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (response && response.error && Array.isArray(response.error.errors) && response.error.errors.length) {
             response.error.errors.forEach((error: ApiErrorResponse) => {
                 console.log(error);
-                this.toastService.error(error['error-code'], error['error-result'], error.id);
+                this.toastService.error(error['error-code'], error['error-result']);
             });
         }
 

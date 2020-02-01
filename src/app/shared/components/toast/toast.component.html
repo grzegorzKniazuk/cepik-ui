@@ -2,6 +2,9 @@
     <cpk-icon (click)="onClose()" class="x clickable" title="Zamknij komunikat">close</cpk-icon>
     <h4 *ngIf="toastOptions.title" class="alert-heading"><strong>{{ toastOptions.title }}</strong></h4>
     <p *ngIf="toastOptions.message">{{ toastOptions.message }}</p>
-    <hr>
-    <small *ngIf="toastOptions.id" class="mb-0"><strong>Identyfikator błędu:</strong> {{ toastOptions.id }}</small>
+
+    <ng-container *ngIf="toastOptions.type === 'danger'">
+        <hr>
+        <cpk-button type="dark"><cpk-icon>refresh</cpk-icon>Spróbuj ponownie</cpk-button>
+    </ng-container>
 </div>

@@ -39,7 +39,8 @@ export class ModalService<ComponentType, ModalParamsDataType = null> {
     }
 
     public close(): void {
-        return this.renderer2.removeChild(this.document.body, this.modalComponentRef.location.nativeElement);
+        this.renderer2.removeChild(this.document.body, this.modalComponentRef.location.nativeElement);
+        this.modalComponentRef.destroy();
     }
 
     private buildContentComponent(content: Type<ComponentType>, modalOptions?: Partial<ModalOptions<ModalParamsDataType>>): void {

@@ -7,6 +7,7 @@ div.alert {
     z-index: 10;
     animation: $open-animation;
     box-shadow: $box-shadow;
+    padding-right: 20px;
 
     .x {
         position: absolute;

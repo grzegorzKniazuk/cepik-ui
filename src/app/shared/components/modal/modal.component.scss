@@ -1,6 +1,7 @@
 @import "colors.scss";
 @import "variables.scss";
 @import "animations.scss";
+@import "transitions.scss";
 
 .modal-container {
     top: 0;
@@ -49,13 +50,13 @@
         }
 
         .close-icon {
+            @include color-transition();
             position: absolute;
             top: 0;
             right: 10px;
             height: 60px;
             display: flex;
             align-items: center;
-            transition: color 150ms ease-in-out;
             z-index: 10001;
             cursor: pointer;
             color: #ffffff;

@@ -1,1 +1,11 @@
+@import "colors.scss";
+@import "transitions.scss";
 
+nav a {
+    @include color-transition();
+    margin-right: 0;
+
+    &:hover {
+        color: $blue;
+    }
+}
