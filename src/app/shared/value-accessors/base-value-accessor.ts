@@ -21,10 +21,6 @@ export abstract class BaseValueAccessor<T> implements ControlValueAccessor {
         this._disabled = disabled;
     }
 
-    public get invalid(): boolean {
-        return this.ngControl ? this.ngControl.invalid : false;
-    }
-
     public get errors(): ValidationErrors | null {
         return this.ngControl ? this.ngControl.errors : null;
     }
