@@ -1,6 +1,6 @@
 import { ComponentFactoryResolver, ComponentRef, Directive, NgZone, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
 import { ArrowUpComponent } from 'src/app/shared/components';
-import { WindowService } from 'src/app/shared/services';
+import { WindowService } from 'src/app/shared/services/window.service';
 
 @Directive({
     selector: '[cpkArrowUp]',

@@ -11,8 +11,8 @@ export class TextControlComponent extends BaseValueAccessor<string> implements A
     @Input() public readonly valueKey: string;
     @Input() public readonly counterKey: string;
 
-    @ViewChild('input', { static: false }) private readonly inputElement: ElementRef;
-    @ViewChild('datalist', { static: false }) private readonly dataListElement: ElementRef;
+    @ViewChild('input') private readonly inputElement: ElementRef;
+    @ViewChild('datalist') private readonly dataListElement: ElementRef;
 
     ngAfterViewInit() {
         this.setDataListId();

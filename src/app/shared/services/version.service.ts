@@ -18,6 +18,6 @@ export class VersionService extends ApiService {
     }
 
     public getVersion(): Observable<Version> {
-        return this.httpClient.get(`${this.apiUrl}/version`) as Observable<Version>;
+        return this.httpClient.get<Version>(`${this.apiUrl}/version`);
     }
 }

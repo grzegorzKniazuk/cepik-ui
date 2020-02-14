@@ -15,7 +15,7 @@ export class SortableDirective extends BaseComponent implements OnInit, OnDestro
 
     @Input('cpkSortable') private readonly key: string;
 
-    private readonly iconCompononentFactory = this.componentFactoryResolver.resolveComponentFactory(IconComponent);
+    private readonly iconComponentFactory = this.componentFactoryResolver.resolveComponentFactory(IconComponent);
     private readonly keyboardArrowUpNode = this.document.createTextNode('keyboard_arrow_up');
     private readonly keyboardArrowDownNode = this.document.createTextNode('keyboard_arrow_down');
 
@@ -57,10 +57,10 @@ export class SortableDirective extends BaseComponent implements OnInit, OnDestro
                 tap(() => this.viewContainerRef.clear()),
             ).subscribe((actualKey: string) => {
                 if (this.key === actualKey) {
-                    const iconComponent = this.viewContainerRef.createComponent(this.iconCompononentFactory, 0, this.injector, [ [ this.keyboardArrowUpNode ] ]);
+                    const iconComponent = this.viewContainerRef.createComponent(this.iconComponentFactory, 0, this.injector, [ [ this.keyboardArrowUpNode ] ]);
                     this.appendIconElement(iconComponent);
                 } else if (actualKey.startsWith('-') && actualKey.slice(1) === this.key) {
-                    const iconComponent = this.viewContainerRef.createComponent(this.iconCompononentFactory, 0, this.injector, [ [ this.keyboardArrowDownNode ] ]);
+                    const iconComponent = this.viewContainerRef.createComponent(this.iconComponentFactory, 0, this.injector, [ [ this.keyboardArrowDownNode ] ]);
                     this.appendIconElement(iconComponent);
                 }
             }),

@@ -27,12 +27,12 @@ export class VehicleService extends ApiService {
             }
         }
 
-        return this.httpClient.get(`${this.apiUrl}/pojazdy`, { params }).pipe(
+        return this.httpClient.get<ApiResponse<Vehicle[]>>(`${this.apiUrl}/pojazdy`, { params }).pipe(
             catchError(() => of({ meta: null, links: null, data: [] })),
-        ) as Observable<ApiResponse<Vehicle[]>>;
+        );
     }
 
     public getVehicle(id: string): Observable<ApiResponse<Vehicle>> {
-        return this.httpClient.get(`${this.apiUrl}/pojazdy/${id}`) as Observable<ApiResponse<Vehicle>>;
+        return this.httpClient.get<ApiResponse<Vehicle>>(`${this.apiUrl}/pojazdy/${id}`);
     }
 }

@@ -18,6 +18,6 @@ export class DictionaryService extends ApiService {
     }
 
     public getDictionary(dictionary: string): Observable<ApiResponse<DictionaryItemList>> {
-        return this.httpClient.get(`${this.apiUrl}/slowniki/${dictionary}`) as Observable<ApiResponse<DictionaryItemList>>;
+        return this.httpClient.get<ApiResponse<DictionaryItemList>>(`${this.apiUrl}/slowniki/${dictionary}`);
     }
 }

@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import { WindowService } from 'src/app/shared/services';
+import { WindowService } from 'src/app/shared/services/window.service';
 import { Subject } from 'rxjs';
 
 @Component({

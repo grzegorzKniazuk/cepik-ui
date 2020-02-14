@@ -8,13 +8,6 @@ import { BooleanRadioControlComponent, DateControlComponent, RadioControlCompone
 import { MaskPipe, YesNoPipe } from 'src/app/shared/pipes';
 import { ArrowUpDirective, LoadingBlurDirective, SortableDirective } from 'src/app/shared/directives';
 
-const entryComponents: any[] = [
-    ToastComponent,
-    ModalComponent,
-    IconComponent,
-    ArrowUpComponent,
-];
-
 const valueAccessors: any[] = [
     SelectControlComponent,
     RadioControlComponent,
@@ -24,13 +17,16 @@ const valueAccessors: any[] = [
 ];
 
 const components: any[] = [
-    ...entryComponents,
     ...valueAccessors,
     PaginatorComponent,
     LoaderComponent,
     ButtonComponent,
     NavBarComponent,
     ValidationErrorComponent,
+    ToastComponent,
+    ModalComponent,
+    IconComponent,
+    ArrowUpComponent,
 ];
 
 const directives: any[] = [
@@ -45,9 +41,6 @@ const pipes: any[] = [
 ];
 
 @NgModule({
-    entryComponents: [
-        ...entryComponents,
-    ],
     declarations: [
         ...components,
         ...directives,

@@ -20,19 +20,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VehiclesEffects } from 'src/app/store/vehicles/vehicles.effects';
 import { VersionEffects } from 'src/app/store/version/version.effects';
 
-const entryComponents: any[] = [
-    VehiclesQueryOptionsComponent,
-    VehicleCardComponent,
-    VehiclesQueryFilersComponent,
-];
-
 const views: any[] = [
     AppComponent,
     VehiclesComponent,
 ];
 
 const components: any[] = [
-    ...entryComponents,
+    VehiclesQueryOptionsComponent,
+    VehicleCardComponent,
+    VehiclesQueryFilersComponent,
     ...views,
 ];
 
@@ -59,9 +55,6 @@ const interceptors: any[] = [
 ];
 
 @NgModule({
-    entryComponents: [
-        ...entryComponents,
-    ],
     declarations: [
         ...components,
     ],
