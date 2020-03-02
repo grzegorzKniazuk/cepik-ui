@@ -14,8 +14,16 @@ export class TextControlComponent extends BaseValueAccessor<string> implements A
     @ViewChild('input') private readonly inputElement: ElementRef;
     @ViewChild('datalist') private readonly dataListElement: ElementRef;
 
+    public get isEmpty(): boolean {
+        return !this._value || this._value.length === 0;
+    }
+
     ngAfterViewInit() {
         this.setDataListId();
+    }
+
+    public onReset(): void {
+        this.writeValue(null);
     }
 
     private setDataListId(): void {
@@ -23,13 +31,5 @@ export class TextControlComponent extends BaseValueAccessor<string> implements A
 
         this.renderer2.setAttribute(this.inputElement.nativeElement, 'list', uuid);
         this.renderer2.setAttribute(this.dataListElement.nativeElement, 'id', uuid);
-    }
-
-    public get isEmpty(): boolean {
-        return !this._value || this._value.length === 0;
-    }
-
-    public onReset(): void {
-        this.writeValue(null);
     }
 }

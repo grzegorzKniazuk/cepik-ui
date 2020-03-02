@@ -1,32 +1,49 @@
 <form [formGroup]="filersForm" class="col-12 d-flex justify-content-center flex-column align-items-center">
     <div class="row">
         <div class="col-12 d-flex justify-content-center">
-            <cpk-text-control class="mr-4" formControlName="filter[marka]" label="Marka" [dataList]="brands$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
+            <cpk-text-control [dataList]="brands$ | async" class="mr-4" counterKey="liczba-wystapien"
+                              formControlName="filter[marka]"
+                              label="Marka" valueKey="klucz-slownika"></cpk-text-control>
             <cpk-text-control formControlName="filter[model]" label="Model"></cpk-text-control>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-12 d-flex justify-content-center">
-            <cpk-text-control class="mr-4" formControlName="filter[rodzaj-pojazdu]" label="Rodzaj pojazdu" [dataList]="vehicleTypes$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
-            <cpk-text-control formControlName="filter[rodzaj-paliwa]" label="Rodzaj paliwa" [dataList]="fuelTypes$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
+            <cpk-text-control [dataList]="vehicleTypes$ | async" class="mr-4" counterKey="liczba-wystapien"
+                              formControlName="filter[rodzaj-pojazdu]" label="Rodzaj pojazdu"
+                              valueKey="klucz-slownika"></cpk-text-control>
+            <cpk-text-control [dataList]="fuelTypes$ | async" counterKey="liczba-wystapien"
+                              formControlName="filter[rodzaj-paliwa]" label="Rodzaj paliwa"
+                              valueKey="klucz-slownika"></cpk-text-control>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-12 d-flex justify-content-center">
-            <cpk-text-control class="mr-4" formControlName="filter[pochodzenie-pojazdu]" label="Pochodzenie pojazdu" [dataList]="origin$ | async" valueKey="klucz-slownika" counterKey="liczba-wystapien"></cpk-text-control>
-            <cpk-text-control formControlName="filter[przeznaczenie-pojazdu]" label="Przeznaczenie pojazdu"></cpk-text-control>
+            <cpk-text-control [dataList]="origin$ | async" class="mr-4" counterKey="liczba-wystapien"
+                              formControlName="filter[pochodzenie-pojazdu]" label="Pochodzenie pojazdu"
+                              valueKey="klucz-slownika"></cpk-text-control>
+            <cpk-text-control formControlName="filter[przeznaczenie-pojazdu]"
+                              label="Przeznaczenie pojazdu"></cpk-text-control>
         </div>
     </div>
     <div class="row mt-4">
         <div class="col-12 d-flex justify-content-center">
-            <cpk-text-control class="mr-4" formControlName="filter[rejestracja-powiat]" label="Powiat (rejestracja)"></cpk-text-control>
-            <cpk-text-control formControlName="filter[rejestracja-gmina]" label="Gmina (rejestracja)"></cpk-text-control>
+            <cpk-text-control class="mr-4" formControlName="filter[rejestracja-powiat]"
+                              label="Powiat (rejestracja)"></cpk-text-control>
+            <cpk-text-control formControlName="filter[rejestracja-gmina]"
+                              label="Gmina (rejestracja)"></cpk-text-control>
         </div>
     </div>
     <div class="row mt-5">
         <div class="col-12">
-            <cpk-button (click)="onFilterSubmit()" type="primary"><cpk-icon class="mr-1">done</cpk-icon>Zatwierdź</cpk-button>
-            <cpk-button (click)="onFilterReset()" class="mr-1" type="danger"><cpk-icon class="mr-1">clear</cpk-icon>Wyczyść wszystko</cpk-button>
+            <cpk-button (click)="onFilterSubmit()" type="primary">
+                <cpk-icon class="mr-1">done</cpk-icon>
+                Zatwierdź
+            </cpk-button>
+            <cpk-button (click)="onFilterReset()" class="mr-1" type="danger">
+                <cpk-icon class="mr-1">clear</cpk-icon>
+                Wyczyść wszystko
+            </cpk-button>
         </div>
     </div>
 </form>

@@ -4,18 +4,16 @@ import { ApiResponse, Vehicle, VehicleQueryParams } from 'src/app/shared/interfa
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { API_URL } from 'src/app/shared/constants';
-import { ApiService } from 'src/app/shared/services/base/api.service';
 
 @Injectable({
     providedIn: 'root',
 })
-export class VehicleService extends ApiService {
+export class VehicleService {
 
     constructor(
         protected readonly httpClient: HttpClient,
         @Inject(API_URL) protected readonly apiUrl: string,
     ) {
-        super();
     }
 
     public getVehicles(queryParams: VehicleQueryParams): Observable<ApiResponse<Vehicle[]>> {

@@ -1,18 +1,18 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { DictionaryItem } from 'src/app/shared/interfaces';
 import { Action, createReducer, on } from '@ngrx/store';
-import { SET_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
+import { ADD_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
 
 export interface DictionariesState extends EntityState<{ id: string, items: DictionaryItem[] }> {
 }
 
 const adapter = createEntityAdapter<{ id: string, items: DictionaryItem[] }>();
 
-const initialState: DictionariesState = adapter.getInitialState();
+export const initialDictionariesState: DictionariesState = adapter.getInitialState();
 
 const reducer = createReducer(
-    initialState,
-    on(SET_DICTIONARY_ITEM, (state, { item }) => {
+    initialDictionariesState,
+    on(ADD_DICTIONARY_ITEM, (state, { item }) => {
         return adapter.addOne(item, state);
     }),
 );

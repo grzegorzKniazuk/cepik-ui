@@ -7,27 +7,9 @@ import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store';
 import { selectPageData } from 'src/app/store/loader/loader.selectors';
 import { first, map, pluck, switchMap, tap } from 'rxjs/operators';
-import {
-    DATA_DO_KEY,
-    DATA_OD_KEY,
-    FILTER_MARKA_KEY,
-    FILTER_MODEL_KEY,
-    FILTER_POCHODZENIE_POJAZDU_KEY,
-    FILTER_PRZEZNACZENIE_POJAZDU_KEY,
-    FILTER_REJESTRACJA_GMINA_KEY,
-    FILTER_REJESTRACJA_POWIAT_KEY,
-    FILTER_RODZAJ_PALIWA_KEY,
-    FILTER_RODZAJ_POJAZDU_KEY,
-    LIMIT_KEY,
-    PAGE_KEY,
-    POKAZ_WSZYSTKIE_POLA_KEY,
-    SORT_KEY,
-    TYLKO_ZAREJESTROWANE_KEY,
-    TYP_DATY_KEY,
-    WOJEWODZTWO_KEY,
-} from 'src/app/shared/constants';
+import { DATA_DO_KEY, DATA_OD_KEY, FILTER_MARKA_KEY, FILTER_MODEL_KEY, FILTER_POCHODZENIE_POJAZDU_KEY, FILTER_PRZEZNACZENIE_POJAZDU_KEY, FILTER_REJESTRACJA_GMINA_KEY, FILTER_REJESTRACJA_POWIAT_KEY, FILTER_RODZAJ_PALIWA_KEY, FILTER_RODZAJ_POJAZDU_KEY, LIMIT_KEY, PAGE_KEY, POKAZ_WSZYSTKIE_POLA_KEY, SORT_KEY, TYLKO_ZAREJESTROWANE_KEY, TYP_DATY_KEY, WOJEWODZTWO_KEY } from 'src/app/shared/constants';
 import { UPSERT_MANY_VEHICLES } from 'src/app/store/vehicles/vehicles.actions';
-import { SET_PAGINATION_LINKS } from 'src/app/store/pagination-links/pagination-links.actions';
+import { SET_PAGINATION_PAGE_NUMBERS } from 'src/app/store/pagination-links/pagination-links.actions';
 import { SET_LOADED_PAGE_DATA } from 'src/app/store/loader/loader.actions';
 import { selectVehicles } from 'src/app/store/vehicles/vehicles.selectors';
 
@@ -86,7 +68,7 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
                                     meta: data.meta,
                                     links: data.links,
                                     data: this.extractVehiclesIds(data.data),
-                                }
+                                },
                             }));
                         }),
                         tap(({ data }) => {
@@ -97,7 +79,7 @@ export class VehiclesResolver implements Resolve<Vehicle[]> {
 
                 return of({ meta: null, links: null, data: [] });
             }),
-            tap(({ links }: ApiResponse<Vehicle[]>) => this.store.dispatch(SET_PAGINATION_LINKS({ links }))),
+            tap(({ links }: ApiResponse<Vehicle[]>) => this.store.dispatch(SET_PAGINATION_PAGE_NUMBERS({ links }))),
             pluck<ApiResponse<Vehicle[]>, Vehicle[]>('data'),
         );
     }

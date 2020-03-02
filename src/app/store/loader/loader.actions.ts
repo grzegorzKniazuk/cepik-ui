@@ -14,5 +14,5 @@ export const HIDE_LOADER = createAction(
 
 export const SET_LOADED_PAGE_DATA = createAction(
     `${ACTION_LABEL} SET_LOADED_PAGE_DATA`,
-    props<{ url: string, data: { meta: Meta; links: Partial<Links>, data: string[] } }>()
+    props<{ url: string, data: { meta: Meta; links: Partial<Links>, data: string[] } }>(),
 );

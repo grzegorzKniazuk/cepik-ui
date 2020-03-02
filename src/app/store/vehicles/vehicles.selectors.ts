@@ -1,7 +1,7 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { selectEntities, VehiclesState } from 'src/app/store/vehicles/vehicles.reducer';
 import { Dictionary } from '@ngrx/entity';
-import { Vehicle, VehicleDetails } from 'src/app/shared/interfaces';
+import { Vehicle } from 'src/app/shared/interfaces';
 import { AppState } from 'src/app/store/index';
 import { VEHICLES_FEATURE_KEY } from 'src/app/store/feature-names';
 
@@ -15,7 +15,7 @@ export const selectVehiclesEntities = createSelector(
 export const selectVehicle = createSelector(
     selectVehiclesEntities,
     ((entities: Dictionary<Vehicle>, { id }: { id: string }) => {
-        return entities[id] ? entities[id].attributes as VehicleDetails : null;
+        return entities[id] ? entities[id].attributes : null;
     }),
 );
 

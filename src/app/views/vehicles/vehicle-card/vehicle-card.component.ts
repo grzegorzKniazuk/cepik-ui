@@ -60,6 +60,7 @@ export class VehicleCardComponent {
         @Inject(MODAL_DATA) public readonly details: VehicleDetails,
         private readonly changeDetectorRef: ChangeDetectorRef,
     ) {
+        console.log(this.details);
     }
 
     public selectTab(id: number): void {

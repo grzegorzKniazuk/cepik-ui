@@ -15,6 +15,8 @@ export const selectDictionariesEntities = createSelector(
 export const selectDictionary = createSelector(
     selectDictionariesEntities,
     ((entities: Dictionary<{ id: string, items: DictionaryItem[] }>, { id }: { id: string }) => {
-        return entities[id] ? entities[id].items : null;
+        if (entities[id]) {
+            return entities[id].items;
+        }
     }),
 );

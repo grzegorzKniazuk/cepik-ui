@@ -9,7 +9,7 @@ export interface VersionState {
     patch: string;
 }
 
-const initialState: VersionState = {
+export const initialVersionState: VersionState = {
     dateMod: null,
     deprecated: null,
     major: null,
@@ -18,7 +18,7 @@ const initialState: VersionState = {
 };
 
 const reducer = createReducer(
-    initialState,
+    initialVersionState,
     on(SET_VERSION, (state, { version }) => {
         return {
             ...state,

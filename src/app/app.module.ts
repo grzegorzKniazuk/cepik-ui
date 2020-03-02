@@ -13,7 +13,7 @@ import { appReducers } from 'src/app/store';
 import { API_URL, RUNTIME_CHECKS, STORE_ROUTER_CONNECTING_CONFIG } from 'src/app/shared/constants';
 import { BrandsResolver, FuelTypesResolver, RegionsResolver, VehicleOriginResolver, VehiclesResolver, VehicleTypesResolver } from 'src/app/shared/resolvers';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
-import { HttpErrorInterceptor, HttpLoaderInterceptor, TimeoutInterceptor } from 'src/app/shared/interceptors';
+import { HttpErrorInterceptor, HttpLoaderInterceptor } from 'src/app/shared/interceptors';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -49,7 +49,6 @@ const resolvers: any[] = [
 ];
 
 const interceptors: any[] = [
-    { provide: HTTP_INTERCEPTORS, useClass: TimeoutInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpLoaderInterceptor, multi: true },
 ];

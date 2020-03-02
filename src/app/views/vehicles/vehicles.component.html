@@ -41,7 +41,8 @@
                 </tr>
                 </thead>
                 <tbody *ngIf="vehicles$ | async as vehicles">
-                <tr (click)="openVehicleCard(vehicle.id)" *ngFor="let vehicle of vehicles; let i = index; trackBy: vehiclesTrackBy">
+                <tr (click)="openVehicleCard(vehicle.id)"
+                    *ngFor="let vehicle of vehicles; let i = index; trackBy: vehiclesTrackBy">
                     <th cpkLoadingBlur scope="row">{{ i + 1 }}</th>
                     <td cpkLoadingBlur>{{ vehicle.attributes.marka }}</td>
                     <td cpkLoadingBlur>{{ vehicle.attributes.model }}</td>
@@ -60,7 +61,7 @@
             </table>
         </div>
     </div>
-    <div class="row" *ngIf="selectedRegion$ | async">
+    <div *ngIf="selectedRegion$ | async" class="row">
         <div class="col-12">
             <cpk-paginator (limitChange)="onLimitChange($event)"
                            (pageChange)="onPageChange($event)"

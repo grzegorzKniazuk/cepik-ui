@@ -6,7 +6,7 @@ import { DictionaryService } from 'src/app/shared/services';
 import { Observable, of } from 'rxjs';
 import { selectDictionary } from 'src/app/store/dictionaries/dictionaries.selectors';
 import { first, map, switchMap, tap } from 'rxjs/operators';
-import { SET_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
+import { ADD_DICTIONARY_ITEM } from 'src/app/store/dictionaries/dictionaries.actions';
 
 export abstract class BaseDictionaryResolver implements Resolve<DictionaryItem[]> {
 
@@ -27,7 +27,7 @@ export abstract class BaseDictionaryResolver implements Resolve<DictionaryItem[]
                 }
                 return this.dictionaryService.getDictionary(this.dictionaryKey).pipe(
                     tap((response: ApiResponse<DictionaryItemList>) => {
-                        this.store.dispatch(SET_DICTIONARY_ITEM({
+                        this.store.dispatch(ADD_DICTIONARY_ITEM({
                             item: {
                                 id: response.data.id,
                                 items: response.data.attributes['dostepne-rekordy-slownika'],

@@ -16,5 +16,4 @@ export const selectPageData = createSelector(
         if (state.loadedPages) {
             return state.loadedPages[url];
         }
-        return null;
-});
+    });

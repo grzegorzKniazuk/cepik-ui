@@ -1,10 +1,13 @@
 <div class="input-group">
-    <input #input class="form-control" [placeholder]="label" [value]="_value" (change)="writeValue($event.target.value)">
+    <input #input (change)="writeValue($event.target.value)" [placeholder]="label" [value]="_value"
+           class="form-control">
     <datalist #datalist *ngIf="dataList">
-        <option *ngFor="let item of dataList" [value]="item[valueKey]" [label]="item[valueKey] + ' (' + item[counterKey] + ')'">
+        <option *ngFor="let item of dataList" [label]="item[valueKey] + ' (' + item[counterKey] + ')'"
+                [value]="item[valueKey]">
     </datalist>
     <div class="input-group-append">
-        <button class="btn btn-danger" title="Wyczyść" [disabled]="isEmpty" [class.disabled]="isEmpty" (click)="onReset()">
+        <button (click)="onReset()" [class.disabled]="isEmpty" [disabled]="isEmpty" class="btn btn-danger"
+                title="Wyczyść">
             <cpk-icon>close</cpk-icon>
         </button>
     </div>

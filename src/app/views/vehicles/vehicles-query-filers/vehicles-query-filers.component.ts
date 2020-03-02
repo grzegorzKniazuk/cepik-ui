@@ -9,13 +9,7 @@ import { AppState } from 'src/app/store';
 import { selectRouteData } from 'src/app/store/router/router.selectors';
 import { pluck } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import {
-    FILTER_MARKA_KEY,
-    FILTER_MODEL_KEY,
-    FILTER_POCHODZENIE_POJAZDU_KEY, FILTER_PRZEZNACZENIE_POJAZDU_KEY, FILTER_REJESTRACJA_GMINA_KEY, FILTER_REJESTRACJA_POWIAT_KEY,
-    FILTER_RODZAJ_PALIWA_KEY,
-    FILTER_RODZAJ_POJAZDU_KEY,
-} from 'src/app/shared/constants';
+import { FILTER_MARKA_KEY, FILTER_MODEL_KEY, FILTER_POCHODZENIE_POJAZDU_KEY, FILTER_PRZEZNACZENIE_POJAZDU_KEY, FILTER_REJESTRACJA_GMINA_KEY, FILTER_REJESTRACJA_POWIAT_KEY, FILTER_RODZAJ_PALIWA_KEY, FILTER_RODZAJ_POJAZDU_KEY } from 'src/app/shared/constants';
 
 @Component({
     selector: 'cpk-vehicles-query-filers',
@@ -51,19 +45,6 @@ export class VehiclesQueryFilersComponent extends BaseComponent implements OnIni
         this.unsubscribe();
     }
 
-    private buildForm(): void {
-        this.filersForm = this.formBuilder.group({
-            [FILTER_MARKA_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_MARKA_KEY] ],
-            [FILTER_MODEL_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_MODEL_KEY] ],
-            [FILTER_RODZAJ_POJAZDU_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_RODZAJ_POJAZDU_KEY] ],
-            [FILTER_RODZAJ_PALIWA_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_RODZAJ_PALIWA_KEY] ],
-            [FILTER_POCHODZENIE_POJAZDU_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_POCHODZENIE_POJAZDU_KEY] ],
-            [FILTER_PRZEZNACZENIE_POJAZDU_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_PRZEZNACZENIE_POJAZDU_KEY] ],
-            [FILTER_REJESTRACJA_POWIAT_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_REJESTRACJA_POWIAT_KEY] ],
-            [FILTER_REJESTRACJA_GMINA_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_REJESTRACJA_GMINA_KEY] ],
-        });
-    }
-
     @HostListener('document:keyup.enter')
     public onFilterSubmit(): void {
         if (this.filersForm.valid) {
@@ -89,6 +70,19 @@ export class VehiclesQueryFilersComponent extends BaseComponent implements OnIni
             [FILTER_PRZEZNACZENIE_POJAZDU_KEY]: null,
             [FILTER_REJESTRACJA_POWIAT_KEY]: null,
             [FILTER_REJESTRACJA_GMINA_KEY]: null,
+        });
+    }
+
+    private buildForm(): void {
+        this.filersForm = this.formBuilder.group({
+            [FILTER_MARKA_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_MARKA_KEY] ],
+            [FILTER_MODEL_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_MODEL_KEY] ],
+            [FILTER_RODZAJ_POJAZDU_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_RODZAJ_POJAZDU_KEY] ],
+            [FILTER_RODZAJ_PALIWA_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_RODZAJ_PALIWA_KEY] ],
+            [FILTER_POCHODZENIE_POJAZDU_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_POCHODZENIE_POJAZDU_KEY] ],
+            [FILTER_PRZEZNACZENIE_POJAZDU_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_PRZEZNACZENIE_POJAZDU_KEY] ],
+            [FILTER_REJESTRACJA_POWIAT_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_REJESTRACJA_POWIAT_KEY] ],
+            [FILTER_REJESTRACJA_GMINA_KEY]: [ this.activatedRoute.snapshot.queryParams[FILTER_REJESTRACJA_GMINA_KEY] ],
         });
     }
 }

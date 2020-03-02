@@ -13,7 +13,7 @@ export interface LoaderState {
     };
 }
 
-const initialLoaderState: LoaderState = {
+export const initialLoaderState: LoaderState = {
     enabled: false,
     loadedPages: {},
 };

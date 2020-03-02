@@ -1,5 +1,5 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { SET_PAGINATION_LINKS } from 'src/app/store/pagination-links/pagination-links.actions';
+import { SET_PAGINATION_PAGE_NUMBERS } from 'src/app/store/pagination-links/pagination-links.actions';
 
 export interface PaginationLinksState {
     first: number;
@@ -9,7 +9,7 @@ export interface PaginationLinksState {
     self: number;
 }
 
-const initialState: PaginationLinksState = {
+export const initialPaginationLinksState: PaginationLinksState = {
     first: null,
     last: null,
     next: null,
@@ -18,8 +18,8 @@ const initialState: PaginationLinksState = {
 };
 
 const reducer = createReducer(
-    initialState,
-    on(SET_PAGINATION_LINKS, (state, { links }) => {
+    initialPaginationLinksState,
+    on(SET_PAGINATION_PAGE_NUMBERS, (state, { links }) => {
         return {
             ...state,
             first: links && links.first ? linkStringToPageNumber(links.first) : null,

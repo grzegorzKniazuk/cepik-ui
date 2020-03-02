@@ -1,17 +1,17 @@
 import { createEntityAdapter, EntityState } from '@ngrx/entity';
 import { Vehicle } from 'src/app/shared/interfaces';
 import { Action, createReducer, on } from '@ngrx/store';
-import { UPSERT_MANY_VEHICLES, ADD_ONE_VEHICLE } from 'src/app/store/vehicles/vehicles.actions';
+import { ADD_ONE_VEHICLE, UPSERT_MANY_VEHICLES } from 'src/app/store/vehicles/vehicles.actions';
 
 export interface VehiclesState extends EntityState<Vehicle> {
 }
 
 const adapter = createEntityAdapter<Vehicle>();
 
-const initialState = adapter.getInitialState();
+export const initialVehiclesState = adapter.getInitialState();
 
 const reducer = createReducer(
-    initialState,
+    initialVehiclesState,
     on(ADD_ONE_VEHICLE, (state, { vehicle }) => {
         return adapter.addOne(vehicle, state);
     }),

@@ -3,7 +3,8 @@
         <div class="list-group clickable">
             <a (click)="selectTab(tab.id)"
                *ngFor="let tab of tabs"
-               [class.active]="(activeTabId$ | async) === tab.id" class="list-group-item list-group-item-action">{{ tab.title }}</a>
+               [class.active]="(activeTabId$ | async) === tab.id"
+               class="list-group-item list-group-item-action">{{ tab.title }}</a>
         </div>
     </div>
     <div class="col-9">
@@ -35,14 +36,17 @@
             <li class="list-group-item"><strong>Wariant</strong>: {{ details.wariant }}</li>
             <li class="list-group-item"><strong>Wersja</strong>: {{ details.wersja }}</li>
             <li class="list-group-item"><strong>Przeznaczenie</strong>: {{ details["przeznaczenie-pojazdu"] }}</li>
-            <li class="list-group-item"><strong>Liczba miejsc ogółem</strong>: {{ details["liczba-miejsc-ogolem"] }}</li>
+            <li class="list-group-item"><strong>Liczba miejsc ogółem</strong>: {{ details["liczba-miejsc-ogolem"] }}
+            </li>
             <li class="list-group-item"><strong>Nazwa producenta</strong>: {{ details["nazwa-producenta"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Typ</strong>: {{ details.typ}}</li>
             <li class="list-group-item"><strong>Pochodzenie</strong>: {{ details["pochodzenie-pojazdu"] }}</li>
-            <li class="list-group-item"><strong>Liczba miejsc siedzących</strong>: {{ details["liczba-miejsc-siedzacych"] }}</li>
-            <li class="list-group-item"><strong>Liczba miejsc stojących</strong>: {{ details["liczba-miejsc-stojacych"] }}</li>
+            <li class="list-group-item"><strong>Liczba miejsc
+                siedzących</strong>: {{ details["liczba-miejsc-siedzacych"] }}</li>
+            <li class="list-group-item"><strong>Liczba miejsc
+                stojących</strong>: {{ details["liczba-miejsc-stojacych"] }}</li>
             <li class="list-group-item"><strong>Hak</strong>: {{ details.hak | yesNo }}</li>
         </ul>
     </div>
@@ -51,15 +55,21 @@
 <ng-template #engine>
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Pojemność skokowa</strong>: {{ details["pojemnosc-skokowa-silnika"] }}</li>
-            <li *ngIf="isMotorcycle" class="list-group-item"><strong>Stosunek mocy do masy własnej</strong>: {{ details["stosunek-mocy-silnika-do-masy-wlasnej-motocykle"] }}</li>
-            <li class="list-group-item"><strong>Moc silnika hybrydowego</strong>: {{ details["moc-netto-silnika-hybrydowego"] }}</li>
-            <li class="list-group-item"><strong>Średnie zużycie paliwa</strong>: {{ details["srednie-zuzycie-paliwa"] }}</li>
+            <li class="list-group-item"><strong>Pojemność skokowa</strong>: {{ details["pojemnosc-skokowa-silnika"] }}
+            </li>
+            <li *ngIf="isMotorcycle" class="list-group-item"><strong>Stosunek mocy do masy
+                własnej</strong>: {{ details["stosunek-mocy-silnika-do-masy-wlasnej-motocykle"] }}</li>
+            <li class="list-group-item"><strong>Moc silnika
+                hybrydowego</strong>: {{ details["moc-netto-silnika-hybrydowego"] }}</li>
+            <li class="list-group-item"><strong>Średnie zużycie paliwa</strong>: {{ details["srednie-zuzycie-paliwa"] }}
+            </li>
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Rodzaj paliwa</strong>: {{ details["rodzaj-paliwa"] }}</li>
             <li class="list-group-item"><strong>Moc silnika</strong>: {{ details["moc-netto-silnika"] }}</li>
-            <li class="list-group-item"><strong>Paliwo alternatywne</strong>: {{ details["rodzaj-pierwszego-paliwa-alternatywnego"] || details["rodzaj-drugiego-paliwa-alternatywnego"] }}</li>
+            <li class="list-group-item"><strong>Paliwo
+                alternatywne</strong>: {{ details["rodzaj-pierwszego-paliwa-alternatywnego"] || details["rodzaj-drugiego-paliwa-alternatywnego"] }}
+            </li>
         </ul>
     </div>
 </ng-template>
@@ -67,12 +77,16 @@
 <ng-template #exhaustEmissions>
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Katalizator/pochłaniacz</strong>: {{ details["katalizator-pochlaniacz"] | yesNo }}</li>
-            <li class="list-group-item"><strong>Poziom emisji CO<sup>2</sup></strong>: {{ details["poziom-emisji-co2"] }}</li>
+            <li class="list-group-item">
+                <strong>Katalizator/pochłaniacz</strong>: {{ details["katalizator-pochlaniacz"] | yesNo }}</li>
+            <li class="list-group-item"><strong>Poziom emisji
+                CO<sup>2</sup></strong>: {{ details["poziom-emisji-co2"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Redukcja emisji spalin</strong>: {{ details["redukcja-emisji-spalin"] }}</li>
-            <li class="list-group-item"><strong>Poziom emisji CO<sup>2</sup> dla paliwa alternatywnego</strong>: {{ details["poziom-emisji-co2-paliwo-alternatywne-1"] }}</li>
+            <li class="list-group-item"><strong>Redukcja emisji spalin</strong>: {{ details["redukcja-emisji-spalin"] }}
+            </li>
+            <li class="list-group-item"><strong>Poziom emisji CO<sup>2</sup> dla paliwa
+                alternatywnego</strong>: {{ details["poziom-emisji-co2-paliwo-alternatywne-1"] }}</li>
         </ul>
     </div>
 </ng-template>
@@ -81,17 +95,24 @@
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Rodzaj zawieszenia</strong>: {{ details["rodzaj-zawieszenia"] }}</li>
-            <li class="list-group-item"><strong>Dopuszczalna masa całkowita</strong>: {{ details["dopuszczalna-masa-calkowita"] }}</li>
-            <li class="list-group-item"><strong>Dopuszczalna ładowność</strong>: {{ details["dopuszczalna-ladownosc"] }}</li>
-            <li class="list-group-item"><strong>Dopszczalna masa całkowita zespołu pojazdów</strong>: {{ details["dopuszczalna-masa-calkowita-zespolu-pojazdow"] }}</li>
-            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy bez hamulca</strong>: {{ details["max-masa-calkowita-przyczepy-bez-hamulca"] }}</li>
+            <li class="list-group-item"><strong>Dopuszczalna masa
+                całkowita</strong>: {{ details["dopuszczalna-masa-calkowita"] }}</li>
+            <li class="list-group-item"><strong>Dopuszczalna ładowność</strong>: {{ details["dopuszczalna-ladownosc"] }}
+            </li>
+            <li class="list-group-item"><strong>Dopszczalna masa całkowita zespołu
+                pojazdów</strong>: {{ details["dopuszczalna-masa-calkowita-zespolu-pojazdow"] }}</li>
+            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy bez
+                hamulca</strong>: {{ details["max-masa-calkowita-przyczepy-bez-hamulca"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Masa własna</strong>: {{ details["masa-wlasna"] }}</li>
-            <li class="list-group-item"><strong>Masa pojazdu gotowego do jazdy</strong>: {{ details["masa-pojazdu-gotowego-do-jazdy"] }}</li>
-            <li class="list-group-item"><strong>Maksymalna masa całkowita</strong>: {{ details["max-masa-calkowita"] }}</li>
+            <li class="list-group-item"><strong>Masa pojazdu gotowego do
+                jazdy</strong>: {{ details["masa-pojazdu-gotowego-do-jazdy"] }}</li>
+            <li class="list-group-item"><strong>Maksymalna masa całkowita</strong>: {{ details["max-masa-calkowita"] }}
+            </li>
             <li class="list-group-item"><strong>Maksymalna ładowność</strong>: {{ details["max-ladownosc"] }}</li>
-            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy z hamulcem</strong>: {{ details["max-masa-calkowita-przyczepy-z-hamulcem"] }}</li>
+            <li class="list-group-item"><strong>Maksymalna masa całkowita przyczepy z
+                hamulcem</strong>: {{ details["max-masa-calkowita-przyczepy-z-hamulcem"] }}</li>
         </ul>
     </div>
 </ng-template>
@@ -102,13 +123,18 @@
             <li class="list-group-item"><strong>Liczba osi</strong>: {{ details["liczba-osi"] }}</li>
             <li class="list-group-item"><strong>Minimalny rozstaw kół</strong>: {{ details["min-rozstaw-kol"] }}</li>
             <li class="list-group-item"><strong>Maksymalny rozstaw kół</strong>: {{ details["max-rozstaw-kol"] }}</li>
-            <li class="list-group-item"><strong>Kierownica po prawej stronie</strong>: {{ details["kierownica-po-prawej-stronie"] | yesNo }}</li>
-            <li class="list-group-item"><strong>Kierownica po prawej stronie pierwotnie</strong>: {{ details["kierownica-po-prawej-stronie-pierwotnie"] | yesNo }}</li>
+            <li class="list-group-item"><strong>Kierownica po prawej
+                stronie</strong>: {{ details["kierownica-po-prawej-stronie"] | yesNo }}</li>
+            <li class="list-group-item"><strong>Kierownica po prawej stronie
+                pierwotnie</strong>: {{ details["kierownica-po-prawej-stronie-pierwotnie"] | yesNo }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Dopuszczalny nacisk osi</strong>: {{ details["dopuszczalny-nacisk-osi"] }}</li>
-            <li class="list-group-item"><strong>Maksymalny nacisk osi</strong>: {{ details["maksymalny-nacisk-osi"] }}</li>
-            <li class="list-group-item"><strong>Rozstaw kół osi</strong>: {{ details["rozstaw-kol-osi-kierowanej-pozostalych-osi"] }}</li>
+            <li class="list-group-item"><strong>Dopuszczalny nacisk
+                osi</strong>: {{ details["dopuszczalny-nacisk-osi"] }}</li>
+            <li class="list-group-item"><strong>Maksymalny nacisk osi</strong>: {{ details["maksymalny-nacisk-osi"] }}
+            </li>
+            <li class="list-group-item"><strong>Rozstaw kół
+                osi</strong>: {{ details["rozstaw-kol-osi-kierowanej-pozostalych-osi"] }}</li>
             <li class="list-group-item"><strong>Średni rozstaw kół</strong>: {{ details["avg-rozstaw-kol"] }}</li>
         </ul>
     </div>
@@ -137,8 +163,10 @@
 <ng-template #deregistration>
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-12">
-            <li class="list-group-item"><strong>Data wyrejestrowania</strong>: {{ details["data-wyrejestrowania-pojazdu"] }}</li>
-            <li class="list-group-item"><strong>Przyczyna wyrejestrowania pojazdu</strong>: {{ details["przyczyna-wyrejestrowania-pojazdu"] }}</li>
+            <li class="list-group-item"><strong>Data
+                wyrejestrowania</strong>: {{ details["data-wyrejestrowania-pojazdu"] }}</li>
+            <li class="list-group-item"><strong>Przyczyna wyrejestrowania
+                pojazdu</strong>: {{ details["przyczyna-wyrejestrowania-pojazdu"] }}</li>
         </ul>
     </div>
 </ng-template>
@@ -147,13 +175,18 @@
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Rok produkcji</strong>: {{ details["rok-produkcji"] }}</li>
-            <li class="list-group-item"><strong>Pierwsza rejestracja w kraju</strong>: {{ details["data-pierwszej-rejestracji-w-kraju"] }}</li>
-            <li class="list-group-item"><strong>Rejestracja za granicą</strong>: {{ details["data-rejestracji-za-granica"] }}</li>
+            <li class="list-group-item"><strong>Pierwsza rejestracja w
+                kraju</strong>: {{ details["data-pierwszej-rejestracji-w-kraju"] }}</li>
+            <li class="list-group-item"><strong>Rejestracja za
+                granicą</strong>: {{ details["data-rejestracji-za-granica"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Data pierwszej rejestracji</strong>: {{ details["data-pierwszej-rejestracji"] }}</li>
-            <li class="list-group-item"><strong>Ostatnia rejestracja w kraju</strong>: {{ details["data-ostatniej-rejestracji-w-kraju"] }}</li>
-            <li class="list-group-item"><strong>Data wprowadzenia danych</strong>: {{ details["data-wprowadzenia-danych"] }}</li>
+            <li class="list-group-item"><strong>Data pierwszej
+                rejestracji</strong>: {{ details["data-pierwszej-rejestracji"] }}</li>
+            <li class="list-group-item"><strong>Ostatnia rejestracja w
+                kraju</strong>: {{ details["data-ostatniej-rejestracji-w-kraju"] }}</li>
+            <li class="list-group-item"><strong>Data wprowadzenia
+                danych</strong>: {{ details["data-wprowadzenia-danych"] }}</li>
         </ul>
     </div>
 </ng-template>
@@ -161,14 +194,19 @@
 <ng-template #others>
     <div class="d-flex col-12">
         <ul class="list-group list-group-flush col-6">
-            <li class="list-group-item"><strong>Rodzaj tabliczki znamionowej</strong>: {{ details["rodzaj-tabliczki-znamionowej"] }}</li>
-            <li class="list-group-item"><strong>Kod instytutu transportu samochodowego</strong>: {{ details["kod-instytutu-transaportu-samochodowego"] }}</li>
-            <li class="list-group-item"><strong>Rodzaj/Podrodzaj przeznaczenie</strong>: {{ details["kod-rodzaj-podrodzaj-przeznaczenie"] }}</li>
+            <li class="list-group-item"><strong>Rodzaj tabliczki
+                znamionowej</strong>: {{ details["rodzaj-tabliczki-znamionowej"] }}</li>
+            <li class="list-group-item"><strong>Kod instytutu transportu
+                samochodowego</strong>: {{ details["kod-instytutu-transaportu-samochodowego"] }}</li>
+            <li class="list-group-item"><strong>Rodzaj/Podrodzaj
+                przeznaczenie</strong>: {{ details["kod-rodzaj-podrodzaj-przeznaczenie"] }}</li>
         </ul>
         <ul class="list-group list-group-flush col-6">
             <li class="list-group-item"><strong>Sposób produkcji</strong>: {{ details["sposob-produkcji"] }}</li>
-            <li class="list-group-item"><strong>Wyposażenie i rodzaj urządzenia radarowego</strong>: {{ details["wyposazenie-i-rodzaj-urzadzenia-radarowego"] }}</li>
-            <li class="list-group-item"><strong>Rodzaj kodowania/Rodzaj-podrodzaj przeznaczenie</strong>: {{ details["rodzaj-kodowania-rodzaj-podrodzaj-przeznaczenie"] }}</li>
+            <li class="list-group-item"><strong>Wyposażenie i rodzaj urządzenia
+                radarowego</strong>: {{ details["wyposazenie-i-rodzaj-urzadzenia-radarowego"] }}</li>
+            <li class="list-group-item"><strong>Rodzaj kodowania/Rodzaj-podrodzaj
+                przeznaczenie</strong>: {{ details["rodzaj-kodowania-rodzaj-podrodzaj-przeznaczenie"] }}</li>
         </ul>
     </div>
 </ng-template>

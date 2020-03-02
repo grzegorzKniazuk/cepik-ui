@@ -1,3 +1,3 @@
-<div *ngIf="show$ | async" class="clickable" (click)="goToUp()" title="Do góry">
+<div (click)="goToUp()" *ngIf="show$ | async" class="clickable" title="Do góry">
     <cpk-icon>keyboard_arrow_up</cpk-icon>
 </div>

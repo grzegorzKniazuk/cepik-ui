@@ -1,11 +1,13 @@
 <div class="form-group">
     <label>{{ label }}</label>
     <div [class.disabled]="_disabled" class="form-check">
-        <input (change)="setValue($event.target.value)" [checked]="_value" [disabled]="_disabled" [value]="true" class="form-check-input" id="radioTrue" name="boolean-radio" type="radio">
+        <input (change)="setValue($event.target.value)" [checked]="_value" [disabled]="_disabled" [value]="true"
+               class="form-check-input" id="radioTrue" name="boolean-radio" type="radio">
         <label class="form-check-label" for="radioTrue">Tak</label>
     </div>
     <div [class.disabled]="_disabled" class="form-check">
-        <input (change)="setValue($event.target.value)" [checked]="!_value" [disabled]="_disabled" [value]="false" class="form-check-input" id="radioFalse" name="boolean-radio" type="radio">
+        <input (change)="setValue($event.target.value)" [checked]="!_value" [disabled]="_disabled" [value]="false"
+               class="form-check-input" id="radioFalse" name="boolean-radio" type="radio">
         <label class="form-check-label" for="radioFalse">Nie</label>
     </div>
 </div>

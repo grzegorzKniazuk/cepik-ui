@@ -1,9 +1,11 @@
 <cpk-loader *ngIf="loadingState$ | async"></cpk-loader>
 <cpk-nav-bar></cpk-nav-bar>
-<main cpkArrowUp class="container-fluid col-12 pl-0 pr-0 pt-0">
+<main class="container-fluid col-12 pl-0 pr-0 pt-0" cpkArrowUp>
     <router-outlet></router-outlet>
 </main>
 <footer *ngIf="apiVersion$ | async as version">
-    <div><strong>Wersja API:</strong> {{ version.major }}.{{ version.minor }}.{{ version.patch }} <strong>Ostatnia zmiana:</strong> {{ version.dateMod }}</div>
-    <div><strong>Źródło wytworzenia i pozyskania informacji:</strong> <a href="http://www.cepik.gov.pl/interfejs-dla-cepik" target="_blank">www.cepik.gov.pl</a></div>
+    <div><strong>Wersja API:</strong> {{ version.major }}.{{ version.minor }}.{{ version.patch }} <strong>Ostatnia
+        zmiana:</strong> {{ version.dateMod }}</div>
+    <div><strong>Źródło wytworzenia i pozyskania informacji:</strong> <a
+            href="http://www.cepik.gov.pl/interfejs-dla-cepik" target="_blank">www.cepik.gov.pl</a></div>
 </footer>

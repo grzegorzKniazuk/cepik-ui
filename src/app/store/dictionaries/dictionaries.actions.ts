@@ -4,7 +4,7 @@ import { DICTIONARIES_FEATURE_KEY } from 'src/app/store/feature-names';
 
 const ACTION_LABEL = `[${DICTIONARIES_FEATURE_KEY.toUpperCase()}]`;
 
-export const SET_DICTIONARY_ITEM = createAction(
-    `${ACTION_LABEL} SET_DICTIONARY_ITEM`,
+export const ADD_DICTIONARY_ITEM = createAction(
+    `${ACTION_LABEL} ADD_DICTIONARY_ITEM`,
     props<{ item: { id: string, items: DictionaryItem[] } }>(),
 );
