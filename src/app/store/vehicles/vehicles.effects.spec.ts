@@ -9,6 +9,8 @@ import { DICTIONARIES_FEATURE_KEY, LOADER_FEATURE_KEY, PAGINATION_LINKS_FEATURE_
 import { MockStore, provideMockStore } from '@ngrx/store/testing';
 import { AppState } from 'src/app/store/index';
 import { selectVehicleDetails } from 'src/app/store/vehicles/vehicles.selectors';
+import { ModalComponent } from 'src/app/shared/components';
+import { VehicleDetails } from 'src/app/shared/interfaces';
 
 const mockedVehicle1 = {
     id: 'sample-id-1',
@@ -172,6 +174,7 @@ describe(VehiclesEffects.name, () => {
     let effects: VehiclesEffects;
 
     let vehicleServiceSpy: jasmine.SpyObj<VehicleService>;
+    let modalServiceSpy: jasmine.SpyObj<ModalService<ModalComponent, VehicleDetails>>;
 
     let mockStore: MockStore<AppState>;
 
@@ -211,9 +214,12 @@ describe(VehiclesEffects.name, () => {
                 },
             ],
         });
+    });
 
+    beforeEach(() => {
         effects = TestBed.inject(VehiclesEffects);
         vehicleServiceSpy = TestBed.inject(VehicleService as any);
+        modalServiceSpy = TestBed.inject(ModalService as any);
 
         mockStore = TestBed.inject(Store as any);
         mockStore.refreshState();
@@ -228,13 +234,6 @@ describe(VehiclesEffects.name, () => {
             testScheduler.run(({ cold, hot, expectObservable }) => {
 
                 mockStore.overrideSelector(selectVehicleDetails, null);
-
-                actions$ = hot('-a', {
-                    a: {
-                        type: `[${VEHICLES_FEATURE_KEY.toUpperCase()}] SHOW_VEHICLE_CARD`,
-                        id: 'sample-id-1',
-                    },
-                });
 
                 vehicleServiceSpy.getVehicle.and.returnValue(cold('--a|', {
                     a: {
@@ -258,6 +257,15 @@ describe(VehiclesEffects.name, () => {
                         data: mockedVehicle1,
                     },
                 }));
+
+                modalServiceSpy.open.and.callFake(() => {});
+
+                actions$ = hot('-a', {
+                    a: {
+                        type: `[${VEHICLES_FEATURE_KEY.toUpperCase()}] SHOW_VEHICLE_CARD`,
+                        id: 'sample-id-1',
+                    },
+                });
 
                 expectObservable(effects.showVehicleCard$).toBe('---r', {
                     r: mockedVehicle1.attributes,
