@@ -12,7 +12,7 @@ export const selectVehiclesEntities = createSelector(
     selectEntities,
 );
 
-export const selectVehicle = createSelector(
+export const selectVehicleDetails = createSelector(
     selectVehiclesEntities,
     ((entities: Dictionary<Vehicle>, { id }: { id: string }) => {
         return entities[id] ? entities[id].attributes : null;

@@ -8,7 +8,7 @@ import { VersionService } from 'src/app/shared/services';
 import { TestScheduler } from 'rxjs/testing';
 import { SET_VERSION, VERSION_EFFECTS_INIT } from 'src/app/store/version/version.actions';
 
-const mockVersion: VersionState = {
+const mockVersionResponse: VersionState = {
     dateMod: '1',
     deprecated: '1',
     major: '1',
@@ -32,7 +32,7 @@ describe(VersionEffects.name, () => {
                 {
                     provide: VersionService,
                     useValue: {
-                        getVersion: jasmine.createSpy(),
+                        getVersion: jasmine.createSpy('getVersion'),
                     },
                 },
             ],
@@ -52,12 +52,12 @@ describe(VersionEffects.name, () => {
 
                 actions$ = hot('-a', { a: VERSION_EFFECTS_INIT });
 
-                versionServiceSpy.getVersion.and.returnValue(cold('--a|', { a: mockVersion }));
+                versionServiceSpy.getVersion.and.returnValue(cold('--a|', { a: mockVersionResponse }));
 
-                expectObservable(effects.init$).toBe('---c', {
-                    c: {
+                expectObservable(effects.init$).toBe('---r', {
+                    r: {
                         type: SET_VERSION.type,
-                        version: mockVersion,
+                        version: mockVersionResponse,
                     },
                 });
             });

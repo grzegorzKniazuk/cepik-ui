@@ -6,7 +6,7 @@ import { ModalService, VehicleService } from 'src/app/shared/services';
 import { ApiResponse, Vehicle, VehicleDetails } from 'src/app/shared/interfaces';
 import { select, Store } from '@ngrx/store';
 import { AppState } from 'src/app/store/index';
-import { selectVehicle } from 'src/app/store/vehicles/vehicles.selectors';
+import { selectVehicleDetails } from 'src/app/store/vehicles/vehicles.selectors';
 import { of } from 'rxjs';
 import { VehicleCardComponent } from 'src/app/views';
 
@@ -17,7 +17,7 @@ export class VehiclesEffects {
         return this.actions$.pipe(
             ofType(SHOW_VEHICLE_CARD),
             concatMap(({ id }) => {
-                return of(id).pipe(withLatestFrom(this.store.pipe(select(selectVehicle, { id }))));
+                return of(id).pipe(withLatestFrom(this.store.pipe(select(selectVehicleDetails, { id }))));
             }),
             switchMap(([ id, vehicle ]: [ string, VehicleDetails | null ]) => {
                 if (vehicle) {

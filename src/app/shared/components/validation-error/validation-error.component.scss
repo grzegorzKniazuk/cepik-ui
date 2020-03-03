@@ -1,7 +1,7 @@
 @import "variables.scss";
 
 .alert {
+    align-items: center;
     box-shadow: $box-shadow;
     display: flex;
-    align-items: center;
 }

@@ -1,7 +1,7 @@
 .loader-container {
-    top: 0;
-    left: 0;
     background: radial-gradient(at center center, rgba(0, 0, 0, 0.1) 0%, rgba(20, 20, 20, 0.5) 100%);
+    left: 0;
+    top: 0;
     z-index: 5 !important;
 
     .loader {
@@ -13,10 +13,10 @@
             }
 
             &__line {
-                transform-origin: center;
-                stroke-dasharray: 22;
                 animation: line 0.8s ease-in-out infinite;
                 animation-fill-mode: both;
+                stroke-dasharray: 22;
+                transform-origin: center;
 
                 &--top {
                     animation-delay: 0s;

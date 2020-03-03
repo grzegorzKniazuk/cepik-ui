@@ -2,16 +2,16 @@
 @import "variables.scss";
 
 div.alert {
-    top: 1rem;
-    right: 1rem;
-    z-index: 10;
     animation: $open-animation;
     box-shadow: $box-shadow;
     padding-right: 20px;
+    right: 1rem;
+    top: 1rem;
+    z-index: 10;
 
     .x {
         position: absolute;
-        top: .5rem;
         right: .5rem;
+        top: .5rem;
     }
 }
