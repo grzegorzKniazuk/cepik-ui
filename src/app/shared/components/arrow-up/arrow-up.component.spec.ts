@@ -4,7 +4,7 @@ import { WindowService } from 'src/app/shared/services';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { By } from '@angular/platform-browser';
 
-describe('ArrowUpComponent', () => {
+describe(ArrowUpComponent.name, () => {
 
     let component: ArrowUpComponent;
     let fixture: ComponentFixture<ArrowUpComponent>;
@@ -78,6 +78,7 @@ describe('ArrowUpComponent', () => {
     it('should set show$ to false on element click', () => {
         component.show$.next(true);
         fixture.detectChanges();
+
 
         fixture.debugElement.query(By.css('div')).nativeElement.click();
 

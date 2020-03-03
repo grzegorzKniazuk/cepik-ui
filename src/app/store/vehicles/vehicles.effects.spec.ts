@@ -230,7 +230,7 @@ describe(VehiclesEffects.name, () => {
     });
 
     describe('showVehicleCard$', () => {
-        it('should get vehicle details from api if requested data not exists in store', async () => {
+        it('should get vehicle details from api if requested data not exists in store', () => {
             testScheduler.run(({ cold, hot, expectObservable }) => {
 
                 mockStore.overrideSelector(selectVehicleDetails, null);
@@ -257,8 +257,9 @@ describe(VehiclesEffects.name, () => {
                         data: mockedVehicle1,
                     },
                 }));
-
-                modalServiceSpy.open.and.callFake(() => {});
+                console.log(vehicleServiceSpy.getVehicle.calls.count());
+                modalServiceSpy.open.and.callFake(() => {
+                });
 
                 actions$ = hot('-a', {
                     a: {
@@ -273,7 +274,7 @@ describe(VehiclesEffects.name, () => {
             });
         });
 
-        it('should get vehicle details from store if requested data exists in store', async () => {
+        it('should get vehicle details from store if requested data exists in store', () => {
             testScheduler.run(({ hot, expectObservable }) => {
 
                 mockStore.overrideSelector(selectVehicleDetails, mockedVehicle1.attributes);
