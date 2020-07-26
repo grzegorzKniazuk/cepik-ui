@@ -1,7 +1,8 @@
 import { ControlValueAccessor, NgControl, ValidationErrors } from '@angular/forms';
-import { Input, Optional, Renderer2, Self } from '@angular/core';
+import { Input, Optional, Renderer2, Self, Directive } from '@angular/core';
 import { UuidService } from 'src/app/shared/services';
 
+@Directive()
 export abstract class BaseValueAccessor<T> implements ControlValueAccessor {
     @Input() public readonly label: string;
     public _value: T;
