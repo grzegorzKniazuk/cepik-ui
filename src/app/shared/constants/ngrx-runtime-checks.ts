@@ -5,4 +5,6 @@ export const RUNTIME_CHECKS: RuntimeChecks = {
     strictActionImmutability: true,
     strictStateSerializability: true,
     strictActionSerializability: true,
+    strictActionWithinNgZone: true,
+    strictActionTypeUniqueness: true,
 };
